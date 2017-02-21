@@ -20,15 +20,15 @@ To build the sample demo just follow these instructions:
 
  1. install `polymerize`
   
-    pub global activate polymerize
+     pub global activate polymerize
 
  2. prepare the project
 
-    polymerie init --rules-version=v0.0.11
+     polymerize init --rules-version=v0.0.11
 
  3. build it with bazel
 
-    bazel build html
+     bazel build html
 
 The build result will be in the `bazel-bin` folder from where you can serve it.
 
