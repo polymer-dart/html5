@@ -7,6 +7,11 @@ It leverages the `@JS` interop Dart layer and aims to completely replace the (at
 
 As a separate package from the `SDK` this library has the main advantage to be updated more frequently.
 
+Notably this library adds support to latest standards:
+ 
+ - WebComponents v1
+ - ShadowDom
+
 ## How to test it
 
 At the moment this library only works on `DDC` and with `polymerize`. It will be eventually ported to `dart2js` and to `dazel`.
@@ -20,7 +25,6 @@ To build the sample demo just follow these instructions:
  2. prepare the project
 
     polymerie init --rules-version=v0.0.11
-
 
  3. build it with bazel
 
