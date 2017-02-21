@@ -1,7 +1,7 @@
 @JS('window')
 library html_test;
 
-import 'package:html/html.dart';
+import 'package:html5/html.dart';
 import 'package:js/js.dart';
 
 class MyComponent extends HTMLElement {

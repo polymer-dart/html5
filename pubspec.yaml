@@ -1,5 +1,9 @@
-name: html
+name: html5
 description: HTML wrapper library for DDC and JS
 version: 0.0.1
+author: Vittorio Ballestra <vittorio.ballestra@gmail.com>
+homepage: https://github.com/dam0vm3nt/html
+environment:
+    sdk: ">=1.8.0 <2.0.0"
 dependencies:
   js: ^0.6.1

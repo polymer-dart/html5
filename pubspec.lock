@@ -4,7 +4,7 @@ packages:
   js:
     description:
       name: js
-      url: "http://pub.drafintech.it:5001"
+      url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.1"
 sdks:
