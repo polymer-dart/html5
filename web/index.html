@@ -1,28 +1,19 @@
 <html>
 <head>
-    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-    <script>
-    /* this script must run before Polymer is imported */
-    window.Polymer = {
-      dom: 'shadow'
-    };
-  </script>
     <link rel='import' href='imd.html'>
-    <link rel='import' href="bower_components/polymer/polymer.html">
-    <link rel='import' href='bower_components/paper-styles/paper-styles.html'>
-    <link rel='import' href='bower_components/paper-styles/default-theme.html'>
 
     <!-- load main component -->
-    <link rel='import' href="html_lib.mod.html" rel="import">
+    <link rel='import' href="html.mod.html" rel="import">
     <!--link rel='import' href='todo_sample1/my-comp.html'-->
 </head>
 <body>
 
-  <todo-main></todo-main>
-
 <script>
- require(['html_lib','dart_sdk'], function(html_lib,sdk) {
+ require(['html','dart_sdk'], function(html_lib,sdk) {
    function unregister(x)  {
+     if (!x) {
+       return;
+     }
      x.__proto__ && unregister(x.__proto__);
      x.prototype && unregister(x.prototype);
      delete x[sdk.dart._extensionType];
@@ -30,7 +21,42 @@
 
    // Unregister window
    unregister(window.HTMLDivElement);
-   html_lib.test.main();
+   unregister(window.HTMLInputElement);
+   unregister(window.HTMLBodyElement);
+   unregister(window.ShadowRoot);
+   unregister(window.HTMLElement);
+   unregister(window.Event);
+   unregister(window.MouseEvent);
+
+   window.asConstructor = function(dartType) {
+     let unwrappedType = sdk.dart.unwrapType(dartType);
+
+     let jsClass =  class extends unwrappedType {
+       constructor() {
+         super();
+         super.new();
+       }
+
+       static _check(x) {return x;}
+     };
+
+     Object.defineProperty(unwrappedType,'_check',{
+       get: function() {
+         return function(x) {
+           if ( x.constructor == jsClass ) {
+             return x;
+           }
+           throw "Not a " + unwrappedType.name;
+         };
+       }});
+
+     return jsClass;
+   };
+
+
+   sdk._isolate_helper.startRootIsolate((args) =>  html_lib.test.main(args), []);
+
+
  })
 </script>
 </body>

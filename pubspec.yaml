@@ -1,1 +1,5 @@
-../html_lib_bazel/pubspec.yaml
+name: html
+description: HTML wrapper library for DDC and JS
+version: 0.0.1
+dependencies:
+  js: ^0.6.1

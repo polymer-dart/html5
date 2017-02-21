@@ -1,7 +1,9 @@
 @JS('window')
 library html_lib;
 
+import 'dart:async';
 import 'package:js/js.dart';
+import 'package:js/js_util.dart' as js;
 
 
 part 'html_gen.dart';
@@ -104,16 +106,91 @@ class ApplicationCache {
 
 }
 
-@anonymous
-class ElementDefinitionOptionsOk {
-    @JS('extends')
-    external String get Extends;
-    @JS('extends')
-    external set Extends (String val);
+// TODO : actually webidlize it.
+@JS('SVGSVGElement')
+class SVGSVGElement {
+
 }
+
+@JS('nsIDocShell')
+class nsIDocShell {
+
+}
+
+@JS('nsILoadGroup')
+class nsILoadGroup {
+
+}
+
+@JS('ArrayBuffer')
+class ArrayBuffer {
+
+}
+
+@JS('SubtleCrypto')
+class SubtleCrypto {
+
+}
+
+@JS('ArrayBufferView')
+class ArrayBufferView {
+
+}
+
+@JS('EventListener')
+abstract class EventListener {
+  void handleEvent(Event ev);
+}
+
+@JS('nsIFile')
+class nsIFile {
+
+}
+
+@JS('nsIControllers')
+class nsIControllers {
+
+}
+
+@JS('MenuBuilder')
+class MenuBuilder {
+
+}
+
+@JS('imgINotificationObserver')
+class imgINotificationObserver {
+
+}
+
+@JS('imgIRequest')
+class imgIRequest {
+
+}
+
+@JS('IDBFactory')
+class IDBFactory {
+
+}
+
+@JS('XPathNSResolver')
+abstract class XPathNSResolver {
+  external String lookupNamespaceURI(String prefix);
+}
+
 
 @JS('document')
 external Document get document;
 
 @JS('window')
 external Window get window;
+
+
+@JS('asConstructor')
+external asConstructor(Type dartType);
+
+class EventHandler<E> {
+  StreamController<E> _streamController = new StreamController.broadcast();
+  Stream<E> get stream => _streamController.stream;
+
+  void call(E event) => _streamController.add(event);
+}
