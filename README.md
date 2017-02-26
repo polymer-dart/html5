@@ -14,4 +14,4 @@ Notably this library adds support to latest standards:
 
 ## Demo project
 
-See [here]() for a demo project using `polymerize` and this library.
+See [here](https://github.com/dam0vm3nt/html5_demo) for a demo project using `polymerize` and this library.
