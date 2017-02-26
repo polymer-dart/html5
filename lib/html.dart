@@ -4,6 +4,7 @@ library html_lib;
 import 'dart:async';
 import 'package:js/js.dart';
 import 'package:js/js_util.dart' as js;
+export 'package:html5/src/html5_support.dart';
 
 
 part 'html_gen.dart';
@@ -185,8 +186,7 @@ external Document get document;
 external Window get window;
 
 
-@JS('asConstructor')
-external asConstructor(Type dartType);
+
 
 class EventHandler<E> {
   StreamController<E> _streamController = new StreamController.broadcast();

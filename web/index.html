@@ -4,55 +4,13 @@
 
     <!-- load main component -->
     <link rel='import' href="html5.mod.html" rel="import">
+    <link rel='import' href='src/html5_support.html' rel='import'>
     <!--link rel='import' href='todo_sample1/my-comp.html'-->
 </head>
 <body>
 
 <script>
- require(['html5','dart_sdk'], function(html_lib,sdk) {
-   function unregister(x)  {
-     if (!x) {
-       return;
-     }
-     x.__proto__ && unregister(x.__proto__);
-     x.prototype && unregister(x.prototype);
-     delete x[sdk.dart._extensionType];
-   }
-
-   // Unregister window
-   unregister(window.HTMLDivElement);
-   unregister(window.HTMLInputElement);
-   unregister(window.HTMLBodyElement);
-   unregister(window.ShadowRoot);
-   unregister(window.HTMLElement);
-   unregister(window.Event);
-   unregister(window.MouseEvent);
-
-   window.asConstructor = function(dartType) {
-     let unwrappedType = sdk.dart.unwrapType(dartType);
-
-     let jsClass =  class extends unwrappedType {
-       constructor() {
-         super();
-         super.new();
-       }
-
-       static _check(x) {return x;}
-     };
-
-     Object.defineProperty(unwrappedType,'_check',{
-       get: function() {
-         return function(x) {
-           if ( x.constructor == jsClass ) {
-             return x;
-           }
-           throw "Not a " + unwrappedType.name;
-         };
-       }});
-
-     return jsClass;
-   };
-
+ require(['html5','src/html5_support','dart_sdk'], function(html_lib,html_support,sdk) {
 
    sdk._isolate_helper.startRootIsolate((args) =>  html_lib.test.main(args), []);
 

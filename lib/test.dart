@@ -17,6 +17,9 @@ class MyComponent extends HTMLElement {
 }
 
 void main() {
+  // Needed to disable normal html <-> dart
+  unregisterAll(INTERFACES);
+
   HTMLDivElement div = window.document.createElement('div');
   div.innerHTML = "<h1>hello</h1>";
   HTMLBodyElement body = document.querySelector('body');
