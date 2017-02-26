@@ -3,7 +3,6 @@ library html_lib;
 
 import 'dart:async';
 import 'package:js/js.dart';
-import 'package:js/js_util.dart' as js;
 export 'package:html5/src/html5_support.dart';
 
 
