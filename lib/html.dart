@@ -2,10 +2,8 @@
 library html_lib;
 
 import 'dart:async';
-import 'dart:io';
 import 'package:js/js.dart';
 export 'package:html5/src/html5_support.dart';
-import 'dart:io' as io show HttpClient;
 
 part 'html_gen.dart';
 
@@ -167,51 +165,49 @@ class HttpRequest {
       this.isAsync: true,
       this.user,
       this.password,
-      this.responseType:''});
+      this.responseType: ''});
 
   Future<XMLHttpRequest> send(
       {var data,
-      StreamConsumer<ProgressEvent> progressConsumer,
-      StreamConsumer<ProgressEvent> uploadProgressConsumer}) {
+      StreamSink<ProgressEvent> progressConsumer,
+      StreamSink<ProgressEvent> uploadProgressConsumer}) {
     XMLHttpRequest _ajax;
     _ajax = new XMLHttpRequest();
     _ajax.open(method, url, isAsync, user, password);
     _ajax.withCredentials = withCredentials;
     _ajax.responseType = responseType;
 
-    StreamController<ProgressEvent> progressEventStreamController =
-        new StreamController();
-    _ajax.onprogress =
-        (Event evt) => progressEventStreamController.add(evt as ProgressEvent);
+    if (progressConsumer != null)
+      _ajax.onprogress =
+          (Event evt) => progressConsumer.add(evt as ProgressEvent);
 
-    StreamController<ProgressEvent> uploadProgressEventStreamController =
-        new StreamController();
-    _ajax.upload.onprogress =
-        (Event evt) => uploadProgressEventStreamController.add(evt as ProgressEvent);
+    if (uploadProgressConsumer != null)
+      _ajax.upload.onprogress =
+          (Event evt) => uploadProgressConsumer.add(evt as ProgressEvent);
+
+    void closeSinks() {
+      if (progressConsumer != null) {
+        progressConsumer.close();
+      }
+      if (uploadProgressConsumer != null) {
+        uploadProgressConsumer.close();
+      }
+    }
 
     Completer<XMLHttpRequest> completer = new Completer();
     _ajax.onload = (Event evt) {
       completer.complete(_ajax);
-      progressEventStreamController.close();
-      uploadProgressEventStreamController.close();
+      closeSinks();
     };
     _ajax.onerror = (Event evt) {
       completer.completeError(evt as ProgressEvent);
-      progressEventStreamController.close();
-      uploadProgressEventStreamController.close();
+      closeSinks();
     };
     _ajax.onabort = (Event evt) {
       completer.completeError(evt as ProgressEvent);
-      progressEventStreamController.close();
-      uploadProgressEventStreamController.close();
+      closeSinks();
     };
-    if (progressConsumer != null) {
-      progressConsumer.addStream(progressEventStreamController.stream);
-    }
-    if (uploadProgressConsumer != null) {
-      uploadProgressConsumer
-          .addStream(uploadProgressEventStreamController.stream);
-    }
+
     _ajax.send(data);
 
     return completer.future;
