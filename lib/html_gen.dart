@@ -1,6 +1,6 @@
 part of html_lib;
 @JS('AbstractWorker')
-class AbstractWorker {
+abstract class AbstractWorker {
     external EventHandlerNonNull get onerror;
     external set onerror (EventHandlerNonNull val);
 }
@@ -14,13 +14,14 @@ class AddEventListenerOptions extends EventListenerOptions {
 }
 
 @JS('Animatable')
-class Animatable {
+abstract class Animatable {
     external Animation animate(Object keyframes,[var options]);
     external List<Animation> getAnimations([AnimationFilter filter]);
 }
 
 @JS('Animation')
-class Animation extends EventTarget {
+abstract class Animation implements EventTarget {
+    external factory Animation([AnimationEffectReadOnly effect,AnimationTimeline timeline]);
     external String get id;
     external set id (String val);
     external AnimationEffectReadOnly get effect;
@@ -49,13 +50,13 @@ class Animation extends EventTarget {
 }
 
 @JS('AnimationEffectReadOnly')
-class AnimationEffectReadOnly {
+abstract class AnimationEffectReadOnly {
     external AnimationEffectTimingReadOnly get timing;
     external ComputedTimingProperties getComputedTiming();
 }
 
 @JS('AnimationEffectTiming')
-class AnimationEffectTiming extends AnimationEffectTimingReadOnly {
+abstract class AnimationEffectTiming implements AnimationEffectTimingReadOnly {
     external num get delay;
     external set delay (num val);
     external num get endDelay;
@@ -95,7 +96,7 @@ class AnimationEffectTimingProperties {
 }
 
 @JS('AnimationEffectTimingReadOnly')
-class AnimationEffectTimingReadOnly {
+abstract class AnimationEffectTimingReadOnly {
     external num get delay;
     external num get endDelay;
     external String get fill;
@@ -107,7 +108,8 @@ class AnimationEffectTimingReadOnly {
 }
 
 @JS('AnimationEvent')
-class AnimationEvent extends Event {
+abstract class AnimationEvent implements Event {
+    external factory AnimationEvent(String type,[AnimationEventInit eventInitDict]);
     external String get animationName;
     external num get elapsedTime;
     external String get pseudoElement;
@@ -130,7 +132,8 @@ class AnimationFilter {
 }
 
 @JS('AnimationPlaybackEvent')
-class AnimationPlaybackEvent extends Event {
+abstract class AnimationPlaybackEvent implements Event {
+    external factory AnimationPlaybackEvent(String type,[AnimationPlaybackEventInit eventInitDict]);
     external num get currentTime;
     external num get timelineTime;
 }
@@ -168,12 +171,12 @@ class AnimationPropertyValueDetails {
 }
 
 @JS('AnimationTimeline')
-class AnimationTimeline {
+abstract class AnimationTimeline {
     external num get currentTime;
 }
 
 @JS('AnonymousContent')
-class AnonymousContent {
+abstract class AnonymousContent {
     external String getTextContentForElement(String elementId);
     external void setTextContentForElement(String elementId,String text);
     external String getAttributeForElement(String elementId,String attributeName);
@@ -187,7 +190,7 @@ class AnonymousContent {
 typedef  AnyCallback(var value);
 
 @JS('Attr')
-class Attr extends Node {
+abstract class Attr implements Node {
     external String get localName;
     external String get value;
     external set value (String val);
@@ -199,7 +202,7 @@ class Attr extends Node {
 }
 
 @JS('AudioTrack')
-class AudioTrack {
+abstract class AudioTrack {
     external String get id;
     external String get kind;
     external String get label;
@@ -209,7 +212,7 @@ class AudioTrack {
 }
 
 @JS('AudioTrackList')
-class AudioTrackList extends EventTarget {
+abstract class AudioTrackList implements EventTarget {
     external num get length;
     external AudioTrack operator[](num index);
     external AudioTrack getTrackById(String id);
@@ -222,7 +225,8 @@ class AudioTrackList extends EventTarget {
 }
 
 @JS('AutocompleteErrorEvent')
-class AutocompleteErrorEvent extends Event {
+abstract class AutocompleteErrorEvent implements Event {
+    external factory AutocompleteErrorEvent(String type,[AutocompleteErrorEventInit eventInitDict]);
     external String get reason;
 }
 
@@ -245,7 +249,7 @@ class AutocompleteInfo {
 }
 
 @JS('BarProp')
-class BarProp {
+abstract class BarProp {
     external bool get visible;
     external set visible (bool val);
 }
@@ -277,7 +281,8 @@ class BasePropertyIndexedKeyframe {
 }
 
 @JS('Blob')
-class Blob {
+abstract class Blob {
+    external factory Blob([List<dynamic> blobParts,BlobPropertyBag options]);
     external num get size;
     external String get type;
     external Blob slice([num start,num end,String contentType]);
@@ -286,7 +291,8 @@ class Blob {
 typedef void BlobCallback(Blob blob);
 
 @JS('BlobEvent')
-class BlobEvent extends Event {
+abstract class BlobEvent implements Event {
+    external factory BlobEvent(String type,[BlobEventInit eventInitDict]);
     external Blob get data;
 }
 
@@ -305,7 +311,7 @@ class BlobPropertyBag {
 }
 
 @JS('Body')
-class Body {
+abstract class Body {
     external bool get bodyUsed;
     external Promise<ArrayBuffer> arrayBuffer();
     external Promise<Blob> blob();
@@ -323,28 +329,28 @@ class BoxQuadOptions {
 }
 
 @JS('CDATASection')
-class CDATASection extends Text {
+abstract class CDATASection implements Text {
 }
 
 @JS('CSS')
-class CSS {
+abstract class CSS {
     external bool supports(String conditionText);
     external String escape(String ident);
 }
 
 @JS('CSSAnimation')
-class CSSAnimation extends Animation {
+abstract class CSSAnimation implements Animation {
     external String get animationName;
 }
 
 @JS('CSSConditionRule')
-class CSSConditionRule extends CSSGroupingRule {
+abstract class CSSConditionRule implements CSSGroupingRule {
     external String get conditionText;
     external set conditionText (String val);
 }
 
 @JS('CSSCounterStyleRule')
-class CSSCounterStyleRule extends CSSRule {
+abstract class CSSCounterStyleRule implements CSSRule {
     external String get name;
     external set name (String val);
     external String get system;
@@ -370,12 +376,12 @@ class CSSCounterStyleRule extends CSSRule {
 }
 
 @JS('CSSFontFaceRule')
-class CSSFontFaceRule extends CSSRule {
+abstract class CSSFontFaceRule implements CSSRule {
     external CSSStyleDeclaration get style;
 }
 
 @JS('CSSFontFeatureValuesRule')
-class CSSFontFeatureValuesRule extends CSSRule {
+abstract class CSSFontFeatureValuesRule implements CSSRule {
     external String get fontFamily;
     external set fontFamily (String val);
     external String get valueText;
@@ -383,28 +389,28 @@ class CSSFontFeatureValuesRule extends CSSRule {
 }
 
 @JS('CSSGroupingRule')
-class CSSGroupingRule extends CSSRule {
+abstract class CSSGroupingRule implements CSSRule {
     external CSSRuleList get cssRules;
     external num insertRule(String rule,num index);
     external void deleteRule(num index);
 }
 
 @JS('CSSImportRule')
-class CSSImportRule extends CSSRule {
+abstract class CSSImportRule implements CSSRule {
     external String get href;
     external MediaList get media;
     external CSSStyleSheet get styleSheet;
 }
 
 @JS('CSSKeyframeRule')
-class CSSKeyframeRule extends CSSRule {
+abstract class CSSKeyframeRule implements CSSRule {
     external String get keyText;
     external set keyText (String val);
     external CSSStyleDeclaration get style;
 }
 
 @JS('CSSKeyframesRule')
-class CSSKeyframesRule extends CSSRule {
+abstract class CSSKeyframesRule implements CSSRule {
     external String get name;
     external set name (String val);
     external CSSRuleList get cssRules;
@@ -414,7 +420,7 @@ class CSSKeyframesRule extends CSSRule {
 }
 
 @JS('CSSLexer')
-class CSSLexer {
+abstract class CSSLexer {
     external num get lineNumber;
     external num get columnNumber;
     external String performEOFFixup(String inputString,bool preserveBackslash);
@@ -422,25 +428,25 @@ class CSSLexer {
 }
 
 @JS('CSSMediaRule')
-class CSSMediaRule extends CSSConditionRule {
+abstract class CSSMediaRule implements CSSConditionRule {
     external MediaList get media;
 }
 
 @JS('CSSMozDocumentRule')
-class CSSMozDocumentRule extends CSSConditionRule {
+abstract class CSSMozDocumentRule implements CSSConditionRule {
 }
 
 @JS('CSSNamespaceRule')
-class CSSNamespaceRule extends CSSRule {
+abstract class CSSNamespaceRule implements CSSRule {
 }
 
 @JS('CSSPageRule')
-class CSSPageRule extends CSSRule {
+abstract class CSSPageRule implements CSSRule {
     external CSSStyleDeclaration get style;
 }
 
 @JS('CSSPrimitiveValue')
-class CSSPrimitiveValue extends CSSValue {
+abstract class CSSPrimitiveValue implements CSSValue {
     external num get primitiveType;
     external void setFloatValue(num unitType,num floatValue);
     external num getFloatValue(num unitType);
@@ -452,13 +458,13 @@ class CSSPrimitiveValue extends CSSValue {
 }
 
 @JS('CSSPseudoElement')
-class CSSPseudoElement extends Object with Animatable {
+abstract class CSSPseudoElement {
     external String get type;
     external Element get parentElement;
 }
 
 @JS('CSSRule')
-class CSSRule {
+abstract class CSSRule {
     external num get type;
     external String get cssText;
     external set cssText (String val);
@@ -467,13 +473,13 @@ class CSSRule {
 }
 
 @JS('CSSRuleList')
-class CSSRuleList {
+abstract class CSSRuleList {
     external num get length;
     external CSSRule operator[](num index);
 }
 
 @JS('CSSStyleDeclaration')
-class CSSStyleDeclaration {
+abstract class CSSStyleDeclaration {
     external String get cssText;
     external set cssText (String val);
     external num get length;
@@ -488,14 +494,14 @@ class CSSStyleDeclaration {
 }
 
 @JS('CSSStyleRule')
-class CSSStyleRule extends CSSRule {
+abstract class CSSStyleRule implements CSSRule {
     external String get selectorText;
     external set selectorText (String val);
     external CSSStyleDeclaration get style;
 }
 
 @JS('CSSStyleSheet')
-class CSSStyleSheet extends StyleSheet {
+abstract class CSSStyleSheet implements StyleSheet {
     external CSSRule get ownerRule;
     external CSSRuleList get cssRules;
     external String get parsingMode;
@@ -504,7 +510,7 @@ class CSSStyleSheet extends StyleSheet {
 }
 
 @JS('CSSSupportsRule')
-class CSSSupportsRule extends CSSConditionRule {
+abstract class CSSSupportsRule implements CSSConditionRule {
 }
 
 @anonymous
@@ -526,25 +532,25 @@ class CSSToken {
 }
 
 @JS('CSSTransition')
-class CSSTransition extends Animation {
+abstract class CSSTransition implements Animation {
     external String get transitionProperty;
 }
 
 @JS('CSSValue')
-class CSSValue {
+abstract class CSSValue {
     external String get cssText;
     external set cssText (String val);
     external num get cssValueType;
 }
 
 @JS('CSSValueList')
-class CSSValueList extends CSSValue {
+abstract class CSSValueList implements CSSValue {
     external num get length;
     external CSSValue operator[](num index);
 }
 
 @JS('Cache')
-class Cache {
+abstract class Cache {
     external Promise<Response> match(var request,[CacheQueryOptions options]);
     external Promise<List<Response>> matchAll([var request,CacheQueryOptions options]);
     external Promise<dynamic> add(var request);
@@ -579,7 +585,7 @@ class CacheQueryOptions {
 }
 
 @JS('CacheStorage')
-class CacheStorage {
+abstract class CacheStorage {
     external Promise<Response> match(var request,[CacheQueryOptions options]);
     external Promise<bool> has(String cacheName);
     external Promise<Cache> open(String cacheName);
@@ -588,20 +594,21 @@ class CacheStorage {
 }
 
 @JS('CanvasCaptureMediaStream')
-class CanvasCaptureMediaStream extends MediaStream {
+abstract class CanvasCaptureMediaStream implements MediaStream {
     external HTMLCanvasElement get canvas;
     external void requestFrame();
 }
 
 @JS('CaretPosition')
-class CaretPosition {
+abstract class CaretPosition {
     external Node get offsetNode;
     external num get offset;
     external DOMRect getClientRect();
 }
 
 @JS('CaretStateChangedEvent')
-class CaretStateChangedEvent extends Event {
+abstract class CaretStateChangedEvent implements Event {
+    external factory CaretStateChangedEvent(String type,[CaretStateChangedEventInit eventInit]);
     external bool get collapsed;
     external DOMRectReadOnly get boundingClientRect;
     external String get reason;
@@ -649,7 +656,7 @@ class ChannelPixelLayout {
 }
 
 @JS('CharacterData')
-class CharacterData extends Node with ChildNode, NonDocumentTypeChildNode {
+abstract class CharacterData implements Node,ChildNode,NonDocumentTypeChildNode {
     external String get data;
     external set data (String val);
     external num get length;
@@ -661,7 +668,7 @@ class CharacterData extends Node with ChildNode, NonDocumentTypeChildNode {
 }
 
 @JS('ChildNode')
-class ChildNode {
+abstract class ChildNode {
     external void before(var nodes);
     external void after(var nodes);
     external void replaceWith(var nodes);
@@ -675,7 +682,7 @@ class ChromeFilePropertyBag extends FilePropertyBag {
 }
 
 @JS('ChromeWindow')
-class ChromeWindow {
+abstract class ChromeWindow {
     external num get windowState;
     external nsIBrowserDOMWindow get browserDOMWindow;
     external set browserDOMWindow (nsIBrowserDOMWindow val);
@@ -692,7 +699,8 @@ class ChromeWindow {
 }
 
 @JS('ChromeWorker')
-class ChromeWorker extends Worker {
+abstract class ChromeWorker implements Worker {
+    external factory ChromeWorker(String scriptURL);
 }
 
 @anonymous
@@ -704,7 +712,8 @@ class ClientRectsAndTexts {
 }
 
 @JS('Comment')
-class Comment extends CharacterData {
+abstract class Comment implements CharacterData {
+    external factory Comment([String data]);
 }
 
 @anonymous
@@ -730,20 +739,21 @@ class ConvertCoordinateOptions {
 }
 
 @JS('Crypto')
-class Crypto {
+abstract class Crypto {
     external SubtleCrypto get subtle;
     external ArrayBufferView getRandomValues(ArrayBufferView array);
 }
 
 @JS('CustomElementRegistry')
-class CustomElementRegistry {
+abstract class CustomElementRegistry {
     external void define(String name,var functionConstructor,[ElementDefinitionOptions options]);
     external  get(String name);
     external Promise<dynamic> whenDefined(String name);
 }
 
 @JS('CustomEvent')
-class CustomEvent extends Event {
+abstract class CustomEvent implements Event {
+    external factory CustomEvent(String type,[CustomEventInit eventInitDict]);
     external  get detail;
     external void initCustomEvent(String type,bool canBubble,bool cancelable,var detail);
 }
@@ -755,19 +765,20 @@ class CustomEventInit extends EventInit {
 }
 
 @JS('DOMCursor')
-class DOMCursor extends EventTarget with DOMRequestShared {
+abstract class DOMCursor implements EventTarget,DOMRequestShared {
     external bool get done;
     external void doContinue();
 }
 
 @JS('DOMError')
-class DOMError {
+abstract class DOMError {
+    external factory DOMError(String name,[String message]);
     external String get name;
     external String get message;
 }
 
 @JS('DOMImplementation')
-class DOMImplementation {
+abstract class DOMImplementation {
     external bool hasFeature();
     external DocumentType createDocumentType(String qualifiedName,String publicId,String systemId);
     external Document createDocument(String namespace,String qualifiedName,[DocumentType doctype]);
@@ -775,7 +786,8 @@ class DOMImplementation {
 }
 
 @JS('DOMMatrix')
-class DOMMatrix extends DOMMatrixReadOnly {
+abstract class DOMMatrix implements DOMMatrixReadOnly {
+    external factory DOMMatrix();
     external num get a;
     external set a (num val);
     external num get b;
@@ -836,7 +848,7 @@ class DOMMatrix extends DOMMatrixReadOnly {
 }
 
 @JS('DOMMatrixReadOnly')
-class DOMMatrixReadOnly {
+abstract class DOMMatrixReadOnly {
     external num get a;
     external num get b;
     external num get c;
@@ -880,7 +892,8 @@ class DOMMatrixReadOnly {
 }
 
 @JS('DOMPoint')
-class DOMPoint extends DOMPointReadOnly {
+abstract class DOMPoint implements DOMPointReadOnly {
+    external factory DOMPoint([DOMPointInit point]);
     external num get x;
     external set x (num val);
     external num get y;
@@ -904,7 +917,7 @@ class DOMPointInit {
 }
 
 @JS('DOMPointReadOnly')
-class DOMPointReadOnly {
+abstract class DOMPointReadOnly {
     external num get x;
     external num get y;
     external num get z;
@@ -912,7 +925,8 @@ class DOMPointReadOnly {
 }
 
 @JS('DOMQuad')
-class DOMQuad {
+abstract class DOMQuad {
+    external factory DOMQuad([DOMPointInit p1,DOMPointInit p2,DOMPointInit p3,DOMPointInit p4]);
     external DOMPoint get p1;
     external DOMPoint get p2;
     external DOMPoint get p3;
@@ -921,7 +935,8 @@ class DOMQuad {
 }
 
 @JS('DOMRect')
-class DOMRect extends DOMRectReadOnly {
+abstract class DOMRect implements DOMRectReadOnly {
+    external factory DOMRect();
     external num get x;
     external set x (num val);
     external num get y;
@@ -945,13 +960,13 @@ class DOMRectInit {
 }
 
 @JS('DOMRectList')
-class DOMRectList {
+abstract class DOMRectList {
     external num get length;
     external DOMRect operator[](num index);
 }
 
 @JS('DOMRectReadOnly')
-class DOMRectReadOnly {
+abstract class DOMRectReadOnly {
     external num get x;
     external num get y;
     external num get width;
@@ -963,12 +978,12 @@ class DOMRectReadOnly {
 }
 
 @JS('DOMRequest')
-class DOMRequest extends EventTarget with DOMRequestShared {
+abstract class DOMRequest implements EventTarget,DOMRequestShared {
     external  then([AnyCallback fulfillCallback,AnyCallback rejectCallback]);
 }
 
 @JS('DOMRequestShared')
-class DOMRequestShared {
+abstract class DOMRequestShared {
     external String get readyState;
     external  get result;
     external DOMError get error;
@@ -979,21 +994,21 @@ class DOMRequestShared {
 }
 
 @JS('DOMStringList')
-class DOMStringList {
+abstract class DOMStringList {
     external num get length;
     external String operator[](num index);
     external bool contains(String string);
 }
 
 @JS('DOMStringMap')
-class DOMStringMap {
+abstract class DOMStringMap {
     external String operator[](String name);
     external void operator[]=(String name,String value);
     // Deleter ?
 }
 
 @JS('DOMTokenList')
-class DOMTokenList {
+abstract class DOMTokenList {
     external num get length;
     external String operator[](num index);
     external bool contains(String token);
@@ -1022,7 +1037,8 @@ class DateTimeValue {
 }
 
 @JS('Document')
-class Document extends Node with XPathEvaluator, GlobalEventHandlers, DocumentAndElementEventHandlers, TouchEventHandlers, ParentNode, OnErrorEventHandlerForNodes, GeometryUtils, FontFaceSource {
+abstract class Document implements Node,XPathEvaluator,GlobalEventHandlers,DocumentAndElementEventHandlers,TouchEventHandlers,ParentNode,OnErrorEventHandlerForNodes,GeometryUtils,FontFaceSource {
+    external factory Document();
     external DOMImplementation get implementation;
     external String get URL;
     external String get documentURI;
@@ -1140,7 +1156,7 @@ class Document extends Node with XPathEvaluator, GlobalEventHandlers, DocumentAn
 }
 
 @JS('DocumentAndElementEventHandlers')
-class DocumentAndElementEventHandlers {
+abstract class DocumentAndElementEventHandlers {
     external EventHandlerNonNull get oncopy;
     external set oncopy (EventHandlerNonNull val);
     external EventHandlerNonNull get oncut;
@@ -1150,14 +1166,16 @@ class DocumentAndElementEventHandlers {
 }
 
 @JS('DocumentFragment')
-class DocumentFragment extends Node with ParentNode {
+abstract class DocumentFragment implements Node,ParentNode {
+    external factory DocumentFragment();
     external Element getElementById(String elementId);
     external Element querySelector(String selectors);
     external NodeList querySelectorAll(String selectors);
 }
 
 @JS('DocumentTimeline')
-class DocumentTimeline extends AnimationTimeline {
+abstract class DocumentTimeline implements AnimationTimeline {
+    external factory DocumentTimeline([DocumentTimelineOptions options]);
 }
 
 @anonymous
@@ -1167,14 +1185,14 @@ class DocumentTimelineOptions {
 }
 
 @JS('DocumentType')
-class DocumentType extends Node with ChildNode {
+abstract class DocumentType implements Node,ChildNode {
     external String get name;
     external String get publicId;
     external String get systemId;
 }
 
 @JS('Element')
-class Element extends Node with ChildNode, NonDocumentTypeChildNode, ParentNode, Animatable, GeometryUtils {
+abstract class Element implements Node,ChildNode,NonDocumentTypeChildNode,ParentNode,Animatable,GeometryUtils {
     external String get namespaceURI;
     external String get prefix;
     external String get localName;
@@ -1283,7 +1301,8 @@ class ElementRegistrationOptions {
 }
 
 @JS('Event')
-class Event {
+abstract class Event {
+    external factory Event(String type,[EventInit eventInitDict]);
     external String get type;
     external EventTarget get target;
     external EventTarget get currentTarget;
@@ -1361,7 +1380,8 @@ class EventModifierInit extends UIEventInit {
 }
 
 @JS('EventSource')
-class EventSource extends EventTarget {
+abstract class EventSource implements EventTarget {
+    external factory EventSource(String url,[EventSourceInit eventSourceInitDict]);
     external String get url;
     external bool get withCredentials;
     external num get readyState;
@@ -1381,7 +1401,7 @@ class EventSourceInit {
 }
 
 @JS('EventTarget')
-class EventTarget {
+abstract class EventTarget {
     external void addEventListener(String type,EventListener listener,[var options,bool wantsUntrusted]);
     external void removeEventListener(String type,EventListener listener,[var options]);
     external bool dispatchEvent(Event event);
@@ -1391,7 +1411,8 @@ class EventTarget {
 }
 
 @JS('ExtendableEvent')
-class ExtendableEvent extends Event {
+abstract class ExtendableEvent implements Event {
+    external factory ExtendableEvent(String type,[ExtendableEventInit eventInitDict]);
     external void waitUntil(Promise<dynamic> p);
 }
 
@@ -1400,7 +1421,8 @@ class ExtendableEventInit extends EventInit {
 }
 
 @JS('FetchEvent')
-class FetchEvent extends ExtendableEvent {
+abstract class FetchEvent implements ExtendableEvent {
+    external factory FetchEvent(String type,FetchEventInit eventInitDict);
     external Request get request;
     external String get clientId;
     external bool get isReload;
@@ -1418,7 +1440,8 @@ class FetchEventInit extends EventInit {
 }
 
 @JS('File')
-class File extends Blob {
+abstract class File implements Blob {
+    external factory File(List<dynamic> fileBits,String fileName,[FilePropertyBag options]);
     external String get name;
     external num get lastModified;
     external DateTime get lastModifiedDate;
@@ -1429,7 +1452,7 @@ class File extends Blob {
 }
 
 @JS('FileList')
-class FileList {
+abstract class FileList {
     external File operator[](num index);
     external num get length;
 }
@@ -1443,7 +1466,8 @@ class FilePropertyBag {
 }
 
 @JS('FontFace')
-class FontFace {
+abstract class FontFace {
+    external factory FontFace(String family,var source,[FontFaceDescriptors descriptors]);
     external String get family;
     external set family (String val);
     external String get style;
@@ -1484,7 +1508,7 @@ class FontFaceDescriptors {
 }
 
 @JS('FontFaceSet')
-class FontFaceSet extends EventTarget {
+abstract class FontFaceSet implements EventTarget {
     external num get size;
     external void add(FontFace font);
     external bool has(FontFace font);
@@ -1508,7 +1532,7 @@ class FontFaceSet extends EventTarget {
 typedef void FontFaceSetForEachCallback(FontFace value,FontFace key,FontFaceSet set);
 
 @JS('FontFaceSetIterator')
-class FontFaceSetIterator {
+abstract class FontFaceSetIterator {
     external FontFaceSetIteratorResult next();
 }
 
@@ -1521,12 +1545,13 @@ class FontFaceSetIteratorResult {
 }
 
 @JS('FontFaceSource')
-class FontFaceSource {
+abstract class FontFaceSource {
     external FontFaceSet get fonts;
 }
 
 @JS('FormData')
-class FormData {
+abstract class FormData {
+    external factory FormData([HTMLFormElement form]);
     external void append(String name,var value,[String filename]);
     external void delete(String name);
     external  get(String name);
@@ -1538,7 +1563,7 @@ class FormData {
 typedef void FrameRequestCallback(DOMHighResTimeStamp time);
 
 @JS('GeometryUtils')
-class GeometryUtils {
+abstract class GeometryUtils {
     external List<DOMQuad> getBoxQuads([BoxQuadOptions options]);
     external DOMQuad convertQuadFromNode(DOMQuad quad,var from,[ConvertCoordinateOptions options]);
     external DOMQuad convertRectFromNode(DOMRectReadOnly rect,var from,[ConvertCoordinateOptions options]);
@@ -1552,12 +1577,12 @@ class GetRootNodeOptions {
 }
 
 @JS('GlobalCrypto')
-class GlobalCrypto {
+abstract class GlobalCrypto {
     external Crypto get crypto;
 }
 
 @JS('GlobalEventHandlers')
-class GlobalEventHandlers {
+abstract class GlobalEventHandlers {
     external EventHandlerNonNull get onabort;
     external set onabort (EventHandlerNonNull val);
     external EventHandlerNonNull get onblur;
@@ -1727,18 +1752,18 @@ class GlobalEventHandlers {
 }
 
 @JS('GlobalU2F')
-class GlobalU2F {
+abstract class GlobalU2F {
     external U2F get u2f;
 }
 
 @JS('Grid')
-class Grid {
+abstract class Grid {
     external GridDimension get rows;
     external GridDimension get cols;
 }
 
 @JS('GridArea')
-class GridArea {
+abstract class GridArea {
     external String get name;
     external String get type;
     external num get rowStart;
@@ -1748,13 +1773,13 @@ class GridArea {
 }
 
 @JS('GridDimension')
-class GridDimension {
+abstract class GridDimension {
     external GridLines get lines;
     external GridTracks get tracks;
 }
 
 @JS('GridLine')
-class GridLine {
+abstract class GridLine {
     external num get start;
     external num get breadth;
     external String get type;
@@ -1762,13 +1787,13 @@ class GridLine {
 }
 
 @JS('GridLines')
-class GridLines {
+abstract class GridLines {
     external num get length;
     external GridLine operator[](num index);
 }
 
 @JS('GridTrack')
-class GridTrack {
+abstract class GridTrack {
     external num get start;
     external num get breadth;
     external String get type;
@@ -1776,20 +1801,20 @@ class GridTrack {
 }
 
 @JS('GridTracks')
-class GridTracks {
+abstract class GridTracks {
     external num get length;
     external GridTrack operator[](num index);
 }
 
 @JS('HTMLAllCollection')
-class HTMLAllCollection {
+abstract class HTMLAllCollection {
     external num get length;
     external Node operator[](num index);
     external Node item(num index);
 }
 
 @JS('HTMLAnchorElement')
-class HTMLAnchorElement extends HTMLElement with HTMLHyperlinkElementUtils {
+abstract class HTMLAnchorElement implements HTMLElement,HTMLHyperlinkElementUtils {
     external String get target;
     external set target (String val);
     external String get download;
@@ -1820,7 +1845,7 @@ class HTMLAnchorElement extends HTMLElement with HTMLHyperlinkElementUtils {
 }
 
 @JS('HTMLAppletElement')
-class HTMLAppletElement extends HTMLElement {
+abstract class HTMLAppletElement implements HTMLElement {
     external String get align;
     external set align (String val);
     external String get alt;
@@ -1846,7 +1871,7 @@ class HTMLAppletElement extends HTMLElement {
 }
 
 @JS('HTMLAreaElement')
-class HTMLAreaElement extends HTMLElement with HTMLHyperlinkElementUtils {
+abstract class HTMLAreaElement implements HTMLElement,HTMLHyperlinkElementUtils {
     external String get alt;
     external set alt (String val);
     external String get coords;
@@ -1869,17 +1894,17 @@ class HTMLAreaElement extends HTMLElement with HTMLHyperlinkElementUtils {
 }
 
 @JS('HTMLAudioElement')
-class HTMLAudioElement extends HTMLMediaElement {
+abstract class HTMLAudioElement implements HTMLMediaElement {
 }
 
 @JS('HTMLBRElement')
-class HTMLBRElement extends HTMLElement {
+abstract class HTMLBRElement implements HTMLElement {
     external String get clear;
     external set clear (String val);
 }
 
 @JS('HTMLBaseElement')
-class HTMLBaseElement extends HTMLElement {
+abstract class HTMLBaseElement implements HTMLElement {
     external String get href;
     external set href (String val);
     external String get target;
@@ -1887,7 +1912,7 @@ class HTMLBaseElement extends HTMLElement {
 }
 
 @JS('HTMLBodyElement')
-class HTMLBodyElement extends HTMLElement with WindowEventHandlers {
+abstract class HTMLBodyElement implements HTMLElement,WindowEventHandlers {
     external String get text;
     external set text (String val);
     external String get link;
@@ -1903,7 +1928,7 @@ class HTMLBodyElement extends HTMLElement with WindowEventHandlers {
 }
 
 @JS('HTMLButtonElement')
-class HTMLButtonElement extends HTMLElement {
+abstract class HTMLButtonElement implements HTMLElement {
     external bool get autofocus;
     external set autofocus (bool val);
     external bool get disabled;
@@ -1934,7 +1959,7 @@ class HTMLButtonElement extends HTMLElement {
 }
 
 @JS('HTMLCanvasElement')
-class HTMLCanvasElement extends HTMLElement {
+abstract class HTMLCanvasElement implements HTMLElement {
     external num get width;
     external set width (num val);
     external num get height;
@@ -1953,43 +1978,43 @@ class HTMLCanvasElement extends HTMLElement {
 }
 
 @JS('HTMLCollection')
-class HTMLCollection {
+abstract class HTMLCollection {
     external num get length;
     external Element operator[](num index);
 }
 
 @JS('HTMLContentElement')
-class HTMLContentElement extends HTMLElement {
+abstract class HTMLContentElement implements HTMLElement {
     external String get select;
     external set select (String val);
     external NodeList getDistributedNodes();
 }
 
 @JS('HTMLDListElement')
-class HTMLDListElement extends HTMLElement {
+abstract class HTMLDListElement implements HTMLElement {
     external bool get compact;
     external set compact (bool val);
 }
 
 @JS('HTMLDataElement')
-class HTMLDataElement extends HTMLElement {
+abstract class HTMLDataElement implements HTMLElement {
     external String get value;
     external set value (String val);
 }
 
 @JS('HTMLDataListElement')
-class HTMLDataListElement extends HTMLElement {
+abstract class HTMLDataListElement implements HTMLElement {
     external HTMLCollection get options;
 }
 
 @JS('HTMLDetailsElement')
-class HTMLDetailsElement extends HTMLElement {
+abstract class HTMLDetailsElement implements HTMLElement {
     external bool get open;
     external set open (bool val);
 }
 
 @JS('HTMLDialogElement')
-class HTMLDialogElement extends HTMLElement {
+abstract class HTMLDialogElement implements HTMLElement {
     external bool get open;
     external set open (bool val);
     external String get returnValue;
@@ -2000,19 +2025,19 @@ class HTMLDialogElement extends HTMLElement {
 }
 
 @JS('HTMLDirectoryElement')
-class HTMLDirectoryElement extends HTMLElement {
+abstract class HTMLDirectoryElement implements HTMLElement {
     external bool get compact;
     external set compact (bool val);
 }
 
 @JS('HTMLDivElement')
-class HTMLDivElement extends HTMLElement {
+abstract class HTMLDivElement implements HTMLElement {
     external String get align;
     external set align (String val);
 }
 
 @JS('HTMLDocument')
-class HTMLDocument extends Document {
+abstract class HTMLDocument implements Document {
     external String get domain;
     external set domain (String val);
     external String get cookie;
@@ -2062,7 +2087,7 @@ class HTMLDocument extends Document {
 }
 
 @JS('HTMLElement')
-class HTMLElement extends Element with GlobalEventHandlers, DocumentAndElementEventHandlers, TouchEventHandlers, OnErrorEventHandlerForNodes {
+abstract class HTMLElement implements Element,GlobalEventHandlers,DocumentAndElementEventHandlers,TouchEventHandlers,OnErrorEventHandlerForNodes {
     external String get title;
     external set title (String val);
     external String get lang;
@@ -2101,7 +2126,7 @@ class HTMLElement extends Element with GlobalEventHandlers, DocumentAndElementEv
 }
 
 @JS('HTMLEmbedElement')
-class HTMLEmbedElement extends HTMLElement {
+abstract class HTMLEmbedElement implements HTMLElement {
     external String get src;
     external set src (String val);
     external String get type;
@@ -2118,7 +2143,7 @@ class HTMLEmbedElement extends HTMLElement {
 }
 
 @JS('HTMLFieldSetElement')
-class HTMLFieldSetElement extends HTMLElement {
+abstract class HTMLFieldSetElement implements HTMLElement {
     external bool get disabled;
     external set disabled (bool val);
     external HTMLFormElement get form;
@@ -2135,7 +2160,7 @@ class HTMLFieldSetElement extends HTMLElement {
 }
 
 @JS('HTMLFontElement')
-class HTMLFontElement extends HTMLElement {
+abstract class HTMLFontElement implements HTMLElement {
     external String get color;
     external set color (String val);
     external String get face;
@@ -2145,11 +2170,11 @@ class HTMLFontElement extends HTMLElement {
 }
 
 @JS('HTMLFormControlsCollection')
-class HTMLFormControlsCollection extends HTMLCollection {
+abstract class HTMLFormControlsCollection implements HTMLCollection {
 }
 
 @JS('HTMLFormElement')
-class HTMLFormElement extends HTMLElement {
+abstract class HTMLFormElement implements HTMLElement {
     external String get acceptCharset;
     external set acceptCharset (String val);
     external String get action;
@@ -2179,7 +2204,7 @@ class HTMLFormElement extends HTMLElement {
 }
 
 @JS('HTMLFrameElement')
-class HTMLFrameElement extends HTMLElement {
+abstract class HTMLFrameElement implements HTMLElement {
     external String get name;
     external set name (String val);
     external String get scrolling;
@@ -2201,7 +2226,7 @@ class HTMLFrameElement extends HTMLElement {
 }
 
 @JS('HTMLFrameSetElement')
-class HTMLFrameSetElement extends HTMLElement with WindowEventHandlers {
+abstract class HTMLFrameSetElement implements HTMLElement,WindowEventHandlers {
     external String get cols;
     external set cols (String val);
     external String get rows;
@@ -2209,7 +2234,7 @@ class HTMLFrameSetElement extends HTMLElement with WindowEventHandlers {
 }
 
 @JS('HTMLHRElement')
-class HTMLHRElement extends HTMLElement {
+abstract class HTMLHRElement implements HTMLElement {
     external String get align;
     external set align (String val);
     external String get color;
@@ -2223,23 +2248,23 @@ class HTMLHRElement extends HTMLElement {
 }
 
 @JS('HTMLHeadElement')
-class HTMLHeadElement extends HTMLElement {
+abstract class HTMLHeadElement implements HTMLElement {
 }
 
 @JS('HTMLHeadingElement')
-class HTMLHeadingElement extends HTMLElement {
+abstract class HTMLHeadingElement implements HTMLElement {
     external String get align;
     external set align (String val);
 }
 
 @JS('HTMLHtmlElement')
-class HTMLHtmlElement extends HTMLElement {
+abstract class HTMLHtmlElement implements HTMLElement {
     external String get version;
     external set version (String val);
 }
 
 @JS('HTMLHyperlinkElementUtils')
-class HTMLHyperlinkElementUtils {
+abstract class HTMLHyperlinkElementUtils {
     external String get href;
     external set href (String val);
     external String get origin;
@@ -2264,7 +2289,7 @@ class HTMLHyperlinkElementUtils {
 }
 
 @JS('HTMLIFrameElement')
-class HTMLIFrameElement extends HTMLElement {
+abstract class HTMLIFrameElement implements HTMLElement {
     external String get src;
     external set src (String val);
     external String get srcdoc;
@@ -2300,7 +2325,7 @@ class HTMLIFrameElement extends HTMLElement {
 }
 
 @JS('HTMLImageElement')
-class HTMLImageElement extends HTMLElement with MozImageLoadingContent {
+abstract class HTMLImageElement implements HTMLElement,MozImageLoadingContent {
     external String get alt;
     external set alt (String val);
     external String get src;
@@ -2344,7 +2369,7 @@ class HTMLImageElement extends HTMLElement with MozImageLoadingContent {
 }
 
 @JS('HTMLInputElement')
-class HTMLInputElement extends HTMLElement with MozImageLoadingContent, MozPhonetic {
+abstract class HTMLInputElement implements HTMLElement,MozImageLoadingContent,MozPhonetic {
     external String get accept;
     external set accept (String val);
     external String get alt;
@@ -2466,7 +2491,7 @@ class HTMLInputElement extends HTMLElement with MozImageLoadingContent, MozPhone
 }
 
 @JS('HTMLLIElement')
-class HTMLLIElement extends HTMLElement {
+abstract class HTMLLIElement implements HTMLElement {
     external num get value;
     external set value (num val);
     external String get type;
@@ -2474,7 +2499,7 @@ class HTMLLIElement extends HTMLElement {
 }
 
 @JS('HTMLLabelElement')
-class HTMLLabelElement extends HTMLElement {
+abstract class HTMLLabelElement implements HTMLElement {
     external HTMLFormElement get form;
     external String get htmlFor;
     external set htmlFor (String val);
@@ -2482,14 +2507,14 @@ class HTMLLabelElement extends HTMLElement {
 }
 
 @JS('HTMLLegendElement')
-class HTMLLegendElement extends HTMLElement {
+abstract class HTMLLegendElement implements HTMLElement {
     external HTMLFormElement get form;
     external String get align;
     external set align (String val);
 }
 
 @JS('HTMLLinkElement')
-class HTMLLinkElement extends HTMLElement with LinkStyle {
+abstract class HTMLLinkElement implements HTMLElement,LinkStyle {
     external bool get disabled;
     external set disabled (bool val);
     external String get href;
@@ -2520,14 +2545,14 @@ class HTMLLinkElement extends HTMLElement with LinkStyle {
 }
 
 @JS('HTMLMapElement')
-class HTMLMapElement extends HTMLElement {
+abstract class HTMLMapElement implements HTMLElement {
     external String get name;
     external set name (String val);
     external HTMLCollection get areas;
 }
 
 @JS('HTMLMediaElement')
-class HTMLMediaElement extends HTMLElement {
+abstract class HTMLMediaElement implements HTMLElement {
     external MediaError get error;
     external String get src;
     external set src (String val);
@@ -2613,7 +2638,7 @@ class HTMLMediaElement extends HTMLElement {
 }
 
 @JS('HTMLMenuElement')
-class HTMLMenuElement extends HTMLElement {
+abstract class HTMLMenuElement implements HTMLElement {
     external String get type;
     external set type (String val);
     external String get label;
@@ -2626,7 +2651,7 @@ class HTMLMenuElement extends HTMLElement {
 }
 
 @JS('HTMLMenuItemElement')
-class HTMLMenuItemElement extends HTMLElement {
+abstract class HTMLMenuItemElement implements HTMLElement {
     external String get type;
     external set type (String val);
     external String get label;
@@ -2644,7 +2669,7 @@ class HTMLMenuItemElement extends HTMLElement {
 }
 
 @JS('HTMLMetaElement')
-class HTMLMetaElement extends HTMLElement {
+abstract class HTMLMetaElement implements HTMLElement {
     external String get name;
     external set name (String val);
     external String get httpEquiv;
@@ -2656,7 +2681,7 @@ class HTMLMetaElement extends HTMLElement {
 }
 
 @JS('HTMLMeterElement')
-class HTMLMeterElement extends HTMLElement {
+abstract class HTMLMeterElement implements HTMLElement {
     external num get value;
     external set value (num val);
     external num get min;
@@ -2672,7 +2697,7 @@ class HTMLMeterElement extends HTMLElement {
 }
 
 @JS('HTMLModElement')
-class HTMLModElement extends HTMLElement {
+abstract class HTMLModElement implements HTMLElement {
     external String get cite;
     external set cite (String val);
     external String get dateTime;
@@ -2680,7 +2705,7 @@ class HTMLModElement extends HTMLElement {
 }
 
 @JS('HTMLOListElement')
-class HTMLOListElement extends HTMLElement {
+abstract class HTMLOListElement implements HTMLElement {
     external bool get reversed;
     external set reversed (bool val);
     external num get start;
@@ -2692,7 +2717,7 @@ class HTMLOListElement extends HTMLElement {
 }
 
 @JS('HTMLObjectElement')
-class HTMLObjectElement extends HTMLElement {
+abstract class HTMLObjectElement implements HTMLElement {
     external String get data;
     external set data (String val);
     external String get type;
@@ -2740,7 +2765,7 @@ class HTMLObjectElement extends HTMLElement {
 }
 
 @JS('HTMLOptGroupElement')
-class HTMLOptGroupElement extends HTMLElement {
+abstract class HTMLOptGroupElement implements HTMLElement {
     external bool get disabled;
     external set disabled (bool val);
     external String get label;
@@ -2748,7 +2773,7 @@ class HTMLOptGroupElement extends HTMLElement {
 }
 
 @JS('HTMLOptionElement')
-class HTMLOptionElement extends HTMLElement {
+abstract class HTMLOptionElement implements HTMLElement {
     external bool get disabled;
     external set disabled (bool val);
     external HTMLFormElement get form;
@@ -2766,7 +2791,7 @@ class HTMLOptionElement extends HTMLElement {
 }
 
 @JS('HTMLOptionsCollection')
-class HTMLOptionsCollection extends HTMLCollection {
+abstract class HTMLOptionsCollection implements HTMLCollection {
     external num get length;
     external set length (num val);
     external void operator[]=(num index,HTMLOptionElement option);
@@ -2777,7 +2802,7 @@ class HTMLOptionsCollection extends HTMLCollection {
 }
 
 @JS('HTMLOutputElement')
-class HTMLOutputElement extends HTMLElement {
+abstract class HTMLOutputElement implements HTMLElement {
     external DOMTokenList get htmlFor;
     external HTMLFormElement get form;
     external String get name;
@@ -2796,13 +2821,13 @@ class HTMLOutputElement extends HTMLElement {
 }
 
 @JS('HTMLParagraphElement')
-class HTMLParagraphElement extends HTMLElement {
+abstract class HTMLParagraphElement implements HTMLElement {
     external String get align;
     external set align (String val);
 }
 
 @JS('HTMLParamElement')
-class HTMLParamElement extends HTMLElement {
+abstract class HTMLParamElement implements HTMLElement {
     external String get name;
     external set name (String val);
     external String get value;
@@ -2814,17 +2839,17 @@ class HTMLParamElement extends HTMLElement {
 }
 
 @JS('HTMLPictureElement')
-class HTMLPictureElement extends HTMLElement {
+abstract class HTMLPictureElement implements HTMLElement {
 }
 
 @JS('HTMLPreElement')
-class HTMLPreElement extends HTMLElement {
+abstract class HTMLPreElement implements HTMLElement {
     external num get width;
     external set width (num val);
 }
 
 @JS('HTMLProgressElement')
-class HTMLProgressElement extends HTMLElement {
+abstract class HTMLProgressElement implements HTMLElement {
     external num get value;
     external set value (num val);
     external num get max;
@@ -2833,13 +2858,13 @@ class HTMLProgressElement extends HTMLElement {
 }
 
 @JS('HTMLQuoteElement')
-class HTMLQuoteElement extends HTMLElement {
+abstract class HTMLQuoteElement implements HTMLElement {
     external String get cite;
     external set cite (String val);
 }
 
 @JS('HTMLScriptElement')
-class HTMLScriptElement extends HTMLElement {
+abstract class HTMLScriptElement implements HTMLElement {
     external String get src;
     external set src (String val);
     external String get type;
@@ -2863,7 +2888,7 @@ class HTMLScriptElement extends HTMLElement {
 }
 
 @JS('HTMLSelectElement')
-class HTMLSelectElement extends HTMLElement {
+abstract class HTMLSelectElement implements HTMLElement {
     external bool get autofocus;
     external set autofocus (bool val);
     external String get autocomplete;
@@ -2903,12 +2928,12 @@ class HTMLSelectElement extends HTMLElement {
 }
 
 @JS('HTMLShadowElement')
-class HTMLShadowElement extends HTMLElement {
+abstract class HTMLShadowElement implements HTMLElement {
     external ShadowRoot get olderShadowRoot;
 }
 
 @JS('HTMLSourceElement')
-class HTMLSourceElement extends HTMLElement {
+abstract class HTMLSourceElement implements HTMLElement {
     external String get src;
     external set src (String val);
     external String get type;
@@ -2922,11 +2947,11 @@ class HTMLSourceElement extends HTMLElement {
 }
 
 @JS('HTMLSpanElement')
-class HTMLSpanElement extends HTMLElement {
+abstract class HTMLSpanElement implements HTMLElement {
 }
 
 @JS('HTMLStyleElement')
-class HTMLStyleElement extends HTMLElement with LinkStyle {
+abstract class HTMLStyleElement implements HTMLElement,LinkStyle {
     external bool get disabled;
     external set disabled (bool val);
     external String get media;
@@ -2938,13 +2963,13 @@ class HTMLStyleElement extends HTMLElement with LinkStyle {
 }
 
 @JS('HTMLTableCaptionElement')
-class HTMLTableCaptionElement extends HTMLElement {
+abstract class HTMLTableCaptionElement implements HTMLElement {
     external String get align;
     external set align (String val);
 }
 
 @JS('HTMLTableCellElement')
-class HTMLTableCellElement extends HTMLElement {
+abstract class HTMLTableCellElement implements HTMLElement {
     external num get colSpan;
     external set colSpan (num val);
     external num get rowSpan;
@@ -2977,7 +3002,7 @@ class HTMLTableCellElement extends HTMLElement {
 }
 
 @JS('HTMLTableColElement')
-class HTMLTableColElement extends HTMLElement {
+abstract class HTMLTableColElement implements HTMLElement {
     external num get span;
     external set span (num val);
     external String get align;
@@ -2993,7 +3018,7 @@ class HTMLTableColElement extends HTMLElement {
 }
 
 @JS('HTMLTableElement')
-class HTMLTableElement extends HTMLElement {
+abstract class HTMLTableElement implements HTMLElement {
     external HTMLTableCaptionElement get caption;
     external set caption (HTMLTableCaptionElement val);
     external HTMLElement createCaption();
@@ -3032,7 +3057,7 @@ class HTMLTableElement extends HTMLElement {
 }
 
 @JS('HTMLTableRowElement')
-class HTMLTableRowElement extends HTMLElement {
+abstract class HTMLTableRowElement implements HTMLElement {
     external num get rowIndex;
     external num get sectionRowIndex;
     external HTMLCollection get cells;
@@ -3051,7 +3076,7 @@ class HTMLTableRowElement extends HTMLElement {
 }
 
 @JS('HTMLTableSectionElement')
-class HTMLTableSectionElement extends HTMLElement {
+abstract class HTMLTableSectionElement implements HTMLElement {
     external HTMLCollection get rows;
     external HTMLElement insertRow([num index]);
     external void deleteRow(num index);
@@ -3066,12 +3091,12 @@ class HTMLTableSectionElement extends HTMLElement {
 }
 
 @JS('HTMLTemplateElement')
-class HTMLTemplateElement extends HTMLElement {
+abstract class HTMLTemplateElement implements HTMLElement {
     external DocumentFragment get content;
 }
 
 @JS('HTMLTextAreaElement')
-class HTMLTextAreaElement extends HTMLElement {
+abstract class HTMLTextAreaElement implements HTMLElement {
     external bool get autofocus;
     external set autofocus (bool val);
     external num get cols;
@@ -3122,19 +3147,19 @@ class HTMLTextAreaElement extends HTMLElement {
 }
 
 @JS('HTMLTimeElement')
-class HTMLTimeElement extends HTMLElement {
+abstract class HTMLTimeElement implements HTMLElement {
     external String get dateTime;
     external set dateTime (String val);
 }
 
 @JS('HTMLTitleElement')
-class HTMLTitleElement extends HTMLElement {
+abstract class HTMLTitleElement implements HTMLElement {
     external String get text;
     external set text (String val);
 }
 
 @JS('HTMLTrackElement')
-class HTMLTrackElement extends HTMLElement {
+abstract class HTMLTrackElement implements HTMLElement {
     external String get kind;
     external set kind (String val);
     external String get src;
@@ -3152,7 +3177,7 @@ class HTMLTrackElement extends HTMLElement {
 }
 
 @JS('HTMLUListElement')
-class HTMLUListElement extends HTMLElement {
+abstract class HTMLUListElement implements HTMLElement {
     external bool get compact;
     external set compact (bool val);
     external String get type;
@@ -3160,11 +3185,11 @@ class HTMLUListElement extends HTMLElement {
 }
 
 @JS('HTMLUnknownElement')
-class HTMLUnknownElement extends HTMLElement {
+abstract class HTMLUnknownElement implements HTMLElement {
 }
 
 @JS('HTMLVideoElement')
-class HTMLVideoElement extends HTMLMediaElement {
+abstract class HTMLVideoElement implements HTMLMediaElement {
     external num get width;
     external set width (num val);
     external num get height;
@@ -3185,7 +3210,8 @@ class HTMLVideoElement extends HTMLMediaElement {
 }
 
 @JS('Headers')
-class Headers {
+abstract class Headers {
+    external factory Headers([var init]);
     external void append(String name,String value);
     external void delete(String name);
     external String get(String name);
@@ -3196,7 +3222,7 @@ class Headers {
 }
 
 @JS('History')
-class History {
+abstract class History {
     external num get length;
     external String get scrollRestoration;
     external set scrollRestoration (String val);
@@ -3217,7 +3243,7 @@ class IdleRequestOptions {
 }
 
 @JS('ImageBitmap')
-class ImageBitmap {
+abstract class ImageBitmap {
     external num get width;
     external num get height;
     external void close();
@@ -3233,7 +3259,8 @@ class KeyframeAnimationOptions extends KeyframeEffectOptions {
 }
 
 @JS('KeyframeEffect')
-class KeyframeEffect extends KeyframeEffectReadOnly {
+abstract class KeyframeEffect implements KeyframeEffectReadOnly {
+    external factory KeyframeEffect(var target,Object keyframes,[var options]);
     external  get target;
     external set target (var val);
     external String get iterationComposite;
@@ -3256,7 +3283,8 @@ class KeyframeEffectOptions extends AnimationEffectTimingProperties {
 }
 
 @JS('KeyframeEffectReadOnly')
-class KeyframeEffectReadOnly extends AnimationEffectReadOnly {
+abstract class KeyframeEffectReadOnly implements AnimationEffectReadOnly {
+    external factory KeyframeEffectReadOnly(var target,Object keyframes,[var options]);
     external  get target;
     external String get iterationComposite;
     external String get composite;
@@ -3286,12 +3314,12 @@ typedef void LifecycleCreatedCallback();
 typedef void LifecycleDetachedCallback();
 
 @JS('LinkStyle')
-class LinkStyle {
+abstract class LinkStyle {
     external StyleSheet get sheet;
 }
 
 @JS('Location')
-class Location {
+abstract class Location {
     external String get href;
     external set href (String val);
     external String get origin;
@@ -3315,18 +3343,18 @@ class Location {
 }
 
 @JS('MediaError')
-class MediaError {
+abstract class MediaError {
     external num get code;
     external String get message;
 }
 
 @JS('MediaKeyError')
-class MediaKeyError extends Event {
+abstract class MediaKeyError implements Event {
     external num get systemCode;
 }
 
 @JS('MediaKeySession')
-class MediaKeySession extends EventTarget {
+abstract class MediaKeySession implements EventTarget {
     external MediaKeyError get error;
     external String get sessionId;
     external num get expiration;
@@ -3344,21 +3372,21 @@ class MediaKeySession extends EventTarget {
 }
 
 @JS('MediaKeyStatusMap')
-class MediaKeyStatusMap {
+abstract class MediaKeyStatusMap {
     external num get size;
     external bool has(BufferSource keyId);
     external  get(BufferSource keyId);
 }
 
 @JS('MediaKeys')
-class MediaKeys {
+abstract class MediaKeys {
     external String get keySystem;
     external MediaKeySession createSession([String sessionType]);
     external Promise<dynamic> setServerCertificate(BufferSource serverCertificate);
 }
 
 @JS('MediaList')
-class MediaList {
+abstract class MediaList {
     external String get mediaText;
     external set mediaText (String val);
     external num get length;
@@ -3368,7 +3396,7 @@ class MediaList {
 }
 
 @JS('MediaQueryList')
-class MediaQueryList {
+abstract class MediaQueryList {
     external String get media;
     external bool get matches;
     external void addListener(MediaQueryListListener listener);
@@ -3378,7 +3406,8 @@ class MediaQueryList {
 typedef void MediaQueryListListener(MediaQueryList list);
 
 @JS('MediaSource')
-class MediaSource extends EventTarget {
+abstract class MediaSource implements EventTarget {
+    external factory MediaSource();
     external SourceBufferList get sourceBuffers;
     external SourceBufferList get activeSourceBuffers;
     external String get readyState;
@@ -3400,7 +3429,8 @@ class MediaSource extends EventTarget {
 }
 
 @JS('MouseEvent')
-class MouseEvent extends UIEvent {
+abstract class MouseEvent implements UIEvent {
+    external factory MouseEvent(String typeArg,[MouseEventInit mouseEventInitDict]);
     external num get screenX;
     external num get screenY;
     external num get clientX;
@@ -3450,13 +3480,13 @@ class MouseEventInit extends EventModifierInit {
 }
 
 @JS('MozCanvasPrintState')
-class MozCanvasPrintState {
+abstract class MozCanvasPrintState {
     external nsISupports get context;
     external void done();
 }
 
 @JS('MozImageLoadingContent')
-class MozImageLoadingContent {
+abstract class MozImageLoadingContent {
     external bool get loadingEnabled;
     external set loadingEnabled (bool val);
     external num get imageBlockingStatus;
@@ -3470,7 +3500,7 @@ class MozImageLoadingContent {
 }
 
 @JS('MozObjectLoadingContent')
-class MozObjectLoadingContent {
+abstract class MozObjectLoadingContent {
     external String get actualType;
     external num get displayedType;
     external num getContentTypeForMIMEType(String aMimeType);
@@ -3487,7 +3517,7 @@ class MozObjectLoadingContent {
 }
 
 @JS('MozPhonetic')
-class MozPhonetic {
+abstract class MozPhonetic {
     external String get phonetic;
 }
 
@@ -3499,10 +3529,19 @@ class MozPluginParameter {
     external set value (String val);
 }
 
+@anonymous
+class MozXMLHttpRequestParameters {
+    external bool get mozAnon;
+    external set mozAnon (bool val);
+    external bool get mozSystem;
+    external set mozSystem (bool val);
+}
+
 typedef void MutationCallback(List<MutationRecord> mutations,MutationObserver observer);
 
 @JS('MutationObserver')
-class MutationObserver {
+abstract class MutationObserver {
+    external factory MutationObserver(MutationCallback mutationCallback);
     external void observe(Node target,[MutationObserverInit options]);
     external void disconnect();
     external List<MutationRecord> takeRecords();
@@ -3541,7 +3580,7 @@ class MutationObservingInfo extends MutationObserverInit {
 }
 
 @JS('MutationRecord')
-class MutationRecord {
+abstract class MutationRecord {
     external String get type;
     external Node get target;
     external NodeList get addedNodes;
@@ -3554,7 +3593,7 @@ class MutationRecord {
 }
 
 @JS('NamedNodeMap')
-class NamedNodeMap {
+abstract class NamedNodeMap {
     external Attr operator[](String name);
     external Attr setNamedItem(Attr arg);
     external Attr removeNamedItem(String name);
@@ -3565,7 +3604,7 @@ class NamedNodeMap {
 }
 
 @JS('Node')
-class Node extends EventTarget {
+abstract class Node implements EventTarget {
     external num get nodeType;
     external String get nodeName;
     external String get baseURI;
@@ -3605,7 +3644,7 @@ class Node extends EventTarget {
 }
 
 @JS('NodeIterator')
-class NodeIterator {
+abstract class NodeIterator {
     external Node get root;
     external Node get referenceNode;
     external bool get pointerBeforeReferenceNode;
@@ -3617,19 +3656,20 @@ class NodeIterator {
 }
 
 @JS('NodeList')
-class NodeList {
+abstract class NodeList {
     external Node operator[](num index);
     external num get length;
 }
 
 @JS('NonDocumentTypeChildNode')
-class NonDocumentTypeChildNode {
+abstract class NonDocumentTypeChildNode {
     external Element get previousElementSibling;
     external Element get nextElementSibling;
 }
 
 @JS('OffscreenCanvas')
-class OffscreenCanvas extends EventTarget {
+abstract class OffscreenCanvas implements EventTarget {
+    external factory OffscreenCanvas(num width,num height);
     external num get width;
     external set width (num val);
     external num get height;
@@ -3642,13 +3682,13 @@ class OffscreenCanvas extends EventTarget {
 typedef String OnBeforeUnloadEventHandlerNonNull(Event event);
 
 @JS('OnErrorEventHandlerForNodes')
-class OnErrorEventHandlerForNodes {
+abstract class OnErrorEventHandlerForNodes {
     external EventHandlerNonNull get onerror;
     external set onerror (EventHandlerNonNull val);
 }
 
 @JS('OnErrorEventHandlerForWindow')
-class OnErrorEventHandlerForWindow {
+abstract class OnErrorEventHandlerForWindow {
     external OnErrorEventHandlerNonNull get onerror;
     external set onerror (OnErrorEventHandlerNonNull val);
 }
@@ -3656,7 +3696,7 @@ class OnErrorEventHandlerForWindow {
 typedef  OnErrorEventHandlerNonNull(var event,[String source,num lineno,num column,var error]);
 
 @JS('ParentNode')
-class ParentNode {
+abstract class ParentNode {
     external HTMLCollection get children;
     external Element get firstElementChild;
     external Element get lastElementChild;
@@ -3666,24 +3706,42 @@ class ParentNode {
 }
 
 @JS('Principal')
-class Principal {
+abstract class Principal {
 }
 
 typedef void PrintCallback(MozCanvasPrintState ctx);
 
 @JS('ProcessingInstruction')
-class ProcessingInstruction extends CharacterData {
+abstract class ProcessingInstruction implements CharacterData {
     external String get target;
+}
+
+@JS('ProgressEvent')
+abstract class ProgressEvent implements Event {
+    external factory ProgressEvent(String type,[ProgressEventInit eventInitDict]);
+    external bool get lengthComputable;
+    external num get loaded;
+    external num get total;
+}
+
+@anonymous
+class ProgressEventInit extends EventInit {
+    external bool get lengthComputable;
+    external set lengthComputable (bool val);
+    external num get loaded;
+    external set loaded (num val);
+    external num get total;
+    external set total (num val);
 }
 
 typedef void PromiseJobCallback();
 
 @JS('PromiseNativeHandler')
-class PromiseNativeHandler {
+abstract class PromiseNativeHandler {
 }
 
 @JS('RGBColor')
-class RGBColor {
+abstract class RGBColor {
     external CSSPrimitiveValue get red;
     external CSSPrimitiveValue get green;
     external CSSPrimitiveValue get blue;
@@ -3691,7 +3749,8 @@ class RGBColor {
 }
 
 @JS('Range')
-class Range {
+abstract class Range {
+    external factory Range();
     external Node get startContainer;
     external num get startOffset;
     external Node get endContainer;
@@ -3725,7 +3784,7 @@ class Range {
 }
 
 @JS('Rect')
-class Rect {
+abstract class Rect {
     external CSSPrimitiveValue get top;
     external CSSPrimitiveValue get right;
     external CSSPrimitiveValue get bottom;
@@ -3767,7 +3826,8 @@ class RegisteredKey {
 }
 
 @JS('Request')
-class Request extends Object with Body {
+abstract class Request {
+    external factory Request(var input,[RequestInit init]);
     external String get method;
     external String get url;
     external Headers get headers;
@@ -3808,7 +3868,8 @@ class RequestInit {
 }
 
 @JS('Response')
-class Response extends Object with Body {
+abstract class Response {
+    external factory Response([var body,ResponseInit init]);
     external Response error();
     external Response redirect(String url,[num status]);
     external String get type;
@@ -3833,7 +3894,7 @@ class ResponseInit {
 }
 
 @JS('Screen')
-class Screen extends EventTarget {
+abstract class Screen implements EventTarget {
     external num get availWidth;
     external num get availHeight;
     external num get width;
@@ -3850,7 +3911,7 @@ class Screen extends EventTarget {
 }
 
 @JS('ScreenOrientation')
-class ScreenOrientation extends EventTarget {
+abstract class ScreenOrientation implements EventTarget {
     external Promise<dynamic> lock(String orientation);
     external void unlock();
     external String get type;
@@ -3880,7 +3941,7 @@ class ScrollToOptions extends ScrollOptions {
 }
 
 @JS('Selection')
-class Selection {
+abstract class Selection {
     external Node get anchorNode;
     external num get anchorOffset;
     external Node get focusNode;
@@ -3911,7 +3972,7 @@ class Selection {
 }
 
 @JS('ShadowRoot')
-class ShadowRoot extends DocumentFragment {
+abstract class ShadowRoot implements DocumentFragment {
     external Element getElementById(String elementId);
     external HTMLCollection getElementsByTagName(String localName);
     external HTMLCollection getElementsByTagNameNS(String namespace,String localName);
@@ -3940,7 +4001,7 @@ class SignResponse {
 }
 
 @JS('SourceBuffer')
-class SourceBuffer extends EventTarget {
+abstract class SourceBuffer implements EventTarget {
     external String get mode;
     external set mode (String val);
     external bool get updating;
@@ -3967,7 +4028,7 @@ class SourceBuffer extends EventTarget {
 }
 
 @JS('SourceBufferList')
-class SourceBufferList extends EventTarget {
+abstract class SourceBufferList implements EventTarget {
     external num get length;
     external EventHandlerNonNull get onaddsourcebuffer;
     external set onaddsourcebuffer (EventHandlerNonNull val);
@@ -3977,7 +4038,7 @@ class SourceBufferList extends EventTarget {
 }
 
 @JS('Storage')
-class Storage {
+abstract class Storage {
     external num get length;
     external String key(num index);
     external String operator[](String key);
@@ -3988,7 +4049,7 @@ class Storage {
 }
 
 @JS('StyleSheet')
-class StyleSheet {
+abstract class StyleSheet {
     external String get type;
     external String get href;
     external Node get ownerNode;
@@ -4000,7 +4061,8 @@ class StyleSheet {
 }
 
 @JS('StyleSheetApplicableStateChangeEvent')
-class StyleSheetApplicableStateChangeEvent extends Event {
+abstract class StyleSheetApplicableStateChangeEvent implements Event {
+    external factory StyleSheetApplicableStateChangeEvent(String type,[StyleSheetApplicableStateChangeEventInit eventInitDict]);
     external CSSStyleSheet get stylesheet;
     external bool get applicable;
 }
@@ -4014,7 +4076,8 @@ class StyleSheetApplicableStateChangeEventInit extends EventInit {
 }
 
 @JS('StyleSheetChangeEvent')
-class StyleSheetChangeEvent extends Event {
+abstract class StyleSheetChangeEvent implements Event {
+    external factory StyleSheetChangeEvent(String type,[StyleSheetChangeEventInit eventInitDict]);
     external CSSStyleSheet get stylesheet;
     external bool get documentSheet;
 }
@@ -4028,19 +4091,20 @@ class StyleSheetChangeEventInit extends EventInit {
 }
 
 @JS('StyleSheetList')
-class StyleSheetList {
+abstract class StyleSheetList {
     external num get length;
     external StyleSheet operator[](num index);
 }
 
 @JS('Text')
-class Text extends CharacterData with GeometryUtils {
+abstract class Text implements CharacterData,GeometryUtils {
+    external factory Text([String data]);
     external Text splitText(num offset);
     external String get wholeText;
 }
 
 @JS('TextTrack')
-class TextTrack extends EventTarget {
+abstract class TextTrack implements EventTarget {
     external String get kind;
     external String get label;
     external String get language;
@@ -4058,7 +4122,7 @@ class TextTrack extends EventTarget {
 }
 
 @JS('TextTrackCue')
-class TextTrackCue extends EventTarget {
+abstract class TextTrackCue implements EventTarget {
     external TextTrack get track;
     external String get id;
     external set id (String val);
@@ -4075,14 +4139,14 @@ class TextTrackCue extends EventTarget {
 }
 
 @JS('TextTrackCueList')
-class TextTrackCueList {
+abstract class TextTrackCueList {
     external num get length;
     external VTTCue operator[](num index);
     external VTTCue getCueById(String id);
 }
 
 @JS('TextTrackList')
-class TextTrackList extends EventTarget {
+abstract class TextTrackList implements EventTarget {
     external num get length;
     external TextTrack operator[](num index);
     external TextTrack getTrackById(String id);
@@ -4096,21 +4160,22 @@ class TextTrackList extends EventTarget {
 }
 
 @JS('TimeEvent')
-class TimeEvent extends Event {
+abstract class TimeEvent implements Event {
     external num get detail;
     external WindowProxy get view;
     external void initTimeEvent(String aType,Window aView,num aDetail);
 }
 
 @JS('TimeRanges')
-class TimeRanges {
+abstract class TimeRanges {
     external num get length;
     external num start(num index);
     external num end(num index);
 }
 
 @JS('Touch')
-class Touch {
+abstract class Touch {
+    external factory Touch(TouchInit touchInitDict);
     external num get identifier;
     external EventTarget get target;
     external num get screenX;
@@ -4126,7 +4191,8 @@ class Touch {
 }
 
 @JS('TouchEvent')
-class TouchEvent extends UIEvent {
+abstract class TouchEvent implements UIEvent {
+    external factory TouchEvent(String type,[TouchEventInit eventInitDict]);
     external TouchList get touches;
     external TouchList get targetTouches;
     external TouchList get changedTouches;
@@ -4138,7 +4204,7 @@ class TouchEvent extends UIEvent {
 }
 
 @JS('TouchEventHandlers')
-class TouchEventHandlers {
+abstract class TouchEventHandlers {
     external EventHandlerNonNull get ontouchstart;
     external set ontouchstart (EventHandlerNonNull val);
     external EventHandlerNonNull get ontouchend;
@@ -4188,13 +4254,13 @@ class TouchInit {
 }
 
 @JS('TouchList')
-class TouchList {
+abstract class TouchList {
     external num get length;
     external Touch operator[](num index);
 }
 
 @JS('TreeWalker')
-class TreeWalker {
+abstract class TreeWalker {
     external Node get root;
     external num get whatToShow;
     external NodeFilter get filter;
@@ -4210,7 +4276,7 @@ class TreeWalker {
 }
 
 @JS('U2F')
-class U2F {
+abstract class U2F {
     external void register(String appId,List<RegisterRequest> registerRequests,List<RegisteredKey> registeredKeys,U2FRegisterCallback callback,[num opt_timeoutSeconds]);
     external void sign(String appId,String challenge,List<RegisteredKey> registeredKeys,U2FSignCallback callback,[num opt_timeoutSeconds]);
 }
@@ -4230,7 +4296,8 @@ typedef void U2FRegisterCallback(RegisterResponse response);
 typedef void U2FSignCallback(SignResponse response);
 
 @JS('UIEvent')
-class UIEvent extends Event {
+abstract class UIEvent implements Event {
+    external factory UIEvent(String type,[UIEventInit eventInitDict]);
     external WindowProxy get view;
     external num get detail;
     external void initUIEvent(String aType,bool aCanBubble,bool aCancelable,Window aView,num aDetail);
@@ -4253,11 +4320,12 @@ class UIEventInit extends EventInit {
 }
 
 @JS('URI')
-class URI {
+abstract class URI {
 }
 
 @JS('VTTCue')
-class VTTCue extends TextTrackCue {
+abstract class VTTCue implements TextTrackCue {
+    external factory VTTCue(num startTime,num endTime,String text);
     external VTTRegion get region;
     external set region (VTTRegion val);
     external String get vertical;
@@ -4288,7 +4356,8 @@ class VTTCue extends TextTrackCue {
 }
 
 @JS('VTTRegion')
-class VTTRegion {
+abstract class VTTRegion {
+    external factory VTTRegion();
     external num get width;
     external set width (num val);
     external num get lines;
@@ -4306,7 +4375,7 @@ class VTTRegion {
 }
 
 @JS('ValidityState')
-class ValidityState {
+abstract class ValidityState {
     external bool get valueMissing;
     external bool get typeMismatch;
     external bool get patternMismatch;
@@ -4321,7 +4390,7 @@ class ValidityState {
 }
 
 @JS('VideoPlaybackQuality')
-class VideoPlaybackQuality {
+abstract class VideoPlaybackQuality {
     external DOMHighResTimeStamp get creationTime;
     external num get totalVideoFrames;
     external num get droppedVideoFrames;
@@ -4329,7 +4398,7 @@ class VideoPlaybackQuality {
 }
 
 @JS('VideoTrack')
-class VideoTrack {
+abstract class VideoTrack {
     external String get id;
     external String get kind;
     external String get label;
@@ -4339,7 +4408,7 @@ class VideoTrack {
 }
 
 @JS('VideoTrackList')
-class VideoTrackList extends EventTarget {
+abstract class VideoTrackList implements EventTarget {
     external num get length;
     external VideoTrack operator[](num index);
     external VideoTrack getTrackById(String id);
@@ -4353,7 +4422,7 @@ class VideoTrackList extends EventTarget {
 }
 
 @JS('Window')
-class Window extends EventTarget with GlobalEventHandlers, WindowEventHandlers, WindowSessionStorage, WindowLocalStorage, GlobalCrypto, GlobalU2F, WindowModal, TouchEventHandlers, OnErrorEventHandlerForWindow, ChromeWindow, WindowOrWorkerGlobalScope {
+abstract class Window implements EventTarget,GlobalEventHandlers,WindowEventHandlers,WindowSessionStorage,WindowLocalStorage,GlobalCrypto,GlobalU2F,WindowModal,TouchEventHandlers,OnErrorEventHandlerForWindow,ChromeWindow,WindowOrWorkerGlobalScope {
     external Window get window;
     external Window get self;
     external Document get document;
@@ -4497,7 +4566,7 @@ class Window extends EventTarget with GlobalEventHandlers, WindowEventHandlers, 
 }
 
 @JS('WindowEventHandlers')
-class WindowEventHandlers {
+abstract class WindowEventHandlers {
     external EventHandlerNonNull get onafterprint;
     external set onafterprint (EventHandlerNonNull val);
     external EventHandlerNonNull get onbeforeprint;
@@ -4527,19 +4596,19 @@ class WindowEventHandlers {
 }
 
 @JS('WindowLocalStorage')
-class WindowLocalStorage {
+abstract class WindowLocalStorage {
     external Storage get localStorage;
 }
 
 @JS('WindowModal')
-class WindowModal {
+abstract class WindowModal {
     external  get dialogArguments;
     external  get returnValue;
     external set returnValue (var val);
 }
 
 @JS('WindowOrWorkerGlobalScope')
-class WindowOrWorkerGlobalScope {
+abstract class WindowOrWorkerGlobalScope {
     external String get origin;
     external String btoa(String btoa);
     external String atob(String atob);
@@ -4555,16 +4624,17 @@ class WindowOrWorkerGlobalScope {
 }
 
 @JS('WindowRoot')
-class WindowRoot extends EventTarget {
+abstract class WindowRoot implements EventTarget {
 }
 
 @JS('WindowSessionStorage')
-class WindowSessionStorage {
+abstract class WindowSessionStorage {
     external Storage get sessionStorage;
 }
 
 @JS('Worker')
-class Worker extends EventTarget with AbstractWorker {
+abstract class Worker implements EventTarget,AbstractWorker {
+    external factory Worker(String scriptURL);
     external void terminate();
     external void postMessage(var message,[List<Object> transfer]);
     external EventHandlerNonNull get onmessage;
@@ -4572,25 +4642,82 @@ class Worker extends EventTarget with AbstractWorker {
 }
 
 @JS('Worklet')
-class Worklet {
+abstract class Worklet {
     external Promise<dynamic> import(String moduleURL);
 }
 
+@JS('XMLHttpRequest')
+abstract class XMLHttpRequest implements XMLHttpRequestEventTarget {
+    external factory XMLHttpRequest([MozXMLHttpRequestParameters params]);
+    external EventHandlerNonNull get onreadystatechange;
+    external set onreadystatechange (EventHandlerNonNull val);
+    external num get readyState;
+    external void open(String method,String url,[bool async,String user,String password]);
+    external void setRequestHeader(String header,String value);
+    external num get timeout;
+    external set timeout (num val);
+    external bool get withCredentials;
+    external set withCredentials (bool val);
+    external XMLHttpRequestUpload get upload;
+    external void send([var data]);
+    external void abort();
+    external String get responseURL;
+    external num get status;
+    external String get statusText;
+    external String getResponseHeader(String header);
+    external String getAllResponseHeaders();
+    external void overrideMimeType(String mime);
+    external String get responseType;
+    external set responseType (String val);
+    external  get response;
+    external String get responseText;
+    external Document get responseXML;
+    external String get networkInterfaceId;
+    external set networkInterfaceId (String val);
+    external  getInterface(IID iid);
+    external void setOriginAttributes([OriginAttributesDictionary originAttributes]);
+    external bool get mozAnon;
+    external bool get mozSystem;
+}
+
+@JS('XMLHttpRequestEventTarget')
+abstract class XMLHttpRequestEventTarget implements EventTarget {
+    external EventHandlerNonNull get onloadstart;
+    external set onloadstart (EventHandlerNonNull val);
+    external EventHandlerNonNull get onprogress;
+    external set onprogress (EventHandlerNonNull val);
+    external EventHandlerNonNull get onabort;
+    external set onabort (EventHandlerNonNull val);
+    external EventHandlerNonNull get onerror;
+    external set onerror (EventHandlerNonNull val);
+    external EventHandlerNonNull get onload;
+    external set onload (EventHandlerNonNull val);
+    external EventHandlerNonNull get ontimeout;
+    external set ontimeout (EventHandlerNonNull val);
+    external EventHandlerNonNull get onloadend;
+    external set onloadend (EventHandlerNonNull val);
+}
+
+@JS('XMLHttpRequestUpload')
+abstract class XMLHttpRequestUpload implements XMLHttpRequestEventTarget {
+}
+
 @JS('XPathEvaluator')
-class XPathEvaluator {
+abstract class XPathEvaluator {
+    external factory XPathEvaluator();
     external XPathExpression createExpression(String expression,XPathNSResolver resolver);
     external Node createNSResolver(Node nodeResolver);
     external XPathResult evaluate(String expression,Node contextNode,XPathNSResolver resolver,num type,Object result);
 }
 
 @JS('XPathExpression')
-class XPathExpression {
+abstract class XPathExpression {
     external XPathResult evaluate(Node contextNode,num type,Object result);
     external XPathResult evaluateWithContext(Node contextNode,num contextPosition,num contextSize,num type,Object result);
 }
 
 @JS('XPathResult')
-class XPathResult {
+abstract class XPathResult {
     external num get resultType;
     external num get numberValue;
     external String get stringValue;
@@ -4617,6 +4744,7 @@ const INTERFACES = const [
    'WindowModal',
    'ChromeWindow',
    'AnimationEffectReadOnly',
+   'ProgressEvent',
    'DOMTokenList',
    'CSSKeyframesRule',
    'HTMLHyperlinkElementUtils',
@@ -4741,6 +4869,7 @@ const INTERFACES = const [
    'DOMRequest',
    'MediaKeys',
    'AnimationTimeline',
+   'XMLHttpRequestUpload',
    'NamedNodeMap',
    'MediaError',
    'Response',
@@ -4748,6 +4877,7 @@ const INTERFACES = const [
    'HTMLAppletElement',
    'StyleSheetList',
    'DOMQuad',
+   'XMLHttpRequestEventTarget',
    'ChildNode',
    'NonDocumentTypeChildNode',
    'RGBColor',
@@ -4805,6 +4935,7 @@ const INTERFACES = const [
    'CSSMozDocumentRule',
    'Request',
    'TextTrackList',
+   'XMLHttpRequest',
    'CSSTransition',
    'HTMLPictureElement',
    'HTMLMeterElement',

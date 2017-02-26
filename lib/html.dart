@@ -5,137 +5,109 @@ import 'dart:async';
 import 'package:js/js.dart';
 export 'package:html5/src/html5_support.dart';
 
-
 part 'html_gen.dart';
-
 
 @JS('Promise')
 class Promise<T> {
-
+  external Promise<X> then<X>(X onFulfilled([T t]), [void onRejected([error])]);
+  external JS$catch(void onRejected([error]));
 }
+
+/**
+ * Promise to Future
+ */
+Future<X> asFuture<X>(Promise<X> promise) {
+  Completer<X> completer = new Completer<X>();
+
+  X onFullfilled([X x]) {
+    completer.complete(x);
+    return x;
+  }
+
+  void onRejected([error]) {
+    completer.completeError(error);
+  }
+
+  promise.then(onFullfilled, onRejected);
+
+  return completer.future;
+}
+
+@JS('OriginAttributesDictionary')
+class OriginAttributesDictionary {}
 
 @JS('MediaStream')
-class MediaStream {
-
-}
+class MediaStream {}
 
 @JS('WindowProxy')
-class WindowProxy {
-
-}
+class WindowProxy {}
 
 @JS('Navigator')
-class Navigator {
-
-}
+class Navigator {}
 
 @JS('Performance')
-class Performance {
-
-}
+class Performance {}
 
 @JS('nsIEditor')
-class nsIEditor {
-
-}
+class nsIEditor {}
 
 @JS('nsISupports')
-class nsISupports {
-
-}
-
-
+class nsISupports {}
 
 @JS('MozControllers')
-class MozControllers {
-
-}
+class MozControllers {}
 
 @JS('Counter')
-class Counter {
-
-}
+class Counter {}
 
 @JS('NodeFilter')
-class NodeFilter {
-
-}
+class NodeFilter {}
 
 @JS('BufferSource')
-class BufferSource {
-
-}
+class BufferSource {}
 
 @JS('MozSelfSupport')
-class MozSelfSupport {
-
-}
+class MozSelfSupport {}
 
 @JS('IID')
-class IID {
-
-}
+class IID {}
 
 @JS('DOMHighResTimeStamp')
-class DOMHighResTimeStamp {
-
-}
+class DOMHighResTimeStamp {}
 
 @JS('nsIBrowserDOMWindow')
-class nsIBrowserDOMWindow {
-
-}
+class nsIBrowserDOMWindow {}
 
 @JS('nsIMessageBroadcaster')
-class nsIMessageBroadcaster {
-
-}
+class nsIMessageBroadcaster {}
 
 @JS('IdleDeadline')
-class IdleDeadline {
-
-}
+class IdleDeadline {}
 
 @JS('External')
-class External {
-
-}
+class External {}
 
 @JS('ApplicationCache')
-class ApplicationCache {
-
-}
+class ApplicationCache {}
 
 // TODO : actually webidlize it.
 @JS('SVGSVGElement')
-class SVGSVGElement {
-
-}
+class SVGSVGElement {}
 
 @JS('nsIDocShell')
-class nsIDocShell {
-
-}
+class nsIDocShell {}
 
 @JS('nsILoadGroup')
-class nsILoadGroup {
-
-}
+class nsILoadGroup {}
 
 @JS('ArrayBuffer')
-class ArrayBuffer {
-
-}
+class ArrayBuffer {}
 
 @JS('SubtleCrypto')
-class SubtleCrypto {
-
-}
+class SubtleCrypto {}
 
 @JS('ArrayBufferView')
-class ArrayBufferView {
-
-}
+class ArrayBufferView {}
 
 @JS('EventListener')
 abstract class EventListener {
@@ -143,49 +115,33 @@ abstract class EventListener {
 }
 
 @JS('nsIFile')
-class nsIFile {
-
-}
+class nsIFile {}
 
 @JS('nsIControllers')
-class nsIControllers {
-
-}
+class nsIControllers {}
 
 @JS('MenuBuilder')
-class MenuBuilder {
-
-}
+class MenuBuilder {}
 
 @JS('imgINotificationObserver')
-class imgINotificationObserver {
-
-}
+class imgINotificationObserver {}
 
 @JS('imgIRequest')
-class imgIRequest {
-
-}
+class imgIRequest {}
 
 @JS('IDBFactory')
-class IDBFactory {
-
-}
+class IDBFactory {}
 
 @JS('XPathNSResolver')
 abstract class XPathNSResolver {
   external String lookupNamespaceURI(String prefix);
 }
 
-
 @JS('document')
 external Document get document;
 
 @JS('window')
 external Window get window;
-
-
-
 
 class EventHandler<E> {
   StreamController<E> _streamController = new StreamController.broadcast();
