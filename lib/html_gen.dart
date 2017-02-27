@@ -5,6 +5,7 @@ abstract class AbstractWorker {
     external set onerror (EventHandlerNonNull val);
 }
 
+@JS()
 @anonymous
 class AddEventListenerOptions extends EventListenerOptions {
     external bool get passive;
@@ -75,6 +76,7 @@ abstract class AnimationEffectTiming implements AnimationEffectTimingReadOnly {
     external set easing (String val);
 }
 
+@JS()
 @anonymous
 class AnimationEffectTimingProperties {
     external num get delay;
@@ -115,6 +117,7 @@ abstract class AnimationEvent implements Event {
     external String get pseudoElement;
 }
 
+@JS()
 @anonymous
 class AnimationEventInit extends EventInit {
     external String get animationName;
@@ -125,6 +128,7 @@ class AnimationEventInit extends EventInit {
     external set pseudoElement (String val);
 }
 
+@JS()
 @anonymous
 class AnimationFilter {
     external bool get subtree;
@@ -138,6 +142,7 @@ abstract class AnimationPlaybackEvent implements Event {
     external num get timelineTime;
 }
 
+@JS()
 @anonymous
 class AnimationPlaybackEventInit extends EventInit {
     external num get currentTime;
@@ -146,6 +151,7 @@ class AnimationPlaybackEventInit extends EventInit {
     external set timelineTime (num val);
 }
 
+@JS()
 @anonymous
 class AnimationPropertyDetails {
     external String get property;
@@ -158,6 +164,7 @@ class AnimationPropertyDetails {
     external set values (List<AnimationPropertyValueDetails> val);
 }
 
+@JS()
 @anonymous
 class AnimationPropertyValueDetails {
     external num get offset;
@@ -230,12 +237,14 @@ abstract class AutocompleteErrorEvent implements Event {
     external String get reason;
 }
 
+@JS()
 @anonymous
 class AutocompleteErrorEventInit extends EventInit {
     external String get reason;
     external set reason (String val);
 }
 
+@JS()
 @anonymous
 class AutocompleteInfo {
     external String get section;
@@ -254,12 +263,14 @@ abstract class BarProp {
     external set visible (bool val);
 }
 
+@JS()
 @anonymous
 class BaseComputedKeyframe extends BaseKeyframe {
     external num get computedOffset;
     external set computedOffset (num val);
 }
 
+@JS()
 @anonymous
 class BaseKeyframe {
     external num get offset;
@@ -272,6 +283,7 @@ class BaseKeyframe {
     external set simulateComputeValuesFailure (bool val);
 }
 
+@JS()
 @anonymous
 class BasePropertyIndexedKeyframe {
     external String get easing;
@@ -296,12 +308,14 @@ abstract class BlobEvent implements Event {
     external Blob get data;
 }
 
+@JS()
 @anonymous
 class BlobEventInit extends EventInit {
     external Blob get data;
     external set data (Blob val);
 }
 
+@JS()
 @anonymous
 class BlobPropertyBag {
     external String get type;
@@ -320,6 +334,7 @@ abstract class Body {
     external Promise<String> text();
 }
 
+@JS()
 @anonymous
 class BoxQuadOptions {
     external String get box;
@@ -513,6 +528,7 @@ abstract class CSSStyleSheet implements StyleSheet {
 abstract class CSSSupportsRule implements CSSConditionRule {
 }
 
+@JS()
 @anonymous
 class CSSToken {
     external String get tokenType;
@@ -560,6 +576,7 @@ abstract class Cache {
     external Promise<List<Request>> keys([var request,CacheQueryOptions options]);
 }
 
+@JS()
 @anonymous
 class CacheBatchOperation {
     external String get type;
@@ -572,6 +589,7 @@ class CacheBatchOperation {
     external set options (CacheQueryOptions val);
 }
 
+@JS()
 @anonymous
 class CacheQueryOptions {
     external bool get ignoreSearch;
@@ -619,6 +637,7 @@ abstract class CaretStateChangedEvent implements Event {
     external String get selectedTextContent;
 }
 
+@JS()
 @anonymous
 class CaretStateChangedEventInit extends EventInit {
     external bool get collapsed;
@@ -639,6 +658,7 @@ class CaretStateChangedEventInit extends EventInit {
     external set selectedTextContent (String val);
 }
 
+@JS()
 @anonymous
 class ChannelPixelLayout {
     external num get offset;
@@ -675,6 +695,7 @@ abstract class ChildNode {
     external void remove();
 }
 
+@JS()
 @anonymous
 class ChromeFilePropertyBag extends FilePropertyBag {
     external String get name;
@@ -703,6 +724,7 @@ abstract class ChromeWorker implements Worker {
     external factory ChromeWorker(String scriptURL);
 }
 
+@JS()
 @anonymous
 class ClientRectsAndTexts {
     external DOMRectList get rectList;
@@ -716,6 +738,7 @@ abstract class Comment implements CharacterData {
     external factory Comment([String data]);
 }
 
+@JS()
 @anonymous
 class ComputedTimingProperties extends AnimationEffectTimingProperties {
     external num get endTime;
@@ -730,6 +753,7 @@ class ComputedTimingProperties extends AnimationEffectTimingProperties {
     external set currentIteration (num val);
 }
 
+@JS()
 @anonymous
 class ConvertCoordinateOptions {
     external String get fromBox;
@@ -758,6 +782,7 @@ abstract class CustomEvent implements Event {
     external void initCustomEvent(String type,bool canBubble,bool cancelable,var detail);
 }
 
+@JS()
 @anonymous
 class CustomEventInit extends EventInit {
     external  get detail;
@@ -904,6 +929,7 @@ abstract class DOMPoint implements DOMPointReadOnly {
     external set w (num val);
 }
 
+@JS()
 @anonymous
 class DOMPointInit {
     external num get x;
@@ -947,6 +973,7 @@ abstract class DOMRect implements DOMRectReadOnly {
     external set height (num val);
 }
 
+@JS()
 @anonymous
 class DOMRectInit {
     external num get x;
@@ -1022,6 +1049,7 @@ abstract class DOMTokenList {
     // isStringifier ?
 }
 
+@JS()
 @anonymous
 class DateTimeValue {
     external num get hour;
@@ -1178,6 +1206,7 @@ abstract class DocumentTimeline implements AnimationTimeline {
     external factory DocumentTimeline([DocumentTimelineOptions options]);
 }
 
+@JS()
 @anonymous
 class DocumentTimelineOptions {
     external DOMHighResTimeStamp get originTime;
@@ -1274,6 +1303,7 @@ abstract class Element implements Node,ChildNode,NonDocumentTypeChildNode,Parent
     external void requestPointerLock();
 }
 
+@JS()
 @anonymous
 class ElementCreationOptions {
     @JS('is')
@@ -1282,6 +1312,7 @@ class ElementCreationOptions {
     external set IS (String val);
 }
 
+@JS()
 @anonymous
 class ElementDefinitionOptions {
     @JS('extends')
@@ -1290,6 +1321,7 @@ class ElementDefinitionOptions {
     external set Extends (String val);
 }
 
+@JS()
 @anonymous
 class ElementRegistrationOptions {
     external Object get prototype;
@@ -1331,6 +1363,7 @@ abstract class Event {
 
 typedef  EventHandlerNonNull(Event event);
 
+@JS()
 @anonymous
 class EventInit {
     external bool get bubbles;
@@ -1341,6 +1374,7 @@ class EventInit {
     external set composed (bool val);
 }
 
+@JS()
 @anonymous
 class EventListenerOptions {
     external bool get capture;
@@ -1349,6 +1383,7 @@ class EventListenerOptions {
     external set mozSystemGroup (bool val);
 }
 
+@JS()
 @anonymous
 class EventModifierInit extends UIEventInit {
     external bool get ctrlKey;
@@ -1394,6 +1429,7 @@ abstract class EventSource implements EventTarget {
     external void close();
 }
 
+@JS()
 @anonymous
 class EventSourceInit {
     external bool get withCredentials;
@@ -1416,6 +1452,7 @@ abstract class ExtendableEvent implements Event {
     external void waitUntil(Promise<dynamic> p);
 }
 
+@JS()
 @anonymous
 class ExtendableEventInit extends EventInit {
 }
@@ -1429,6 +1466,7 @@ abstract class FetchEvent implements ExtendableEvent {
     external void respondWith(Promise<Response> r);
 }
 
+@JS()
 @anonymous
 class FetchEventInit extends EventInit {
     external Request get request;
@@ -1457,6 +1495,7 @@ abstract class FileList {
     external num get length;
 }
 
+@JS()
 @anonymous
 class FilePropertyBag {
     external String get type;
@@ -1489,6 +1528,7 @@ abstract class FontFace {
     external Promise<FontFace> get loaded;
 }
 
+@JS()
 @anonymous
 class FontFaceDescriptors {
     external String get style;
@@ -1536,6 +1576,7 @@ abstract class FontFaceSetIterator {
     external FontFaceSetIteratorResult next();
 }
 
+@JS()
 @anonymous
 class FontFaceSetIteratorResult {
     external  get value;
@@ -1570,6 +1611,7 @@ abstract class GeometryUtils {
     external DOMPoint convertPointFromNode(DOMPointInit point,var from,[ConvertCoordinateOptions options]);
 }
 
+@JS()
 @anonymous
 class GetRootNodeOptions {
     external bool get composed;
@@ -3168,10 +3210,9 @@ abstract class HTMLTrackElement implements HTMLElement {
     external set srclang (String val);
     external String get label;
     external set label (String val);
+    external bool get JS$default;
     @JS('default')
-    external bool get defaultValue;
-    @JS('default')
-    external set defaultValue (bool val);
+    external set JS$default (bool val);
     external num get readyState;
     external TextTrack get track;
 }
@@ -3236,6 +3277,7 @@ abstract class History {
 
 typedef void IdleRequestCallback(IdleDeadline deadline);
 
+@JS()
 @anonymous
 class IdleRequestOptions {
     external num get timeout;
@@ -3252,6 +3294,7 @@ abstract class ImageBitmap {
     external Promise<List<ChannelPixelLayout>> mapDataInto(String aFormat,BufferSource aBuffer,num aOffset);
 }
 
+@JS()
 @anonymous
 class KeyframeAnimationOptions extends KeyframeEffectOptions {
     external String get id;
@@ -3272,6 +3315,7 @@ abstract class KeyframeEffect implements KeyframeEffectReadOnly {
     external void setKeyframes(Object keyframes);
 }
 
+@JS()
 @anonymous
 class KeyframeEffectOptions extends AnimationEffectTimingProperties {
     external String get iterationComposite;
@@ -3297,6 +3341,7 @@ typedef void LifecycleAttachedCallback();
 
 typedef void LifecycleAttributeChangedCallback(String attrName,String oldValue,String newValue);
 
+@JS()
 @anonymous
 class LifecycleCallbacks {
     external LifecycleCreatedCallback get createdCallback;
@@ -3457,6 +3502,7 @@ abstract class MouseEvent implements UIEvent {
     external bool get hitCluster;
 }
 
+@JS()
 @anonymous
 class MouseEventInit extends EventModifierInit {
     external num get screenX;
@@ -3521,6 +3567,7 @@ abstract class MozPhonetic {
     external String get phonetic;
 }
 
+@JS()
 @anonymous
 class MozPluginParameter {
     external String get name;
@@ -3529,6 +3576,7 @@ class MozPluginParameter {
     external set value (String val);
 }
 
+@JS()
 @anonymous
 class MozXMLHttpRequestParameters {
     external bool get mozAnon;
@@ -3551,6 +3599,7 @@ abstract class MutationObserver {
     external set mergeAttributeRecords (bool val);
 }
 
+@JS()
 @anonymous
 class MutationObserverInit {
     external bool get childList;
@@ -3573,6 +3622,7 @@ class MutationObserverInit {
     external set attributeFilter (List<String> val);
 }
 
+@JS()
 @anonymous
 class MutationObservingInfo extends MutationObserverInit {
     external Node get observedNode;
@@ -3724,6 +3774,7 @@ abstract class ProgressEvent implements Event {
     external num get total;
 }
 
+@JS()
 @anonymous
 class ProgressEventInit extends EventInit {
     external bool get lengthComputable;
@@ -3791,6 +3842,7 @@ abstract class Rect {
     external CSSPrimitiveValue get left;
 }
 
+@JS()
 @anonymous
 class RegisterRequest {
     external String get version;
@@ -3799,6 +3851,7 @@ class RegisterRequest {
     external set challenge (String val);
 }
 
+@JS()
 @anonymous
 class RegisterResponse {
     external String get version;
@@ -3813,6 +3866,7 @@ class RegisterResponse {
     external set errorMessage (String val);
 }
 
+@JS()
 @anonymous
 class RegisteredKey {
     external String get version;
@@ -3843,6 +3897,7 @@ abstract class Request {
     external void overrideContentPolicyType(num context);
 }
 
+@JS()
 @anonymous
 class RequestInit {
     external String get method;
@@ -3883,6 +3938,7 @@ abstract class Response {
     external Response cloneUnfiltered();
 }
 
+@JS()
 @anonymous
 class ResponseInit {
     external num get status;
@@ -3920,18 +3976,21 @@ abstract class ScreenOrientation implements EventTarget {
     external set onchange (EventHandlerNonNull val);
 }
 
+@JS()
 @anonymous
 class ScrollIntoViewOptions extends ScrollOptions {
     external String get block;
     external set block (String val);
 }
 
+@JS()
 @anonymous
 class ScrollOptions {
     external String get behavior;
     external set behavior (String val);
 }
 
+@JS()
 @anonymous
 class ScrollToOptions extends ScrollOptions {
     external num get left;
@@ -3986,6 +4045,7 @@ abstract class ShadowRoot implements DocumentFragment {
     external StyleSheetList get styleSheets;
 }
 
+@JS()
 @anonymous
 class SignResponse {
     external String get keyHandle;
@@ -4067,6 +4127,7 @@ abstract class StyleSheetApplicableStateChangeEvent implements Event {
     external bool get applicable;
 }
 
+@JS()
 @anonymous
 class StyleSheetApplicableStateChangeEventInit extends EventInit {
     external CSSStyleSheet get stylesheet;
@@ -4082,6 +4143,7 @@ abstract class StyleSheetChangeEvent implements Event {
     external bool get documentSheet;
 }
 
+@JS()
 @anonymous
 class StyleSheetChangeEventInit extends EventInit {
     external CSSStyleSheet get stylesheet;
@@ -4215,6 +4277,7 @@ abstract class TouchEventHandlers {
     external set ontouchcancel (EventHandlerNonNull val);
 }
 
+@JS()
 @anonymous
 class TouchEventInit extends EventModifierInit {
     external List<Touch> get touches;
@@ -4225,6 +4288,7 @@ class TouchEventInit extends EventModifierInit {
     external set changedTouches (List<Touch> val);
 }
 
+@JS()
 @anonymous
 class TouchInit {
     external num get identifier;
@@ -4281,6 +4345,7 @@ abstract class U2F {
     external void sign(String appId,String challenge,List<RegisteredKey> registeredKeys,U2FSignCallback callback,[num opt_timeoutSeconds]);
 }
 
+@JS()
 @anonymous
 class U2FClientData {
     external String get typ;
@@ -4311,6 +4376,7 @@ abstract class UIEvent implements Event {
     external bool get isChar;
 }
 
+@JS()
 @anonymous
 class UIEventInit extends EventInit {
     external Window get view;
@@ -4518,8 +4584,7 @@ abstract class Window implements EventTarget,GlobalEventHandlers,WindowEventHand
     external void updateCommands(String action,[Selection sel,num reason]);
     external bool find([String str,bool caseSensitive,bool backwards,bool wrapAround,bool wholeWord,bool searchInFrames,bool showDialog]);
     external num get mozPaintCount;
-    @JS('MozSelfSupport')
-    external MozSelfSupport get mozSelfSupport;
+    external MozSelfSupport get JS$MozSelfSupport;
     external EventHandlerNonNull get onwheel;
     external set onwheel (EventHandlerNonNull val);
     external EventHandlerNonNull get ondevicemotion;
