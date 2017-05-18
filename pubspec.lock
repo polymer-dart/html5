@@ -4,8 +4,14 @@ packages:
   js:
     description:
       name: js
-      url: "https://pub.dartlang.org"
+      url: "http://pub.drafintech.it:5001"
     source: hosted
     version: "0.6.1"
+  polymerize_common:
+    description:
+      path: "../polymerize_common"
+      relative: true
+    source: path
+    version: "1.0.0"
 sdks:
   dart: ">=1.19.0-dev.0.0 <2.0.0"

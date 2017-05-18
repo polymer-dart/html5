@@ -1,18 +1,27 @@
 @JS('window')
+@HtmlImport('support.html')
 library html_lib;
 
 import 'dart:async';
 import 'package:js/js.dart';
 export 'package:html5/src/html5_support.dart';
+import 'package:html5/src/html5_support.dart' show unregisterAll;
+import 'package:polymerize_common/html_import.dart';
+import 'package:polymerize_common/init.dart';
 
 part 'html_gen.dart';
+
+// TODO ANNOTARE
+@init
+initHtml5() {
+  unregisterAll(INTERFACES);
+}
 
 @JS('Promise')
 class Promise<T> {
   external Promise<X> then<X>(X onFulfilled([T t]), [void onRejected([error])]);
   external JS$catch(void onRejected([error]));
 }
-
 /**
  * Promise to Future
  */
