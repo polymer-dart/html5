@@ -9,9 +9,9 @@ packages:
     version: "0.6.1"
   polymerize_common:
     description:
-      path: "../polymerize_common"
-      relative: true
-    source: path
+      name: polymerize_common
+      url: "http://pub.drafintech.it:5001"
+    source: hosted
     version: "1.0.0"
 sdks:
   dart: ">=1.19.0-dev.0.0 <2.0.0"
