@@ -1,4 +1,7 @@
-##  v0.0.6
+### v0.0.7
+ - fixed an issue being too aggressive removing `dart._extensionType` marker
+
+### v0.0.6
  - support for latest polymerize (^0.8.1)
 
 ### v0.0.5
