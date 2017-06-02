@@ -9,3 +9,8 @@ dependencies:
   js: ^0.6.1
   polymerize_common: ^1.0.0
 #    path: ../polymerize_common
+dev_dependencies:
+  polymerize:
+   path: ../polymerize
+transformers:
+  - polymerize
