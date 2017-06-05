@@ -14,3 +14,6 @@ dev_dependencies:
    path: ../polymerize
 transformers:
   - polymerize
+dependency_overrides:
+  polymerize_common:
+    path: ../polymerize_common

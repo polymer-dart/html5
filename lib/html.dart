@@ -1,20 +1,26 @@
 @JS('window')
-@HtmlImport('support.html')
 library html_lib;
 
 import 'dart:async';
 import 'package:js/js.dart';
-export 'package:html5/src/html5_support.dart';
-import 'package:html5/src/html5_support.dart' show unregisterAll;
-import 'package:polymerize_common/html_import.dart';
+export 'package:html5/html5_support.dart';
+import 'package:html5/html5_support.dart';
 import 'package:polymerize_common/init.dart';
 
 part 'html_gen.dart';
 
+
+void unregisterAll(List<String> defs) => defs.forEach((d) => unregisterByName(d));
+
+
 // TODO ANNOTARE
 @init
 initHtml5() {
-  unregisterAll(INTERFACES);
+  if (isLoaded) {
+    unregisterAll(INTERFACES);
+  } else {
+    print("COULD'T INIT HTML, MISSING MODULE");
+  }
 }
 
 @JS('Promise')
