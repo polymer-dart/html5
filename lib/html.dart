@@ -16,11 +16,9 @@ void unregisterAll(List<String> defs) => defs.forEach((d) => unregisterByName(d)
 // TODO ANNOTARE
 @init
 initHtml5() {
-  if (isLoaded) {
+
     unregisterAll(INTERFACES);
-  } else {
-    print("COULD'T INIT HTML, MISSING MODULE");
-  }
+
 }
 
 @JS('Promise')

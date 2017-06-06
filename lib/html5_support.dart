@@ -1,5 +1,5 @@
 @JS('html5_support')
-@JsMap('html5/src/js/defs')
+@JsMap('packages/html5/src/js/defs')
 //@HtmlImport('js/defs.html')
 library html5_support;
 
