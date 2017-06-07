@@ -14,11 +14,11 @@ void unregisterAll(List<String> defs) => defs.forEach((d) => unregisterByName(d)
 
 
 // TODO ANNOTARE
-@init
+@initModule
 initHtml5() {
-
+  if (isLoaded) {
     unregisterAll(INTERFACES);
-
+  }
 }
 
 @JS('Promise')
