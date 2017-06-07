@@ -3,7 +3,6 @@ library html_lib;
 
 import 'dart:async';
 import 'package:js/js.dart';
-export 'package:html5/html5_support.dart';
 import 'package:html5/html5_support.dart';
 import 'package:polymerize_common/init.dart';
 
@@ -16,9 +15,12 @@ void unregisterAll(List<String> defs) => defs.forEach((d) => unregisterByName(d)
 // TODO ANNOTARE
 @initModule
 initHtml5() {
-  if (isLoaded) {
-    unregisterAll(INTERFACES);
-  }
+  checkHtml5();
+  unregisterAll(INTERFACES);
+}
+
+void checkHtml5() {
+  checkHtml5LibIsLoaded();
 }
 
 @JS('Promise')

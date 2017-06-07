@@ -15,9 +15,14 @@ external asConstructor(Type dartType);
 external unregisterByName(String def);
 
 
-bool isLoaded = false;
+bool _isLoaded = false;
 
 @initModule
 void setLoaded() {
-  isLoaded = true;
+  _isLoaded = true;
+}
+
+void checkHtml5LibIsLoaded() {
+  if (!_isLoaded)
+    throw "Html5 Library is not loaded!";
 }
