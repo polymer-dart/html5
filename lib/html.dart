@@ -13,15 +13,11 @@ void unregisterAll(List<String> defs) => defs.forEach((d) => unregisterByName(d)
 
 
 // TODO ANNOTARE
-@initModule
+@init
 initHtml5() {
-  checkHtml5();
   unregisterAll(INTERFACES);
 }
 
-void checkHtml5() {
-  checkHtml5LibIsLoaded();
-}
 
 @JS('Promise')
 class Promise<T> {

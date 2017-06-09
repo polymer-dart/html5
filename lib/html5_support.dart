@@ -13,16 +13,3 @@ external asConstructor(Type dartType);
 
 @JS('unregisterByName')
 external unregisterByName(String def);
-
-
-bool _isLoaded = false;
-
-@initModule
-void setLoaded() {
-  _isLoaded = true;
-}
-
-void checkHtml5LibIsLoaded() {
-  if (!_isLoaded)
-    throw "Html5 Library is not loaded!";
-}
