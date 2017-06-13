@@ -1,3 +1,6 @@
+### v0.1.0
+ - working with pub+ddc dart 1.24
+
 ### v0.0.7
  - fixed an issue being too aggressive removing `dart._extensionType` marker
 

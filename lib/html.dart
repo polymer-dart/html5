@@ -3,6 +3,7 @@ library html_lib;
 
 import 'dart:async';
 import 'package:js/js.dart';
+import 'package:js/js_util.dart';
 import 'package:html5/html5_support.dart';
 import 'package:polymerize_common/init.dart';
 
@@ -12,7 +13,6 @@ part 'html_gen.dart';
 void unregisterAll(List<String> defs) => defs.forEach((d) => unregisterByName(d));
 
 
-// TODO ANNOTARE
 @init
 initHtml5() {
   unregisterAll(INTERFACES);
@@ -39,7 +39,8 @@ Future<X> asFuture<X>(Promise<X> promise) {
     completer.completeError(error);
   }
 
-  promise.then(onFullfilled, onRejected);
+  callMethod(promise,'then',[onFullfilled]);
+  callMethod(promise,'catch',[onRejected]);
 
   return completer.future;
 }

@@ -1,19 +1,18 @@
 name: html5
 description: HTML wrapper library for DDC and JS
-version: 0.0.7
+version: 0.1.0
 author: Vittorio Ballestra <vittorio.ballestra@gmail.com>
 homepage: https://github.com/dam0vm3nt/html
 environment:
     sdk: ">=1.8.0 <2.0.0"
 dependencies:
   js: ^0.6.1
-  polymerize_common: ^1.0.0
+  polymerize_common: ^1.0.1
 #    path: ../polymerize_common
 dev_dependencies:
-  polymerize:
-   path: ../polymerize
+  polymerize: ^0.9.0
 transformers:
   - polymerize
 dependency_overrides:
-  polymerize_common:
-    path: ../polymerize_common
+#  polymerize_common:
+#    path: ../polymerize_common
