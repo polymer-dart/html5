@@ -121,10 +121,7 @@ class SubtleCrypto {}
 @JS('ArrayBufferView')
 class ArrayBufferView {}
 
-@JS('EventListener')
-abstract class EventListener {
-  void handleEvent(Event ev);
-}
+typedef void EventListener(Event ev);
 
 @JS('nsIFile')
 class nsIFile {}
