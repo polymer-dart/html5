@@ -731,6 +731,24 @@ abstract class ChromeWorker implements Worker {
     external factory ChromeWorker(String scriptURL);
 }
 
+@JS('Client')
+abstract class Client {
+    external String get url;
+    external String get frameType;
+    external String get type;
+    external String get id;
+    external void postMessage(var message,[List<Object> transfer]);
+}
+
+@JS()
+@anonymous
+class ClientQueryOptions {
+    external bool get includeUncontrolled;
+    external set includeUncontrolled (bool val);
+    external String get type;
+    external set type (String val);
+}
+
 @JS()
 @anonymous
 class ClientRectsAndTexts {
@@ -738,6 +756,14 @@ class ClientRectsAndTexts {
     external set rectList (DOMRectList val);
     external DOMStringList get textList;
     external set textList (DOMStringList val);
+}
+
+@JS('Clients')
+abstract class Clients {
+    external Promise<dynamic> get(String id);
+    external Promise<List<Client>> matchAll([ClientQueryOptions options]);
+    external Promise<WindowClient> openWindow(String url);
+    external Promise<dynamic> claim();
 }
 
 @JS('Comment')
@@ -1616,6 +1642,13 @@ abstract class GeometryUtils {
     external DOMQuad convertQuadFromNode(DOMQuad quad,var from,[ConvertCoordinateOptions options]);
     external DOMQuad convertRectFromNode(DOMRectReadOnly rect,var from,[ConvertCoordinateOptions options]);
     external DOMPoint convertPointFromNode(DOMPointInit point,var from,[ConvertCoordinateOptions options]);
+}
+
+@JS()
+@anonymous
+class GetNotificationOptions {
+    external String get tag;
+    external set tag (String val);
 }
 
 @JS()
@@ -3531,6 +3564,15 @@ abstract class MediaSource implements EventTarget {
     external String get mozDebugReaderData;
 }
 
+@JS('MessagePort')
+abstract class MessagePort implements EventTarget {
+    external void postMessage(var message,[List<Object> transferable]);
+    external void start();
+    external void close();
+    external EventHandlerNonNull get onmessage;
+    external set onmessage (EventHandlerNonNull val);
+}
+
 @JS('MouseEvent')
 abstract class MouseEvent implements UIEvent {
     external factory MouseEvent(String typeArg,[MouseEventInit mouseEventInitDict]);
@@ -3711,6 +3753,13 @@ abstract class NamedNodeMap {
     external Attr removeNamedItemNS(String namespaceURI,String localName);
 }
 
+@JS('NetworkInformation')
+abstract class NetworkInformation implements EventTarget {
+    external String get type;
+    external EventHandlerNonNull get ontypechange;
+    external set ontypechange (EventHandlerNonNull val);
+}
+
 @JS('Node')
 abstract class Node implements EventTarget {
     external num get nodeType;
@@ -3774,6 +3823,69 @@ abstract class NonDocumentTypeChildNode {
     external Element get previousElementSibling;
     external Element get nextElementSibling;
 }
+
+@JS('Notification')
+abstract class Notification implements EventTarget {
+    external factory Notification(String title,[NotificationOptions options]);
+    external String get permission;
+    external Promise<String> requestPermission([NotificationPermissionCallback permissionCallback]);
+    external Promise<List<Notification>> get([GetNotificationOptions filter]);
+    external EventHandlerNonNull get onclick;
+    external set onclick (EventHandlerNonNull val);
+    external EventHandlerNonNull get onshow;
+    external set onshow (EventHandlerNonNull val);
+    external EventHandlerNonNull get onerror;
+    external set onerror (EventHandlerNonNull val);
+    external EventHandlerNonNull get onclose;
+    external set onclose (EventHandlerNonNull val);
+    external String get title;
+    external String get dir;
+    external String get lang;
+    external String get body;
+    external String get tag;
+    external String get icon;
+    external bool get requireInteraction;
+    external  get data;
+    external void close();
+}
+
+@JS()
+@anonymous
+class NotificationBehavior {
+    external bool get noscreen;
+    external set noscreen (bool val);
+    external bool get noclear;
+    external set noclear (bool val);
+    external bool get showOnlyOnce;
+    external set showOnlyOnce (bool val);
+    external String get soundFile;
+    external set soundFile (String val);
+    external List<num> get vibrationPattern;
+    external set vibrationPattern (List<num> val);
+}
+
+@JS()
+@anonymous
+class NotificationOptions {
+    external String get dir;
+    external set dir (String val);
+    external String get lang;
+    external set lang (String val);
+    external String get body;
+    external set body (String val);
+    external String get tag;
+    external set tag (String val);
+    external String get icon;
+    external set icon (String val);
+    external bool get requireInteraction;
+    external set requireInteraction (bool val);
+    external  get data;
+    external set data (var val);
+    external NotificationBehavior get mozbehavior;
+    external set mozbehavior (NotificationBehavior val);
+}
+
+typedef void NotificationPermissionCallback(String permission);
 
 @JS('OffscreenCanvas')
 abstract class OffscreenCanvas implements EventTarget {
@@ -3847,6 +3959,75 @@ typedef void PromiseJobCallback();
 
 @JS('PromiseNativeHandler')
 abstract class PromiseNativeHandler {
+}
+
+@JS('PushManager')
+abstract class PushManager {
+    external Promise<PushSubscription> subscribe([PushSubscriptionOptionsInit options]);
+    external Promise<PushSubscription> getSubscription();
+    external Promise<String> permissionState([PushSubscriptionOptionsInit options]);
+}
+
+@JS('PushManagerImpl')
+abstract class PushManagerImpl {
+    external factory PushManagerImpl(String scope);
+    external Promise<PushSubscription> subscribe([PushSubscriptionOptionsInit options]);
+    external Promise<PushSubscription> getSubscription();
+    external Promise<String> permissionState([PushSubscriptionOptionsInit options]);
+}
+
+@JS('PushSubscription')
+abstract class PushSubscription {
+    external String get endpoint;
+    external PushSubscriptionOptions get options;
+    external ArrayBuffer getKey(String name);
+    external Promise<bool> unsubscribe();
+    external PushSubscriptionJSON toJSON();
+}
+
+@JS()
+@anonymous
+class PushSubscriptionInit {
+    external String get endpoint;
+    external set endpoint (String val);
+    external String get scope;
+    external set scope (String val);
+    external ArrayBuffer get p256dhKey;
+    external set p256dhKey (ArrayBuffer val);
+    external ArrayBuffer get authSecret;
+    external set authSecret (ArrayBuffer val);
+    external BufferSource get appServerKey;
+    external set appServerKey (BufferSource val);
+}
+
+@JS()
+@anonymous
+class PushSubscriptionJSON {
+    external String get endpoint;
+    external set endpoint (String val);
+    external PushSubscriptionKeys get keys;
+    external set keys (PushSubscriptionKeys val);
+}
+
+@JS()
+@anonymous
+class PushSubscriptionKeys {
+    external String get p256dh;
+    external set p256dh (String val);
+    external String get auth;
+    external set auth (String val);
+}
+
+@JS('PushSubscriptionOptions')
+abstract class PushSubscriptionOptions {
+    external ArrayBuffer get applicationServerKey;
+}
+
+@JS()
+@anonymous
+class PushSubscriptionOptionsInit {
+    external  get applicationServerKey;
+    external set applicationServerKey (var val);
 }
 
 @JS('RGBColor')
@@ -3935,6 +4116,15 @@ class RegisteredKey {
     external set transports (List<String> val);
     external String get appId;
     external set appId (String val);
+}
+
+@JS()
+@anonymous
+class RegistrationOptions {
+    external String get scope;
+    external set scope (String val);
+    external bool get useCache;
+    external set useCache (bool val);
 }
 
 @JS('Request')
@@ -4086,6 +4276,94 @@ abstract class Selection {
     external num get type;
     external List<Range> GetRangesForInterval(Node beginNode,num beginOffset,Node endNode,num endOffset,bool allowAdjacent);
     external void scrollIntoView(num aRegion,bool aIsSynchronous,num aVPercent,num aHPercent);
+}
+
+@JS('ServiceWorker')
+abstract class ServiceWorker implements EventTarget,AbstractWorker {
+    external String get scriptURL;
+    external String get state;
+    external EventHandlerNonNull get onstatechange;
+    external set onstatechange (EventHandlerNonNull val);
+    external void postMessage(var message,[List<Object> transferable]);
+}
+
+@JS('ServiceWorkerContainer')
+abstract class ServiceWorkerContainer implements EventTarget {
+    external ServiceWorker get controller;
+    external Promise<ServiceWorkerRegistration> get ready;
+    external Promise<ServiceWorkerRegistration> register(String scriptURL,[RegistrationOptions options]);
+    external Promise<dynamic> getRegistration([String documentURL]);
+    external Promise<List<ServiceWorkerRegistration>> getRegistrations();
+    external EventHandlerNonNull get oncontrollerchange;
+    external set oncontrollerchange (EventHandlerNonNull val);
+    external EventHandlerNonNull get onerror;
+    external set onerror (EventHandlerNonNull val);
+    external EventHandlerNonNull get onmessage;
+    external set onmessage (EventHandlerNonNull val);
+    external String getScopeForUrl(String url);
+}
+
+@JS('ServiceWorkerGlobalScope')
+abstract class ServiceWorkerGlobalScope implements WorkerGlobalScope {
+    external Clients get clients;
+    external ServiceWorkerRegistration get registration;
+    external Promise<dynamic> skipWaiting();
+    external EventHandlerNonNull get oninstall;
+    external set oninstall (EventHandlerNonNull val);
+    external EventHandlerNonNull get onactivate;
+    external set onactivate (EventHandlerNonNull val);
+    external EventHandlerNonNull get onfetch;
+    external set onfetch (EventHandlerNonNull val);
+    external EventHandlerNonNull get onmessage;
+    external set onmessage (EventHandlerNonNull val);
+    external EventHandlerNonNull get onpush;
+    external set onpush (EventHandlerNonNull val);
+    external EventHandlerNonNull get onpushsubscriptionchange;
+    external set onpushsubscriptionchange (EventHandlerNonNull val);
+    external EventHandlerNonNull get onnotificationclick;
+    external set onnotificationclick (EventHandlerNonNull val);
+    external EventHandlerNonNull get onnotificationclose;
+    external set onnotificationclose (EventHandlerNonNull val);
+}
+
+@JS('ServiceWorkerMessageEvent')
+abstract class ServiceWorkerMessageEvent implements Event {
+    external factory ServiceWorkerMessageEvent(String type,[ServiceWorkerMessageEventInit eventInitDict]);
+    external  get data;
+    external String get origin;
+    external String get lastEventId;
+    external  get source;
+    external  get ports;
+}
+
+@JS()
+@anonymous
+class ServiceWorkerMessageEventInit extends EventInit {
+    external  get data;
+    external set data (var val);
+    external String get origin;
+    external set origin (String val);
+    external String get lastEventId;
+    external set lastEventId (String val);
+    external  get source;
+    external set source (var val);
+    external List<MessagePort> get ports;
+    external set ports (List<MessagePort> val);
+}
+
+@JS('ServiceWorkerRegistration')
+abstract class ServiceWorkerRegistration implements EventTarget {
+    external ServiceWorker get installing;
+    external ServiceWorker get waiting;
+    external ServiceWorker get active;
+    external String get scope;
+    external Promise<dynamic> update();
+    external Promise<bool> unregister();
+    external EventHandlerNonNull get onupdatefound;
+    external set onupdatefound (EventHandlerNonNull val);
+    external PushManager get pushManager;
+    external Promise<dynamic> showNotification(String title,[NotificationOptions options]);
+    external Promise<List<Notification>> getNotifications([GetNotificationOptions filter]);
 }
 
 @JS('ShadowRoot')
@@ -4693,6 +4971,14 @@ abstract class Window implements EventTarget,GlobalEventHandlers,WindowEventHand
     external bool get isSecureContextIfOpenerIgnored;
 }
 
+@JS('WindowClient')
+abstract class WindowClient implements Client {
+    external String get visibilityState;
+    external bool get focused;
+    external Promise<WindowClient> focus();
+    external Promise<WindowClient> navigate(String url);
+}
+
 @JS('WindowEventHandlers')
 abstract class WindowEventHandlers {
     external EventHandlerNonNull get onafterprint;
@@ -4767,6 +5053,40 @@ abstract class Worker implements EventTarget,AbstractWorker {
     external void postMessage(var message,[List<Object> transfer]);
     external EventHandlerNonNull get onmessage;
     external set onmessage (EventHandlerNonNull val);
+}
+
+@JS('WorkerGlobalScope')
+abstract class WorkerGlobalScope implements EventTarget,GlobalCrypto,WindowOrWorkerGlobalScope {
+    external WorkerGlobalScope get self;
+    external WorkerLocation get location;
+    external WorkerNavigator get navigator;
+    external void importScripts(String urls);
+    external OnErrorEventHandlerNonNull get onerror;
+    external set onerror (OnErrorEventHandlerNonNull val);
+    external EventHandlerNonNull get onoffline;
+    external set onoffline (EventHandlerNonNull val);
+    external EventHandlerNonNull get ononline;
+    external set ononline (EventHandlerNonNull val);
+    external void dump([String str]);
+    external Performance get performance;
+}
+
+@JS('WorkerLocation')
+abstract class WorkerLocation {
+    external String get href;
+    external String get origin;
+    external String get protocol;
+    external String get host;
+    external String get hostname;
+    external String get port;
+    external String get pathname;
+    external String get search;
+    external String get hash;
+}
+
+@JS('WorkerNavigator')
+abstract class WorkerNavigator {
+    external NetworkInformation get connection;
 }
 
 @JS('Worklet')
@@ -4892,6 +5212,8 @@ const INTERFACES = const [
    'DOMPoint',
    'CanvasCaptureMediaStream',
    'MediaSource',
+   'PushManagerImpl',
+   'PushManager',
    'HTMLOutputElement',
    'HTMLOptionsCollection',
    'AnimationPlaybackEvent',
@@ -4910,11 +5232,13 @@ const INTERFACES = const [
    'DocumentFragment',
    'CaretPosition',
    'Blob',
+   'ServiceWorkerRegistration',
    'TouchList',
    'HTMLTemplateElement',
    'MediaKeyStatusMap',
    'DOMStringList',
    'Cache',
+   'PushSubscriptionOptions',
    'HTMLFrameElement',
    'HTMLMapElement',
    'BlobEvent',
@@ -4946,6 +5270,7 @@ const INTERFACES = const [
    'DOMRect',
    'DOMRectReadOnly',
    'CaretStateChangedEvent',
+   'ServiceWorkerMessageEvent',
    'VideoTrackList',
    'Location',
    'XPathResult',
@@ -4985,6 +5310,7 @@ const INTERFACES = const [
    'HTMLDListElement',
    'HTMLQuoteElement',
    'HTMLBodyElement',
+   'Notification',
    'HTMLLinkElement',
    'AudioTrackList',
    'FontFace',
@@ -5003,6 +5329,8 @@ const INTERFACES = const [
    'NamedNodeMap',
    'MediaError',
    'Response',
+   'Client',
+   'WindowClient',
    'HTMLStyleElement',
    'HTMLAppletElement',
    'StyleSheetList',
@@ -5017,6 +5345,8 @@ const INTERFACES = const [
    'HTMLVideoElement',
    'HTMLObjectElement',
    'MozObjectLoadingContent',
+   'WorkerLocation',
+   'WorkerNavigator',
    'HTMLSourceElement',
    'CSSStyleDeclaration',
    'HTMLDocument',
@@ -5029,7 +5359,10 @@ const INTERFACES = const [
    'Document',
    'Animatable',
    'HTMLTableCaptionElement',
+   'ServiceWorker',
    'TouchEvent',
+   'WorkerGlobalScope',
+   'NetworkInformation',
    'AnimationEffectTimingReadOnly',
    'DOMImplementation',
    'StyleSheet',
@@ -5054,6 +5387,7 @@ const INTERFACES = const [
    'DOMStringMap',
    'GlobalCrypto',
    'Crypto',
+   'Clients',
    'HTMLHRElement',
    'HTMLModElement',
    'HTMLOListElement',
@@ -5065,6 +5399,7 @@ const INTERFACES = const [
    'HTMLLIElement',
    'CSSMozDocumentRule',
    'Request',
+   'PushSubscription',
    'TextTrackList',
    'XMLHttpRequest',
    'CSSTransition',
@@ -5073,6 +5408,7 @@ const INTERFACES = const [
    'CustomEvent',
    'File',
    'CSS',
+   'ServiceWorkerGlobalScope',
    'MediaKeyError',
    'Principal',
    'URI',
@@ -5119,8 +5455,10 @@ const INTERFACES = const [
    'TextTrackCue',
    'HTMLTableRowElement',
    'HTMLDetailsElement',
+   'ServiceWorkerContainer',
    'HTMLMediaElement',
    'CSSAnimation',
+   'MessagePort',
    'LinkStyle',
    'CSSMediaRule',
    'ValidityState',

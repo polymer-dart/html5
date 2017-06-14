@@ -1,3 +1,6 @@
+### v0.1.3
+ - added service workers API 
+
 ### v0.1.2+1
  - added missing `KeyboardEvent` (!!)
 
