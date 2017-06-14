@@ -9,21 +9,19 @@ import 'package:polymerize_common/init.dart';
 
 part 'html_gen.dart';
 
-
 void unregisterAll(List<String> defs) => defs.forEach((d) => unregisterByName(d));
-
 
 @init
 initHtml5() {
   unregisterAll(INTERFACES);
 }
 
-
 @JS('Promise')
 class Promise<T> {
   external Promise<X> then<X>(X onFulfilled([T t]), [void onRejected([error])]);
   external JS$catch(void onRejected([error]));
 }
+
 /**
  * Promise to Future
  */
@@ -39,9 +37,11 @@ Future<X> asFuture<X>(Promise<X> promise) {
     completer.completeError(error);
   }
 
-  callMethod(promise,'then',[onFullfilled]);
-  callMethod(promise,'catch',[onRejected]);
-
+  // Type erasure
+  (p) {
+    callMethod(p, 'then', [onFullfilled]);
+    callMethod(p, 'catch', [onRejected]);
+  }(promise);
   return completer.future;
 }
 
@@ -171,31 +171,18 @@ class HttpRequest {
   bool withCredentials;
   String responseType;
 
-  HttpRequest(
-      {this.method,
-      this.url,
-      this.isAsync: true,
-      this.user,
-      this.password,
-      this.responseType: ''});
+  HttpRequest({this.method, this.url, this.isAsync: true, this.user, this.password, this.responseType: ''});
 
-  Future<XMLHttpRequest> send(
-      {var data,
-      StreamSink<ProgressEvent> progressConsumer,
-      StreamSink<ProgressEvent> uploadProgressConsumer}) {
+  Future<XMLHttpRequest> send({var data, StreamSink<ProgressEvent> progressConsumer, StreamSink<ProgressEvent> uploadProgressConsumer}) {
     XMLHttpRequest _ajax;
     _ajax = new XMLHttpRequest();
     _ajax.open(method, url, isAsync, user, password);
     _ajax.withCredentials = withCredentials;
     _ajax.responseType = responseType;
 
-    if (progressConsumer != null)
-      _ajax.onprogress =
-          (Event evt) => progressConsumer.add(evt as ProgressEvent);
+    if (progressConsumer != null) _ajax.onprogress = (Event evt) => progressConsumer.add(evt as ProgressEvent);
 
-    if (uploadProgressConsumer != null)
-      _ajax.upload.onprogress =
-          (Event evt) => uploadProgressConsumer.add(evt as ProgressEvent);
+    if (uploadProgressConsumer != null) _ajax.upload.onprogress = (Event evt) => uploadProgressConsumer.add(evt as ProgressEvent);
 
     void closeSinks() {
       if (progressConsumer != null) {

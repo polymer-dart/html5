@@ -196,6 +196,13 @@ abstract class AnonymousContent {
 
 typedef  AnyCallback(var value);
 
+@JS()
+@anonymous
+class AssignedNodesOptions {
+    external bool get flatten;
+    external set flatten (bool val);
+}
+
 @JS('Attr')
 abstract class Attr implements Node {
     external String get localName;
@@ -1221,7 +1228,7 @@ abstract class DocumentType implements Node,ChildNode {
 }
 
 @JS('Element')
-abstract class Element implements Node,ChildNode,NonDocumentTypeChildNode,ParentNode,Animatable,GeometryUtils {
+abstract class Element implements Node,Slotable,ChildNode,NonDocumentTypeChildNode,ParentNode,Animatable,GeometryUtils {
     external String get namespaceURI;
     external String get prefix;
     external String get localName;
@@ -2974,6 +2981,13 @@ abstract class HTMLShadowElement implements HTMLElement {
     external ShadowRoot get olderShadowRoot;
 }
 
+@JS('HTMLSlotElement')
+abstract class HTMLSlotElement implements HTMLElement {
+    external String get name;
+    external set name (String val);
+    external List<Node> assignedNodes([AssignedNodesOptions options]);
+}
+
 @JS('HTMLSourceElement')
 abstract class HTMLSourceElement implements HTMLElement {
     external String get src;
@@ -4060,6 +4074,11 @@ class SignResponse {
     external set errorMessage (String val);
 }
 
+@JS('Slotable')
+abstract class Slotable {
+    external HTMLSlotElement get assignedSlot;
+}
+
 @JS('SourceBuffer')
 abstract class SourceBuffer implements EventTarget {
     external String get mode;
@@ -4159,7 +4178,7 @@ abstract class StyleSheetList {
 }
 
 @JS('Text')
-abstract class Text implements CharacterData,GeometryUtils {
+abstract class Text implements CharacterData,GeometryUtils,Slotable {
     external factory Text([String data]);
     external Text splitText(num offset);
     external String get wholeText;
@@ -4835,6 +4854,9 @@ const INTERFACES = const [
    'CharacterData',
    'FetchEvent',
    'MouseEvent',
+   'Slotable',
+   'Element',
+   'HTMLSlotElement',
    'HTMLHeadingElement',
    'HTMLAudioElement',
    'CSSCounterStyleRule',
@@ -4876,7 +4898,6 @@ const INTERFACES = const [
    'HTMLAnchorElement',
    'EventSource',
    'Rect',
-   'Element',
    'CSSNamespaceRule',
    'DOMRect',
    'DOMRectReadOnly',
