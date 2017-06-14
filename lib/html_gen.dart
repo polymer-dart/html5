@@ -3308,6 +3308,45 @@ abstract class ImageBitmap {
     external Promise<List<ChannelPixelLayout>> mapDataInto(String aFormat,BufferSource aBuffer,num aOffset);
 }
 
+@JS('KeyboardEvent')
+abstract class KeyboardEvent implements UIEvent,KeyEvent {
+    external factory KeyboardEvent(String typeArg,[KeyboardEventInit keyboardEventInitDict]);
+    external num get charCode;
+    external num get keyCode;
+    external bool get altKey;
+    external bool get ctrlKey;
+    external bool get shiftKey;
+    external bool get metaKey;
+    external bool getModifierState(String key);
+    external num get location;
+    external bool get repeat;
+    external bool get isComposing;
+    external String get key;
+    external String get code;
+    external KeyboardEventInit get initDict;
+}
+
+@JS()
+@anonymous
+class KeyboardEventInit extends EventModifierInit {
+    external String get key;
+    external set key (String val);
+    external String get code;
+    external set code (String val);
+    external num get location;
+    external set location (num val);
+    external bool get repeat;
+    external set repeat (bool val);
+    external bool get isComposing;
+    external set isComposing (bool val);
+    external num get charCode;
+    external set charCode (num val);
+    external num get keyCode;
+    external set keyCode (num val);
+    external num get which;
+    external set which (num val);
+}
+
 @JS()
 @anonymous
 class KeyframeAnimationOptions extends KeyframeEffectOptions {
@@ -5048,6 +5087,7 @@ const INTERFACES = const [
    'KeyframeEffectReadOnly',
    'KeyframeEffect',
    'HTMLOptionElement',
+   'KeyboardEvent',
    'CSSGroupingRule',
    'HTMLTableElement',
    'HTMLCollection',

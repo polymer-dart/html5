@@ -1,3 +1,6 @@
+### v0.1.2
+ - added missing `KeyboardEvent` (!!)
+
 ### v0.1.1
  - adding HTMLSlotElement and Sloatable from https://html.spec.whatwg.org/multipage/scripting.html#htmlslotelement
 
