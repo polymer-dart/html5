@@ -3308,6 +3308,11 @@ abstract class ImageBitmap {
     external Promise<List<ChannelPixelLayout>> mapDataInto(String aFormat,BufferSource aBuffer,num aOffset);
 }
 
+@JS('KeyEvent')
+abstract class KeyEvent {
+    external void initKeyEvent(String type,bool canBubble,bool cancelable,Window view,bool ctrlKey,bool altKey,bool shiftKey,bool metaKey,num keyCode,num charCode);
+}
+
 @JS('KeyboardEvent')
 abstract class KeyboardEvent implements UIEvent,KeyEvent {
     external factory KeyboardEvent(String typeArg,[KeyboardEventInit keyboardEventInitDict]);
@@ -5038,6 +5043,7 @@ const INTERFACES = const [
    'ChromeWorker',
    'HTMLImageElement',
    'MozImageLoadingContent',
+   'KeyEvent',
    'GlobalEventHandlers',
    'WindowEventHandlers',
    'DocumentAndElementEventHandlers',

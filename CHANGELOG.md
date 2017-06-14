@@ -1,4 +1,4 @@
-### v0.1.2
+### v0.1.2+1
  - added missing `KeyboardEvent` (!!)
 
 ### v0.1.1
