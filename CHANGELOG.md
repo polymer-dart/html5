@@ -1,3 +1,6 @@
+### v0.1.1
+ - adding HTMLSlotElement and Sloatable from https://html.spec.whatwg.org/multipage/scripting.html#htmlslotelement
+
 ### v0.1.0
  - working with pub+ddc dart 1.24
 
