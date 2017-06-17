@@ -167,8 +167,10 @@ class HttpRequest {
   String password;
   bool withCredentials;
   String responseType;
+  String overrideMimeType;
+  Map<String,String> headers;
 
-  HttpRequest({this.method, this.url, this.isAsync: true, this.user, this.password, this.responseType: ''});
+  HttpRequest({this.method:'GET', this.url, this.isAsync: true, this.user, this.password, this.responseType: '',this.headers,this.withCredentials,this.overrideMimeType});
 
   Future<XMLHttpRequest> send({var data, StreamSink<ProgressEvent> progressConsumer, StreamSink<ProgressEvent> uploadProgressConsumer}) {
     XMLHttpRequest _ajax;
@@ -176,6 +178,12 @@ class HttpRequest {
     _ajax.open(method, url, isAsync, user, password);
     _ajax.withCredentials = withCredentials;
     _ajax.responseType = responseType;
+    if (overrideMimeType!=null)
+      _ajax.overrideMimeType(overrideMimeType);
+
+    if (this.headers!=null) {
+      this.headers.forEach((k,v)=> _ajax.setRequestHeader(k, v));
+    }
 
     if (progressConsumer != null) _ajax.onprogress = (Event evt) => progressConsumer.add(evt as ProgressEvent);
 
