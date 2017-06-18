@@ -1,3 +1,6 @@
+### v0.1.4
+ - better support for `HttpRequest`
+
 ### v0.1.3
  - added service workers API 
 
