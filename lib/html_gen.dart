@@ -1098,7 +1098,7 @@ class DateTimeValue {
 }
 
 @JS('Document')
-abstract class Document implements Node,XPathEvaluator,GlobalEventHandlers,DocumentAndElementEventHandlers,TouchEventHandlers,ParentNode,OnErrorEventHandlerForNodes,GeometryUtils,FontFaceSource {
+abstract class Document implements Node,DocumentOrShadowRoot,XPathEvaluator,GlobalEventHandlers,DocumentAndElementEventHandlers,TouchEventHandlers,ParentNode,OnErrorEventHandlerForNodes,GeometryUtils,FontFaceSource {
     external factory Document();
     external DOMImplementation get implementation;
     external String get URL;
@@ -1232,6 +1232,16 @@ abstract class DocumentFragment implements Node,ParentNode {
     external Element getElementById(String elementId);
     external Element querySelector(String selectors);
     external NodeList querySelectorAll(String selectors);
+}
+
+@JS('DocumentOrShadowRoot')
+abstract class DocumentOrShadowRoot {
+    external Selection getSelection();
+    external Element elementFromPoint(num x,num y);
+    external List<Element> elementsFromPoint(num x,num y);
+    external CaretPosition caretPositionFromPoint(num x,num y);
+    external Element get activeElement;
+    external StyleSheetList get styleSheets;
 }
 
 @JS('DocumentTimeline')
@@ -4367,7 +4377,7 @@ abstract class ServiceWorkerRegistration implements EventTarget {
 }
 
 @JS('ShadowRoot')
-abstract class ShadowRoot implements DocumentFragment {
+abstract class ShadowRoot implements DocumentFragment,DocumentOrShadowRoot {
     external Element getElementById(String elementId);
     external HTMLCollection getElementsByTagName(String localName);
     external HTMLCollection getElementsByTagNameNS(String namespace,String localName);
@@ -5335,6 +5345,9 @@ const INTERFACES = const [
    'HTMLAppletElement',
    'StyleSheetList',
    'DOMQuad',
+   'DocumentOrShadowRoot',
+   'Document',
+   'ShadowRoot',
    'XMLHttpRequestEventTarget',
    'ChildNode',
    'NonDocumentTypeChildNode',
@@ -5356,7 +5369,6 @@ const INTERFACES = const [
    'History',
    'HTMLDataListElement',
    'Worklet',
-   'Document',
    'Animatable',
    'HTMLTableCaptionElement',
    'ServiceWorker',
@@ -5413,7 +5425,6 @@ const INTERFACES = const [
    'Principal',
    'URI',
    'Node',
-   'ShadowRoot',
    'HTMLMenuElement',
    'HTMLButtonElement',
    'MediaList',

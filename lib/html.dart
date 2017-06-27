@@ -6,8 +6,10 @@ import 'package:js/js.dart';
 import 'package:js/js_util.dart';
 import 'package:html5/html5_support.dart';
 import 'package:polymerize_common/init.dart';
+import 'dart:math' as math;
 
 part 'html_gen.dart';
+part 'html_addendum.dart';
 
 void unregisterAll(List<String> defs) => defs.forEach((d) => unregisterByName(d));
 

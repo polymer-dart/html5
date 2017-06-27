@@ -1,3 +1,12 @@
+### v0.1.5
+ - added `DocumentOrShadowRoot` 
+   - *WARN* : `DocumentOrShadowRoot` is not implemented in `ShadyDOM` (=> Firefox, etc.) 
+      see [here](https://github.com/webcomponents/shadydom/issues/113)
+ - added some more utils, some copied from `dart:html`, notably:
+   - key codes
+   - a simplified version of `EventStreamProvider`
+   - some event stream providers 
+
 ### v0.1.4
  - better support for `HttpRequest`
 
