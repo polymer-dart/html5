@@ -1,16 +1,17 @@
 part of html_lib;
 
-HTMLBodyElement get body => document.querySelector('body');
 
+
+HTMLBodyElement get body => document.querySelector('body');
+/*
 distanceTo(DOMPoint p1, DOMPoint p2) => math.sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
 
 diff(DOMPoint p1, DOMPoint p2) => domPoint(p1.x - p2.x, p1.y - p2.y);
 
 add(DOMPoint p1, DOMPoint p2) => domPoint(p1.x + p2.x, p1.y + p2.y);
+*/
 
-DOMPoint domPoint(num x, num y) => new DOMPoint(new DOMPointInit()
-  ..x = x
-  ..y = y);
+math.Point domPoint(num x, num y) => new math.Point<num>(x,y);
 
 class _EventStreamProvider<T> {
   EventTarget _target;
@@ -58,10 +59,12 @@ EventStreamProvider<KeyboardEvent> onKeyDown = const EventStreamProvider('keydow
 EventStreamProvider<Event> onBlur = const EventStreamProvider('blur');
 EventStreamProvider<TouchEvent> onTouchMove = const EventStreamProvider('touchmove');
 EventStreamProvider<TouchEvent> onTouchEnd = const EventStreamProvider('touchend');
+EventStreamProvider<TouchEvent> onTouchStart = const EventStreamProvider('touchstart');
 EventStreamProvider<TouchEvent> onTouchCancel = const EventStreamProvider('touchcancel');
 EventStreamProvider<MouseEvent> onMouseMove = const EventStreamProvider('mousemove');
 EventStreamProvider<MouseEvent> onMouseUp = const EventStreamProvider('mouseup');
 EventStreamProvider<MouseEvent> onMouseDown = const EventStreamProvider('mousedown');
+EventStreamProvider<MouseEvent> onClick = const EventStreamProvider('click');
 
 // Borrowed from dart:html
 
