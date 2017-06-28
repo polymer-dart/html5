@@ -23,6 +23,7 @@ class _EventStreamProvider<T> {
   void _startListen() {
     if (_count == 0) {
       _handler = (x) {
+
         _controller.add(x as T);
       };
       _target.addEventListener(_type, _handler);
@@ -41,7 +42,7 @@ class _EventStreamProvider<T> {
   _EventStreamProvider(EventTarget tgt, String type)
       : _target = tgt,
         _type = type {
-    _controller = new StreamController.broadcast(onListen: _startListen, onCancel: _stopListen);
+    _controller = new StreamController.broadcast(onListen: _startListen, onCancel: _stopListen,sync:true /* This is important otherwise currentTarget vanishes ... */);
   }
 }
 

@@ -1391,6 +1391,7 @@ abstract class Event {
     external bool get defaultPreventedByChrome;
     external bool get defaultPreventedByContent;
     external bool get composed;
+    external List<EventTarget> composedPath();
     external bool get isTrusted;
     external DOMHighResTimeStamp get timeStamp;
     external void initEvent(String type,bool bubbles,bool cancelable);
