@@ -1548,6 +1548,31 @@ class FilePropertyBag {
     external set lastModified (num val);
 }
 
+@JS('FileReader')
+abstract class FileReader implements EventTarget {
+    external factory FileReader();
+    external void readAsArrayBuffer(Blob blob);
+    external void readAsText(Blob blob,[String label]);
+    external void readAsDataURL(Blob blob);
+    external void abort();
+    external num get readyState;
+    external  get result;
+    external DOMError get error;
+    external EventHandlerNonNull get onloadstart;
+    external set onloadstart (EventHandlerNonNull val);
+    external EventHandlerNonNull get onprogress;
+    external set onprogress (EventHandlerNonNull val);
+    external EventHandlerNonNull get onload;
+    external set onload (EventHandlerNonNull val);
+    external EventHandlerNonNull get onabort;
+    external set onabort (EventHandlerNonNull val);
+    external EventHandlerNonNull get onerror;
+    external set onerror (EventHandlerNonNull val);
+    external EventHandlerNonNull get onloadend;
+    external set onloadend (EventHandlerNonNull val);
+    external void readAsBinaryString(Blob filedata);
+}
+
 @JS('FontFace')
 abstract class FontFace {
     external factory FontFace(String family,var source,[FontFaceDescriptors descriptors]);
@@ -5414,6 +5439,7 @@ const INTERFACES = const [
    'Request',
    'PushSubscription',
    'TextTrackList',
+   'FileReader',
    'XMLHttpRequest',
    'CSSTransition',
    'HTMLPictureElement',

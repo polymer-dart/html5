@@ -8,11 +8,15 @@ environment:
 dependencies:
   js: ^0.6.1
   polymerize_common: ^1.0.1
+  polymerize: ^0.9.4
 #    path: ../polymerize_common
-  polymerize: ^0.9.0
-dev_dependencies:
+
 transformers:
   - polymerize
 dependency_overrides:
+  http:
+   git:
+     url: https://github.com/dart-lang/http.git
+     ref: master
 #  polymerize_common:
 #    path: ../polymerize_common
