@@ -1,3 +1,7 @@
+### v0.1.6-dev
+ - added `FileReader`
+ - added support for `http` (v0.12-dev)
+
 ### v0.1.5
  - added `DocumentOrShadowRoot` 
    - *WARN* : `DocumentOrShadowRoot` is not implemented in `ShadyDOM` (=> Firefox, etc.) 
