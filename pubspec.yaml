@@ -14,9 +14,5 @@ dependencies:
 transformers:
   - polymerize
 dependency_overrides:
-  http:
-   git:
-     url: https://github.com/dart-lang/http.git
-     ref: master
 #  polymerize_common:
 #    path: ../polymerize_common
