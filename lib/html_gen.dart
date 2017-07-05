@@ -788,6 +788,106 @@ class ComputedTimingProperties extends AnimationEffectTimingProperties {
 
 @JS()
 @anonymous
+class ConsoleCounter {
+    external String get label;
+    external set label (String val);
+    external num get count;
+    external set count (num val);
+}
+
+@JS()
+@anonymous
+class ConsoleCounterError {
+    external String get error;
+    external set error (String val);
+}
+
+@JS()
+@anonymous
+class ConsoleEvent {
+    external  get ID;
+    external set ID (var val);
+    external  get innerID;
+    external set innerID (var val);
+    external  get originAttributes;
+    external set originAttributes (var val);
+    external String get level;
+    external set level (String val);
+    external String get filename;
+    external set filename (String val);
+    external num get lineNumber;
+    external set lineNumber (num val);
+    external num get columnNumber;
+    external set columnNumber (num val);
+    external String get functionName;
+    external set functionName (String val);
+    external num get timeStamp;
+    external set timeStamp (num val);
+    external List<dynamic> get arguments;
+    external set arguments (List<dynamic> val);
+    external List<String> get styles;
+    external set styles (List<String> val);
+    external bool get private;
+    external set private (bool val);
+    external String get groupName;
+    external set groupName (String val);
+    external  get timer;
+    external set timer (var val);
+    external  get counter;
+    external set counter (var val);
+}
+
+@JS()
+@anonymous
+class ConsoleProfileEvent {
+    external String get action;
+    external set action (String val);
+    external List<dynamic> get arguments;
+    external set arguments (List<dynamic> val);
+}
+
+@JS()
+@anonymous
+class ConsoleStackEntry {
+    external String get filename;
+    external set filename (String val);
+    external num get lineNumber;
+    external set lineNumber (num val);
+    external num get columnNumber;
+    external set columnNumber (num val);
+    external String get functionName;
+    external set functionName (String val);
+    external num get language;
+    external set language (num val);
+    external String get asyncCause;
+    external set asyncCause (String val);
+}
+
+@JS()
+@anonymous
+class ConsoleTimerEnd {
+    external String get name;
+    external set name (String val);
+    external num get duration;
+    external set duration (num val);
+}
+
+@JS()
+@anonymous
+class ConsoleTimerError {
+    external String get error;
+    external set error (String val);
+}
+
+@JS()
+@anonymous
+class ConsoleTimerStart {
+    external String get name;
+    external set name (String val);
+}
+
+@JS()
+@anonymous
 class ConvertCoordinateOptions {
     external String get fromBox;
     external set fromBox (String val);
