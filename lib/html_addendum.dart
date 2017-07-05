@@ -66,6 +66,7 @@ EventStreamProvider<MouseEvent> onMouseMove = const EventStreamProvider('mousemo
 EventStreamProvider<MouseEvent> onMouseUp = const EventStreamProvider('mouseup');
 EventStreamProvider<MouseEvent> onMouseDown = const EventStreamProvider('mousedown');
 EventStreamProvider<MouseEvent> onClick = const EventStreamProvider('click');
+EventStreamProvider<MessageEvent> onMessage = const EventStreamProvider('message');
 
 // Borrowed from dart:html
 

@@ -3600,6 +3600,32 @@ abstract class MediaSource implements EventTarget {
     external String get mozDebugReaderData;
 }
 
+@JS('MessageEvent')
+abstract class MessageEvent implements Event {
+    external factory MessageEvent(String type,[MessageEventInit eventInitDict]);
+    external  get data;
+    external String get origin;
+    external String get lastEventId;
+    external  get source;
+    external List get ports;
+    external void initMessageEvent(String type,bool bubbles,bool cancelable,var data,String origin,String lastEventId,var source,List<MessagePort> ports);
+}
+
+@JS()
+@anonymous
+class MessageEventInit extends EventInit {
+    external  get data;
+    external set data (var val);
+    external String get origin;
+    external set origin (String val);
+    external String get lastEventId;
+    external set lastEventId (String val);
+    external  get source;
+    external set source (var val);
+    external List<MessagePort> get ports;
+    external set ports (List<MessagePort> val);
+}
+
 @JS('MessagePort')
 abstract class MessagePort implements EventTarget {
     external void postMessage(var message,[List<Object> transferable]);
@@ -5284,6 +5310,7 @@ const INTERFACES = const [
    'CSSValue',
    'Range',
    'CSSValueList',
+   'MessageEvent',
    'HTMLAllCollection',
    'NodeList',
    'CSSFontFeatureValuesRule',
