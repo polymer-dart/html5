@@ -1,4 +1,8 @@
-### v0.1.6-dev
+### v0.1.7-dev
+ - added `MessageEvent` and `onMessage` `EventStreamProvider`.
+ - moved support for `http` in a different package
+ 
+### v0.1.6
  - added `FileReader`
  - added support for `http` (v0.12-dev)
 
