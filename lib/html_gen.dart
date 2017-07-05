@@ -5339,6 +5339,78 @@ abstract class XPathResult {
     external Node snapshotItem(num index);
 }
 
+@JS("console.assert")
+external void $assert(bool condition,var data);
+
+@JS("console.clear")
+external void clear(var data);
+
+@JS("console.count")
+external void count(var data);
+
+@JS("console.debug")
+external void debug(var data);
+
+@JS("console.dir")
+external void dir(var data);
+
+@JS("console.dirxml")
+external void dirxml(var data);
+
+@JS("console.error")
+external void error(var data);
+
+@JS("console.exception")
+external void exception(var data);
+
+@JS("console.group")
+external void group(var data);
+
+@JS("console.groupCollapsed")
+external void groupCollapsed(var data);
+
+@JS("console.groupEnd")
+external void groupEnd(var data);
+
+@JS("console.info")
+external void info(var data);
+
+@JS("console.log")
+external void log(var data);
+
+@JS("console.markTimeline")
+external void markTimeline();
+
+@JS("console.profile")
+external void profile(var data);
+
+@JS("console.profileEnd")
+external void profileEnd(var data);
+
+@JS("console.table")
+external void table(var data);
+
+@JS("console.time")
+external void time([var time]);
+
+@JS("console.timeEnd")
+external void timeEnd([var time]);
+
+@JS("console.timeStamp")
+external void timeStamp([var data]);
+
+@JS("console.timeline")
+external void timeline();
+
+@JS("console.timelineEnd")
+external void timelineEnd();
+
+@JS("console.trace")
+external void trace();
+
+@JS("console.warn")
+external void warn(var data);
+
 const INTERFACES = const [
    'ParentNode',
    'TimeEvent',
