@@ -5364,7 +5364,7 @@ external void error(var data);
 external void exception(var data);
 
 @JS("console.group")
-external void group(var data);
+external void $group(var data);
 
 @JS("console.groupCollapsed")
 external void groupCollapsed(var data);
