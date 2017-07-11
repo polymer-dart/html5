@@ -179,7 +179,8 @@ class HttpRequest {
     _ajax = new XMLHttpRequest();
     _ajax.open(method, url, isAsync, user, password);
     _ajax.withCredentials = withCredentials;
-    _ajax.responseType = responseType;
+    if (responseType!=null)
+      _ajax.responseType = responseType;
     if (overrideMimeType!=null)
       _ajax.overrideMimeType(overrideMimeType);
 
