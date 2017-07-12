@@ -164,6 +164,8 @@ class EventHandler<E> {
 }
 
 class HttpRequest {
+  static final Expando<HttpRequest> _requests = new Expando<HttpRequest>();
+
   String method;
   String url;
   bool isAsync;
@@ -172,27 +174,45 @@ class HttpRequest {
   bool withCredentials;
   String responseType;
   String overrideMimeType;
-  Map<String,String> headers;
+  Map<String, String> headers;
 
-  HttpRequest({this.method:'GET', this.url, this.isAsync: true, this.user, this.password, this.responseType: '',this.headers,this.withCredentials,this.overrideMimeType});
+  List<XMLHttpRequest> _runningRequests = [];
 
-  Future<XMLHttpRequest> send({var data, StreamSink<ProgressEvent> progressConsumer, StreamSink<ProgressEvent> uploadProgressConsumer}) {
+  factory HttpRequest.forAjax(XMLHttpRequest ajax) => _requests[ajax];
+
+  HttpRequest(
+      {this.method: 'GET',
+      this.url,
+      this.isAsync: true,
+      this.user,
+      this.password,
+      this.responseType: '',
+      this.headers,
+      this.withCredentials,
+      this.overrideMimeType});
+
+  Future<XMLHttpRequest> send(
+      {var data,
+      StreamSink<ProgressEvent> progressConsumer,
+      StreamSink<ProgressEvent> uploadProgressConsumer}) {
     XMLHttpRequest _ajax;
     _ajax = new XMLHttpRequest();
+    _requests[_ajax] = this;
     _ajax.open(method, url, isAsync, user, password);
     _ajax.withCredentials = withCredentials;
-    if (responseType!=null)
-      _ajax.responseType = responseType;
-    if (overrideMimeType!=null)
-      _ajax.overrideMimeType(overrideMimeType);
+    if (responseType != null) _ajax.responseType = responseType;
+    if (overrideMimeType != null) _ajax.overrideMimeType(overrideMimeType);
 
-    if (this.headers!=null) {
-      this.headers.forEach((k,v)=> _ajax.setRequestHeader(k, v));
+    if (this.headers != null) {
+      this.headers.forEach((k, v) => _ajax.setRequestHeader(k, v));
     }
 
-    if (progressConsumer != null) _ajax.onprogress = (Event evt) => progressConsumer.add(evt as ProgressEvent);
+    _runningRequests.add(_ajax);
 
-    if (uploadProgressConsumer != null) _ajax.upload.onprogress = (Event evt) => uploadProgressConsumer.add(evt as ProgressEvent);
+    //if (progressConsumer != null) _ajax.onprogress = (Event evt) => progressConsumer.add(evt as ProgressEvent);
+
+    if (uploadProgressConsumer != null)
+      _ajax.upload.onprogress = (Event evt) => uploadProgressConsumer.add(evt as ProgressEvent);
 
     void closeSinks() {
       if (progressConsumer != null) {
@@ -204,21 +224,63 @@ class HttpRequest {
     }
 
     Completer<XMLHttpRequest> completer = new Completer();
+    _ajax.onprogress = (Event ev) {
+      if (_ajax.status != 200 && _ajax.status != 301) {
+        _runningRequests.remove(_ajax);
+        if (!completer.isCompleted)
+          completer.completeError(ev as ProgressEvent);
+        closeSinks();
+      } else if (progressConsumer != null) {
+        progressConsumer.add(ev as ProgressEvent);
+      }
+    };
     _ajax.onload = (Event evt) {
-      completer.complete(_ajax);
+      if (!completer.isCompleted)
+        completer.complete(_ajax);
       closeSinks();
     };
     _ajax.onerror = (Event evt) {
-      completer.completeError(evt as ProgressEvent);
+      _runningRequests.remove(_ajax);
+      if (!completer.isCompleted)
+        completer.completeError(evt as ProgressEvent);
       closeSinks();
     };
     _ajax.onabort = (Event evt) {
-      completer.completeError(evt as ProgressEvent);
+      _runningRequests.remove(_ajax);
+      if (!completer.isCompleted)
+        completer.completeError(evt as ProgressEvent);
       closeSinks();
     };
 
-    _ajax.send(data);
+    try {
+      _ajax.send(data);
+    } catch (error) {
+      _runningRequests.remove(_ajax);
+      if (!completer.isCompleted)
+        completer.completeError(error);
+    }
 
     return completer.future;
+  }
+
+  Future abortAll() {
+    List<XMLHttpRequest> _tmp = new List.from(_runningRequests);
+    Future allAbort = Future.wait(_tmp.map((r) {
+      Completer _c = new Completer();
+
+      _wrapper(func) => (Event ev) {
+            _c.complete();
+            func(ev);
+          };
+
+      r.onload = _wrapper(r.onload);
+      r.onerror = _wrapper(r.onerror);
+      r.onabort = _wrapper(r.onabort);
+
+      return _c.future;
+    }));
+
+    _tmp.forEach((x) => x.abort());
+    return allAbort;
   }
 }
