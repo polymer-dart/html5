@@ -57,7 +57,9 @@ class MediaStream {}
 class WindowProxy {}
 
 @JS('Navigator')
-class Navigator {}
+class Navigator {
+  external String get language;
+}
 
 @JS('Performance')
 class Performance {}
