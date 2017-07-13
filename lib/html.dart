@@ -156,6 +156,18 @@ external Document get document;
 @JS('window')
 external Window get window;
 
+@JS('URL.createObjectURL')
+external String createObjectURL(var blob);
+@JS('URL.createObjectURL')
+external void revokeObjectURL(String url);
+
+
+typedef void FileCallback(File file);
+typedef void FileSystemEntryCallback(FileSystemEntry entry);
+typedef void ErrorCallback(err);
+typedef void VoidCallback();
+typedef void FileSystemEntriesCallback(List<FileSystemEntry> entries);
+
 class EventHandler<E> {
   StreamController<E> _streamController = new StreamController.broadcast();
   Stream<E> get stream => _streamController.stream;

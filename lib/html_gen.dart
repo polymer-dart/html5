@@ -1182,6 +1182,52 @@ abstract class DOMTokenList {
     // isStringifier ?
 }
 
+@JS('DataTransfer')
+abstract class DataTransfer {
+    external String get dropEffect;
+    external set dropEffect (String val);
+    external String get effectAllowed;
+    external set effectAllowed (String val);
+    external DataTransferItemList get items;
+    external void setDragImage(Element image,num x,num y);
+    external List get types;
+    external String getData(String format);
+    external void setData(String format,String data);
+    external void clearData([String format]);
+    external FileList get files;
+    external Promise<List<dynamic>> getFilesAndDirectories();
+    external Promise<List<File>> getFiles([bool recursiveFlag]);
+    external void addElement(Element element);
+    external num get mozItemCount;
+    external String get mozCursor;
+    external set mozCursor (String val);
+    external DOMStringList mozTypesAt(num index);
+    external void mozClearDataAt(String format,num index);
+    external void mozSetDataAt(String format,var data,num index);
+    external  mozGetDataAt(String format,num index);
+    external void updateDragImage(Element image,num x,num y);
+    external bool get mozUserCancelled;
+    external Node get mozSourceNode;
+}
+
+@JS('DataTransferItem')
+abstract class DataTransferItem {
+    external String get kind;
+    external String get type;
+    external void getAsString(FunctionStringCallback callback);
+    external File getAsFile();
+    external FileSystemEntry webkitGetAsEntry();
+}
+
+@JS('DataTransferItemList')
+abstract class DataTransferItemList {
+    external num get length;
+    external DataTransferItem operator[](num index);
+    external DataTransferItem add(var data,[String type]);
+    external void remove(num index);
+    external void clear();
+}
+
 @JS()
 @anonymous
 class DateTimeValue {
@@ -1361,6 +1407,20 @@ abstract class DocumentType implements Node,ChildNode {
     external String get name;
     external String get publicId;
     external String get systemId;
+}
+
+@JS('DragEvent')
+abstract class DragEvent implements MouseEvent {
+    external factory DragEvent(String type,[DragEventInit eventInitDict]);
+    external DataTransfer get dataTransfer;
+    external void initDragEvent(String type,bool canBubble,bool cancelable,Window aView,num aDetail,num aScreenX,num aScreenY,num aClientX,num aClientY,bool aCtrlKey,bool aAltKey,bool aShiftKey,bool aMetaKey,num aButton,EventTarget aRelatedTarget,DataTransfer aDataTransfer);
+}
+
+@JS()
+@anonymous
+class DragEventInit extends MouseEventInit {
+    external DataTransfer get dataTransfer;
+    external set dataTransfer (DataTransfer val);
 }
 
 @JS('Element')
@@ -1673,6 +1733,48 @@ abstract class FileReader implements EventTarget {
     external void readAsBinaryString(Blob filedata);
 }
 
+@JS('FileSystem')
+abstract class FileSystem {
+    external String get name;
+    external FileSystemDirectoryEntry get root;
+}
+
+@JS('FileSystemDirectoryEntry')
+abstract class FileSystemDirectoryEntry implements FileSystemEntry {
+    external FileSystemDirectoryReader createReader();
+    external void getFile([String path,FileSystemFlags options,FileSystemEntryCallback successCallback,ErrorCallback errorCallback]);
+    external void getDirectory([String path,FileSystemFlags options,FileSystemEntryCallback successCallback,ErrorCallback errorCallback]);
+}
+
+@JS('FileSystemDirectoryReader')
+abstract class FileSystemDirectoryReader {
+    external void readEntries(FileSystemEntriesCallback successCallback,[ErrorCallback errorCallback]);
+}
+
+@JS('FileSystemEntry')
+abstract class FileSystemEntry {
+    external bool get isFile;
+    external bool get isDirectory;
+    external String get name;
+    external String get fullPath;
+    external FileSystem get filesystem;
+    external void getParent([FileSystemEntryCallback successCallback,ErrorCallback errorCallback]);
+}
+
+@JS('FileSystemFileEntry')
+abstract class FileSystemFileEntry implements FileSystemEntry {
+    external void file(FileCallback successCallback,[ErrorCallback errorCallback]);
+}
+
+@JS()
+@anonymous
+class FileSystemFlags {
+    external bool get create;
+    external set create (bool val);
+    external bool get exclusive;
+    external set exclusive (bool val);
+}
+
 @JS('FontFace')
 abstract class FontFace {
     external factory FontFace(String family,var source,[FontFaceDescriptors descriptors]);
@@ -1771,6 +1873,8 @@ abstract class FormData {
 }
 
 typedef void FrameRequestCallback(DOMHighResTimeStamp time);
+
+typedef void FunctionStringCallback(String data);
 
 @JS('GeometryUtils')
 abstract class GeometryUtils {
@@ -4892,6 +4996,49 @@ class UIEventInit extends EventInit {
 abstract class URI {
 }
 
+@JS('URL')
+abstract class URL {
+    external factory URL(String url,URL base);
+    external String get href;
+    external set href (String val);
+    external String get origin;
+    external String get protocol;
+    external set protocol (String val);
+    external String get username;
+    external set username (String val);
+    external String get password;
+    external set password (String val);
+    external String get host;
+    external set host (String val);
+    external String get hostname;
+    external set hostname (String val);
+    external String get port;
+    external set port (String val);
+    external String get pathname;
+    external set pathname (String val);
+    external String get search;
+    external set search (String val);
+    external URLSearchParams get searchParams;
+    external String get hash;
+    external set hash (String val);
+    external String toJSON();
+    external static String createObjectURL(var blob);
+    external static void revokeObjectURL(String url);
+    external bool isValidURL(String url);
+}
+
+@JS('URLSearchParams')
+abstract class URLSearchParams {
+    external factory URLSearchParams([var init]);
+    external void append(String name,String value);
+    external void delete(String name);
+    external String get(String name);
+    external List<String> getAll(String name);
+    external bool has(String name);
+    external void set(String name,String value);
+    external void sort();
+}
+
 @JS('VTTCue')
 abstract class VTTCue implements TextTrackCue {
     external factory VTTCue(num startTime,num endTime,String text);
@@ -5444,6 +5591,7 @@ const INTERFACES = const [
    'HTMLTableCellElement',
    'DOMPointReadOnly',
    'DOMPoint',
+   'FileSystemFileEntry',
    'CanvasCaptureMediaStream',
    'MediaSource',
    'PushManagerImpl',
@@ -5454,6 +5602,7 @@ const INTERFACES = const [
    'CharacterData',
    'FetchEvent',
    'MouseEvent',
+   'FileSystemDirectoryReader',
    'Slotable',
    'Element',
    'HTMLSlotElement',
@@ -5471,6 +5620,7 @@ const INTERFACES = const [
    'HTMLTemplateElement',
    'MediaKeyStatusMap',
    'DOMStringList',
+   'FileSystemDirectoryEntry',
    'Cache',
    'PushSubscriptionOptions',
    'HTMLFrameElement',
@@ -5486,6 +5636,7 @@ const INTERFACES = const [
    'HTMLAllCollection',
    'NodeList',
    'CSSFontFeatureValuesRule',
+   'URLSearchParams',
    'HTMLSpanElement',
    'Grid',
    'GridDimension',
@@ -5505,6 +5656,7 @@ const INTERFACES = const [
    'DOMRect',
    'DOMRectReadOnly',
    'CaretStateChangedEvent',
+   'URL',
    'ServiceWorkerMessageEvent',
    'VideoTrackList',
    'Location',
@@ -5526,12 +5678,14 @@ const INTERFACES = const [
    'HTMLEmbedElement',
    'StyleSheetChangeEvent',
    'PromiseNativeHandler',
+   'DataTransferItemList',
    'HTMLIFrameElement',
    'HTMLFieldSetElement',
    'HTMLTrackElement',
    'Event',
    'ImageBitmap',
    'CSSPrimitiveValue',
+   'FileSystem',
    'FontFaceSetIterator',
    'FontFaceSet',
    'CSSSupportsRule',
@@ -5578,6 +5732,7 @@ const INTERFACES = const [
    'NonDocumentTypeChildNode',
    'RGBColor',
    'HTMLAreaElement',
+   'DataTransferItem',
    'WindowRoot',
    'VTTCue',
    'HTMLVideoElement',
@@ -5639,6 +5794,7 @@ const INTERFACES = const [
    'PushSubscription',
    'TextTrackList',
    'FileReader',
+   'FileSystemEntry',
    'XMLHttpRequest',
    'CSSTransition',
    'HTMLPictureElement',
@@ -5678,6 +5834,7 @@ const INTERFACES = const [
    'HTMLPreElement',
    'ProcessingInstruction',
    'CSSLexer',
+   'DragEvent',
    'HTMLFrameSetElement',
    'TreeWalker',
    'Storage',
@@ -5697,6 +5854,7 @@ const INTERFACES = const [
    'CSSAnimation',
    'MessagePort',
    'LinkStyle',
+   'DataTransfer',
    'CSSMediaRule',
    'ValidityState',
    'CustomElementRegistry',
