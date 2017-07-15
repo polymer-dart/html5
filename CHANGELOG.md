@@ -1,7 +1,8 @@
-### v0.1.7-dev
+### v0.1.7
  - added `MessageEvent` and `onMessage` `EventStreamProvider`.
  - moved support for `http` in a different package
  - added `Console`
+ - added support for `URL`, `ProgressEvent`, `DragEvent`, `FileSystem`
  
 ### v0.1.6
  - added `FileReader`
