@@ -8,6 +8,8 @@ import 'package:polymerize_common/html_import.dart';
 import 'package:polymerize_common/init.dart';
 import 'package:polymerize_common/map.dart';
 
+part 'html5_support.polymerize.dart';
+
 @JS('asConstructor')
 external asConstructor(Type dartType);
 

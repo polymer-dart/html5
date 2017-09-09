@@ -10,6 +10,7 @@ import 'dart:math' as math;
 
 part 'html_gen.dart';
 part 'html_addendum.dart';
+part 'html.polymerize.dart';
 
 void unregisterAll(List<String> defs) => defs.forEach((d) => unregisterByName(d));
 

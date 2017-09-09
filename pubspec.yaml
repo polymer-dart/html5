@@ -8,11 +8,13 @@ environment:
 dependencies:
   js: ^0.6.1
   polymerize_common: ^1.0.1
-  polymerize: ^0.9.4
-#    path: ../polymerize_common
+#  polymerize: ^0.9.4
+  polymerize: 
+    path: ../polymerize
 
 transformers:
-  - polymerize
+  - polymerize:
+     skip-generate: true
 dependency_overrides:
 #  polymerize_common:
 #    path: ../polymerize_common
