@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "es6",
+    "target": "es2015",
+    "sourceMap": true,
+    "declaration": true,
+    "rootDir":"./lib/",
+    "experimentalDecorators" :true,
+    "baseUrl" :"./node_modules"
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "lib/**/*.ts"
+  ]
+}

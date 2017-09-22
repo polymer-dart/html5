@@ -1,0 +1,19 @@
+{
+  "name": "package_html",
+  "version": "0.0.1",
+  "description": "HTML support for dart2ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "files" : [
+    "**/*.js","**/*.d.ts","package.json"
+  ],
+  "author": "vittorio.ballestra@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "dart_sdk" : "file:../dart2ts/dart_sdk"
+  },
+  "devDependencies": {
+    "typescript": "^2.5.2"
+  }
+}
