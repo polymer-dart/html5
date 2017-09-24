@@ -2,3 +2,8 @@
 BUILD
 WORKSPACE
 .pub
+.dart_tool
+node_modules
+*.js
+*.ts
+*.js.map
