@@ -1,4 +1,4 @@
-@JS('window')
+@JS()
 library html_lib;
 
 import 'dart:async';

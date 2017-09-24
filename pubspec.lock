@@ -109,6 +109,12 @@ packages:
       url: "http://pub.drafintech.it:5001"
     source: hosted
     version: "0.14.0"
+  dart2ts:
+    description:
+      path: "../dart2ts"
+      relative: true
+    source: path
+    version: "0.0.0"
   dart_style:
     description:
       name: dart_style
@@ -252,7 +258,7 @@ packages:
       path: "../polymerize"
       relative: true
     source: path
-    version: "0.9.6-dev"
+    version: "0.9.7-dev"
   polymerize_common:
     description:
       name: polymerize_common
