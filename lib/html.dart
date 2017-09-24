@@ -185,7 +185,7 @@ class HttpRequest {
   String user;
   String password;
   bool withCredentials;
-  String responseType;
+  var responseType;
   String overrideMimeType;
   Map<String, String> headers;
 
