@@ -877,7 +877,6 @@ abstract class KeyCode {
       default:
         return _KeyName.UNIDENTIFIED;
     }
-    return _KeyName.UNIDENTIFIED;
   }
 }
 
