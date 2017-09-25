@@ -1,3 +1,9 @@
+### v0.1.8-dev
+
+ - using `build` sourge_gen
+ - added `dart2ts` demo
+ - upgraded `shadowDOM` webidl 
+
 ### v0.1.7
  - added `MessageEvent` and `onMessage` `EventStreamProvider`.
  - moved support for `http` in a different package
