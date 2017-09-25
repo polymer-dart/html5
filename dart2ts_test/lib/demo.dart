@@ -1,14 +1,9 @@
 import 'package:html5/html.dart';
 
-class Init implements ShadowRootInit {
-  var mode;
-  bool delegatesFocus;
-  Init([this.mode = 'open', this.delegatesFocus = false]);
-}
-
 class TestClass extends HTMLElement {
   TestClass() {
-    ShadowRoot r = this.attachShadow(new Init());
+    ShadowRoot r = this.attachShadow(new ShadowRootInit()
+                                       ..mode='open');
     Element decl = document.createElement('style');
     decl.textContent = '.myclass {' +
         'background-color:green;' +
@@ -28,6 +23,7 @@ class TestClass extends HTMLElement {
 }
 
 void main(List<String> args) {
+
   HTMLDivElement div = document.createElement('div')
     ..innerHTML = '<h1>Dart2TS + package:html5 demo</h1>';
   HTMLBodyElement body = document.querySelector('body');
