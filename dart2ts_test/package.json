@@ -1,0 +1,22 @@
+{
+  "name": "e2e_test",
+  "version": "1.0.0",
+  "description": "a test for it",
+  "main": "lib/index.html",
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "serve": "webpack-dev-server --config webpack.config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dart_sdk": "file:../../dart2ts/dart_sdk/",
+    "html5": "file:../"
+  },
+  "devDependencies": {
+    "ts-loader": "^2.3.7",
+    "typescript": "^2.5.2",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.8.2"
+  }
+}

@@ -1501,6 +1501,7 @@ abstract class Element implements Node,Slotable,ChildNode,NonDocumentTypeChildNo
     external ShadowRoot createShadowRoot();
     external NodeList getDestinationInsertionPoints();
     external ShadowRoot get shadowRoot;
+    external ShadowRoot attachShadow(ShadowRootInit init);
     external void requestFullscreen();
     external void mozRequestFullScreen();
     external void requestPointerLock();
@@ -4649,6 +4650,15 @@ abstract class ShadowRoot implements DocumentFragment,DocumentOrShadowRoot {
 
 @JS()
 @anonymous
+class ShadowRootInit {
+    external String get mode;
+    external set mode (String val);
+    external bool get delegatesFocus;
+    external set delegatesFocus (bool val);
+}
+
+@JS()
+@anonymous
 class SignResponse {
     external String get keyHandle;
     external set keyHandle (String val);
@@ -5022,8 +5032,8 @@ abstract class URL {
     external String get hash;
     external set hash (String val);
     external String toJSON();
-    external static String createObjectURL(var blob);
-    external static void revokeObjectURL(String url);
+    external String createObjectURL(var blob);
+    external void revokeObjectURL(String url);
     external bool isValidURL(String url);
 }
 
@@ -5511,7 +5521,7 @@ external void error(var data);
 external void exception(var data);
 
 @JS("console.group")
-external void $group(var data);
+external void group(var data);
 
 @JS("console.groupCollapsed")
 external void groupCollapsed(var data);

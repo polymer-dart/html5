@@ -1,0 +1,12 @@
+name: dart2ts_test
+description: sample_project to be translated
+version: 0.0.1
+dependencies:
+ js: any
+ dart2ts:
+  path: ../../dart2ts
+ html5:
+  path: ..
+dependency_overrides:
+ html5:
+  path: ..

@@ -1,12 +1,12 @@
 {
-  "name": "package_html",
+  "name": "html5",
   "version": "0.0.1",
   "description": "HTML support for dart2ts",
   "scripts": {
     "build": "tsc"
   },
   "files" : [
-    "**/*.js","**/*.d.ts","package.json"
+    "lib/**/*.js","lib/**/*.d.ts","package.json"
   ],
   "author": "vittorio.ballestra@gmail.com",
   "license": "ISC",
