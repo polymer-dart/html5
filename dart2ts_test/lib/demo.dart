@@ -4,7 +4,7 @@ class TestClass extends HTMLElement {
   String message = 'here we are!';
 
   TestClass() {
-    ShadowRoot r = this.attachShadow(new ShadowRootInit()..mode = 'open');
+    ShadowRoot r = attachShadow(new ShadowRootInit()..mode = 'open');
     HTMLTemplateElement templateElement =
         document.querySelector('#myTemplate') as HTMLTemplateElement;
 
@@ -13,7 +13,7 @@ class TestClass extends HTMLElement {
           document.importNode(n, true));
     }
 
-    this.onclick = (Event ev) => alert('clicked on custom (${message})');
+    onclick = (Event ev) => alert('clicked on custom (${message})');
   }
 
   void connectedCallback() {
