@@ -4,16 +4,32 @@
     <style>
         .myclass {
             background-color: red;
-            color:white;
-            padding:1em;
-            margin:1em;
+            color: white;
+            padding: 1em;
+            margin: 1em;
             display: inline-block;
             border: none;
         }
     </style>
 </head>
 <body>
+<template id="myTemplate">
+    <style>
+        .myClass {
+            background-color: purple;
+            margin: 1em;
+            padding: 1em;
+            display: inline-block;
+            color: white;
+            font-family: sans-serif;
+        }
+    </style>
+    <div class='myClass'>
+        Hello guys!
+    </div>
+</template>
 <script src='index.js'>
 </script>
+
 </body>
 </html>

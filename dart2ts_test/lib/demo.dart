@@ -1,28 +1,30 @@
 import 'package:html5/html.dart';
 
 class TestClass extends HTMLElement {
+  String message = 'here we are!';
+
   TestClass() {
     ShadowRoot r = this.attachShadow(new ShadowRootInit()
                                        ..mode='open');
-    Element decl = document.createElement('style');
-    decl.textContent = '.myclass {' +
-        'background-color:green;' +
-        'display:inline-block;' +
-        'padding:1em;' +
-        'margin:1em;' +
-        'color:white;' +
-        '}';
-    r.appendChild(decl);
-    HTMLDivElement btn = document.createElement('div')
-      ..className = 'myclass'
-      ..innerHTML = 'Custom Element!';
-    r.appendChild(btn);
+    HTMLTemplateElement templateElement = document.querySelector('#myTemplate') as HTMLTemplateElement;
 
-    btn.onclick = (Event ev) => alert('clicked on custom');
+    for(int i=0;i<templateElement.content.childNodes.length;i++) {
+      r.appendChild(document.importNode(templateElement.content.childNodes[i],true));
+    }
+
+    this.onclick = (Event ev) => alert('clicked on custom (${message})');
+
+  }
+
+  void connectedCallback() {
+    print(message);
   }
 }
 
+
 void main(List<String> args) {
+
+  /// Using package:html5 :
 
   HTMLDivElement div = document.createElement('div')
     ..innerHTML = '<h1>Dart2TS + package:html5 demo</h1>';
@@ -36,13 +38,23 @@ void main(List<String> args) {
 
   div2.onclick = (Event ev) => alert('ciao');
 
+  /// Defining our custom element
+
   window.customElements.define('my-custom-elem', TestClass);
 
-  TestClass myElem = document.createElement('my-custom-elem');
+  /// Creating one instance with document.createElement
+
+  TestClass myElem = document.createElement('my-custom-elem') as TestClass; // Cast is necessary for TS!
 
   body.appendChild(myElem);
 
-  TestClass myElem2 = document.createElement('my-custom-elem');
+  TestClass myElem2 = document.createElement('my-custom-elem') as TestClass;
 
   body.appendChild(myElem2);
+
+
+  // Now create it as a normal class :
+  TestClass myElem3 = new TestClass()
+    ..message='different';
+  body.appendChild(myElem3);
 }
