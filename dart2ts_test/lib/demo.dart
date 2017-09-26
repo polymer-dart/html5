@@ -8,9 +8,9 @@ class TestClass extends HTMLElement {
     HTMLTemplateElement templateElement =
         document.querySelector('#myTemplate') as HTMLTemplateElement;
 
-    for (int i = 0; i < templateElement.content.childNodes.length; i++) {
+    for (Node n in asIterable(templateElement.content.childNodes)) {
       r.appendChild(
-          document.importNode(templateElement.content.childNodes[i], true));
+          document.importNode(n, true));
     }
 
     this.onclick = (Event ev) => alert('clicked on custom (${message})');
