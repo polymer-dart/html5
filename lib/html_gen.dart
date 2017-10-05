@@ -5032,8 +5032,8 @@ abstract class URL {
     external String get hash;
     external set hash (String val);
     external String toJSON();
-    external String createObjectURL(var blob);
-    external void revokeObjectURL(String url);
+    external static String createObjectURL(var blob);
+    external static void revokeObjectURL(String url);
     external bool isValidURL(String url);
 }
 
