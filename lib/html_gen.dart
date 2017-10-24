@@ -4725,6 +4725,32 @@ abstract class Storage {
     external bool get isSessionOnly;
 }
 
+@JS('StorageEvent')
+abstract class StorageEvent implements Event {
+    external factory StorageEvent(String type,[StorageEventInit eventInitDict]);
+    external String get key;
+    external String get oldValue;
+    external String get newValue;
+    external String get url;
+    external Storage get storageArea;
+    external void initStorageEvent(String type,bool canBubble,bool cancelable,String key,String oldValue,String newValue,String url,Storage storageArea);
+}
+
+@JS()
+@anonymous
+class StorageEventInit extends EventInit {
+    external String get key;
+    external set key (String val);
+    external String get oldValue;
+    external set oldValue (String val);
+    external String get newValue;
+    external set newValue (String val);
+    external String get url;
+    external set url (String val);
+    external Storage get storageArea;
+    external set storageArea (Storage val);
+}
+
 @JS('StyleSheet')
 abstract class StyleSheet {
     external String get type;
@@ -5743,6 +5769,7 @@ const INTERFACES = const [
    'RGBColor',
    'HTMLAreaElement',
    'DataTransferItem',
+   'StorageEvent',
    'WindowRoot',
    'VTTCue',
    'HTMLVideoElement',
