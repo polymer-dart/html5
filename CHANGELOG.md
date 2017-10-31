@@ -1,4 +1,4 @@
-### v0.1.8-dev
+### v0.1.8
 
  - using `build` sourge_gen
  - added `dart2ts` demo
