@@ -11,8 +11,9 @@ dependencies:
   polymerize: ^0.9.7
 #  polymerize:
 #    path: ../polymerize
-  dart2ts: ^0.0.1
-#    path: ../dart2ts
+#  dart2ts: ^0.0.1
+  dart2ts:
+    path: ../dart2ts
 transformers:
   - polymerize:
      skip-generate: true

@@ -111,10 +111,10 @@ packages:
     version: "0.14.0"
   dart2ts:
     description:
-      name: dart2ts
-      url: "http://pub.drafintech.it:5001"
-    source: hosted
-    version: "0.0.1"
+      path: "../dart2ts"
+      relative: true
+    source: path
+    version: "0.0.2-dev"
   dart_style:
     description:
       name: dart_style
