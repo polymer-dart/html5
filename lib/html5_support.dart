@@ -1,6 +1,6 @@
 @JS('html5_support')
 @JsMap('packages/html5/src/js/defs')
-@Module('./src/defs')
+@Module('./src/js/defs')
 //@HtmlImport('js/defs.html')
 library html5_support;
 
