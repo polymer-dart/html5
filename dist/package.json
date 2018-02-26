@@ -3,9 +3,6 @@
   "version": "0.0.1",
   "description": "HTML support for dart2ts",
   "flat": "true",
-  "scripts": {
-    "build": "tsc"
-  },
   "files": [
     "**.js",
     "**/*.d.ts",
