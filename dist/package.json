@@ -7,17 +7,15 @@
     "build": "tsc"
   },
   "files": [
-    "lib/**/*.js",
-    "lib/**/*.d.ts",
+    "**.js",
+    "**/*.d.ts",
     "package.json"
   ],
   "author": "vittorio.ballestra@gmail.com",
   "license": "ISC",
   "dependencies": {
-    "dart_sdk": "file:../dart2ts/dart_sdk/dist"
   },
   "devDependencies": {
-    "typescript": "^2.5.2",
-    "tspath": "^1.2.10"
+    "typescript": "^2.7.2"
   }
 }

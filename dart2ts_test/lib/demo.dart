@@ -1,4 +1,5 @@
 import 'package:html5/html.dart';
+import 'package:dart2ts/annotations.dart';
 
 class TestClass extends HTMLElement {
   String message = 'here we are!';
@@ -13,7 +14,7 @@ class TestClass extends HTMLElement {
           document.importNode(n, true));
     }
 
-    onclick = (Event ev) => alert('clicked on custom (${message})');
+    onclick = (Event ev) => window.alert('clicked on custom (${message})');
   }
 
   void connectedCallback() {
@@ -21,20 +22,21 @@ class TestClass extends HTMLElement {
   }
 }
 
-void main(List<String> args) {
+@onModuleLoad
+void main() {
   /// Using package:html5 :
 
-  HTMLDivElement div = document.createElement('div')
-    ..innerHTML = '<h1>Dart2TS + package:html5 DEMO</h1>';
+  HTMLDivElement div = (document.createElement('div')
+    ..innerHTML = '<h1>Dart2TS + package:html5 DEMO</h1>') as HTMLDivElement;
   HTMLBodyElement body = document.querySelector('body');
   body.appendChild(div);
 
-  HTMLDivElement div2 = document.createElement('div')
+  HTMLDivElement div2 = (document.createElement('div')
     ..className = 'myclass'
-    ..innerHTML = 'PRESS HERE!!!';
+    ..innerHTML = 'PRESS HERE!!!') as HTMLDivElement;
   body.appendChild(div2);
 
-  div2.onclick = (Event ev) => alert('Hello!');
+  div2.onclick = (Event ev) => window.alert('Hello!');
 
   /// Defining our custom element
 

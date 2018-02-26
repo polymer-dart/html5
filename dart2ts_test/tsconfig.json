@@ -1,13 +1,18 @@
 {
   "compilerOptions": {
     "module": "es6",
-    "target": "es2015",
+    "target": "es6",
     "sourceMap": true,
     "declaration": true,
-    "rootDir":"./lib/",
+    "rootDir":"./lib",
+    "outDir": "dist",
+    "baseUrl": "./node_modules",
     "experimentalDecorators" :true,
-    "lib": ["es2015","esnext.asynciterable","DOM","ScriptHost"],
-    "baseUrl" :"./node_modules"
+    "lib": [
+      "dom",
+      "es6",
+      "esnext.asynciterable"
+    ]
   },
   "exclude": [
     "node_modules"

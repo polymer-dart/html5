@@ -3,21 +3,18 @@
   "version": "1.0.0",
   "description": "a test for it",
   "main": "lib/index.html",
+  "flat": true,
   "scripts": {
-    "build": "webpack --config webpack.config.js",
-    "serve": "webpack-dev-server --config webpack.config.js"
+    "build": "tsc",
+    "serve": "python -m SimpleHTTPServer 8000"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dart_sdk": "file:../../dart2ts/dart_sdk/",
-    "html5": "file:../"
+    "dart_sdk": "file:../../dart2ts/dart_sdk/dist",
+    "html5": "file:../dist"
   },
   "devDependencies": {
-    "copy-webpack-plugin": "^4.0.1",
-    "ts-loader": "^2.3.7",
-    "typescript": "^2.5.2",
-    "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.8.2"
+    "typescript": "^2.7.2"
   }
 }
