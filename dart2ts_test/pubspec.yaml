@@ -10,5 +10,4 @@ dependency_overrides:
   path: ..
 dev_dependencies:
  dart2ts:
-  path: ../../dart2ts
-
+  path: ../../dart2ts/dart2ts

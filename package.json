@@ -17,7 +17,19 @@
     "dart_sdk": "file:../dart2ts/dart_sdk/dist"
   },
   "devDependencies": {
-    "typescript": "^2.5.2",
-    "tspath": "^1.2.10"
+    "tspath": "^1.2.10",
+    "typescript": "^2.5.2"
+  },
+  "resolutions": {
+    "esprima": "4.0.0",
+    "debug": "3.1.0",
+    "kind-of": "6.0.2",
+    "define-property": "1.0.0",
+    "for-in": "1.0.2",
+    "is-extendable": "1.0.1",
+    "is-descriptor": "1.0.2",
+    "is-accessor-descriptor": "1.0.0",
+    "is-data-descriptor": "1.0.0",
+    "extend-shallow": "3.0.2"
   }
 }

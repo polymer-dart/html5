@@ -1,21 +1,20 @@
 import 'package:html5/html.dart';
 import 'package:dart2ts/annotations.dart';
 
-class TestClass extends HTMLElement {
+abstract class TestClass extends HTMLElement {
   String message = 'here we are!';
 
   TestClass() {
     ShadowRoot r = attachShadow(new ShadowRootInit()..mode = 'open');
-    HTMLTemplateElement templateElement =
-        document.querySelector('#myTemplate') as HTMLTemplateElement;
-
+    HTMLTemplateElement templateElement = document.querySelector('#myTemplate') as HTMLTemplateElement;
     for (Node n in asIterable(templateElement.content.childNodes)) {
-      r.appendChild(
-          document.importNode(n, true));
+      r.appendChild(document.importNode(n, true));
     }
 
     onclick = (Event ev) => window.alert('clicked on custom (${message})');
   }
+
+  factory TestClass.create() => document.createElement('my-custom-elem') as TestClass;
 
   void connectedCallback() {
     print(message);
@@ -26,8 +25,8 @@ class TestClass extends HTMLElement {
 void main() {
   /// Using package:html5 :
 
-  HTMLDivElement div = (document.createElement('div')
-    ..innerHTML = '<h1>Dart2TS + package:html5 DEMO</h1>') as HTMLDivElement;
+  HTMLDivElement div =
+      (document.createElement('div')..innerHTML = '<h1>Dart2TS + package:html5 DEMO</h1>') as HTMLDivElement;
   HTMLBodyElement body = document.querySelector('body');
   body.appendChild(div);
 
@@ -44,8 +43,7 @@ void main() {
 
   /// Creating one instance with document.createElement
 
-  TestClass myElem = document.createElement('my-custom-elem')
-      as TestClass; // Cast is necessary for TS!
+  TestClass myElem = document.createElement('my-custom-elem') as TestClass; // Cast is necessary for TS!
 
   body.appendChild(myElem);
 
@@ -54,9 +52,6 @@ void main() {
   body.appendChild(myElem2);
 
   // Now create it as a normal class :
-  TestClass myElem3 = new TestClass()..message = 'different';
-  body
-    ..appendChild(myElem3)
-    ..appendChild(new TestClass())
-    ..appendChild(new TestClass());
+  TestClass myElem3 = new TestClass.create()..message = 'different';
+  body..appendChild(myElem3)..appendChild(new TestClass.create())..appendChild(new TestClass.create());
 }

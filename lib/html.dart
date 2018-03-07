@@ -4,24 +4,16 @@ library html_lib;
 import 'dart:async';
 import 'package:js/js.dart';
 import 'package:js/js_util.dart';
-import 'package:html5/html5_support.dart';
-import 'package:polymerize_common/init.dart';
 import 'dart:math' as math;
 
 part 'html_gen.dart';
+
 part 'html_addendum.dart';
-part 'html.polymerize.dart';
-
-void unregisterAll(List<String> defs) => defs.forEach((d) => unregisterByName(d));
-
-@init
-initHtml5() {
-  unregisterAll(INTERFACES);
-}
 
 @JS('Promise')
 class Promise<T> {
   external Promise<X> then<X>(X onFulfilled([T t]), [void onRejected([error])]);
+
   external JS$catch(void onRejected([error]));
 }
 
@@ -159,9 +151,9 @@ external Window get window;
 
 @JS('URL.createObjectURL')
 external String createObjectURL(var blob);
+
 @JS('URL.createObjectURL')
 external void revokeObjectURL(String url);
-
 
 typedef void FileCallback(File file);
 typedef void FileSystemEntryCallback(FileSystemEntry entry);
@@ -171,6 +163,7 @@ typedef void FileSystemEntriesCallback(List<FileSystemEntry> entries);
 
 class EventHandler<E> {
   StreamController<E> _streamController = new StreamController.broadcast();
+
   Stream<E> get stream => _streamController.stream;
 
   void call(E event) => _streamController.add(event);
@@ -205,9 +198,7 @@ class HttpRequest {
       this.overrideMimeType});
 
   Future<XMLHttpRequest> send(
-      {var data,
-      StreamSink<ProgressEvent> progressConsumer,
-      StreamSink<ProgressEvent> uploadProgressConsumer}) {
+      {var data, StreamSink<ProgressEvent> progressConsumer, StreamSink<ProgressEvent> uploadProgressConsumer}) {
     XMLHttpRequest _ajax;
     _ajax = new XMLHttpRequest();
     _requests[_ajax] = this;
@@ -240,28 +231,24 @@ class HttpRequest {
     _ajax.onprogress = (Event ev) {
       if (_ajax.status != 200 && _ajax.status != 301) {
         _runningRequests.remove(_ajax);
-        if (!completer.isCompleted)
-          completer.completeError(ev as ProgressEvent);
+        if (!completer.isCompleted) completer.completeError(ev as ProgressEvent);
         closeSinks();
       } else if (progressConsumer != null) {
         progressConsumer.add(ev as ProgressEvent);
       }
     };
     _ajax.onload = (Event evt) {
-      if (!completer.isCompleted)
-        completer.complete(_ajax);
+      if (!completer.isCompleted) completer.complete(_ajax);
       closeSinks();
     };
     _ajax.onerror = (Event evt) {
       _runningRequests.remove(_ajax);
-      if (!completer.isCompleted)
-        completer.completeError(evt as ProgressEvent);
+      if (!completer.isCompleted) completer.completeError(evt as ProgressEvent);
       closeSinks();
     };
     _ajax.onabort = (Event evt) {
       _runningRequests.remove(_ajax);
-      if (!completer.isCompleted)
-        completer.completeError(evt as ProgressEvent);
+      if (!completer.isCompleted) completer.completeError(evt as ProgressEvent);
       closeSinks();
     };
 
@@ -269,8 +256,7 @@ class HttpRequest {
       _ajax.send(data);
     } catch (error) {
       _runningRequests.remove(_ajax);
-      if (!completer.isCompleted)
-        completer.completeError(error);
+      if (!completer.isCompleted) completer.completeError(error);
     }
 
     return completer.future;

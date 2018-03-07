@@ -7,16 +7,5 @@ environment:
     sdk: ">=1.8.0 <2.0.0"
 dependencies:
   js: ^0.6.1
-  polymerize_common: ^1.0.1
-  polymerize: ^0.9.7
-#  polymerize:
-#    path: ../polymerize
-#  dart2ts: ^0.0.1
   dart2ts:
-    path: ../dart2ts
-transformers:
-  - polymerize:
-     skip-generate: true
-dependency_overrides:
-#  polymerize_common:
-#    path: ../polymerize_common
+    path: ../dart2ts/dart2ts
