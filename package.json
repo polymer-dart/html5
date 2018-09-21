@@ -6,12 +6,13 @@
   "flat": true,
   "scripts": {
     "build": "tsc",
-    "serve": "python -m http.server 8000"
+    "serve": "python -m http.server 8000",
+    "publish_local": "npm publish --registry http://localhost:4873"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@dart2ts/dart": "^0.1.0",
+    "@dart2ts/dart": "^0.1.3",
     "reflect-metadata": "^0.1.12"
   },
   "devDependencies": {
