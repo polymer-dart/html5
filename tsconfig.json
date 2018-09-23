@@ -4,9 +4,11 @@
     "target": "es6",
     "sourceMap": true,
     "declaration": true,
+    "outDir": "dist",
     "rootDir":"./",
     "experimentalDecorators" :true,
     "strict": true,
+    "moduleResolution": "node",
     /* Enable all strict type-checking options. */
     "noImplicitAny": false,                 /* Raise error on expressions and declarations with an implied 'any' type. */
     "strictNullChecks": false,              /* Enable strict null checks. */
@@ -21,7 +23,8 @@
     ]
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist"
   ],
   "include": [
     "lib/**/*.ts"
