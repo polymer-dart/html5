@@ -1,6 +1,6 @@
 {
   "name": "@dart2ts.packages/html5",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "a test for it",
   "main": "lib/index.html",
   "flat": true,
