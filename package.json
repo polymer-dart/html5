@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "serve": "python -m http.server 8000",
-    "publish_local": "npm publish --registry http://localhost:4873"
+    "publish_local": "cd dist; npm publish --registry http://localhost:4873"
   },
   "author": "",
   "license": "ISC",

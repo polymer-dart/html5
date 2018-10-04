@@ -238,6 +238,9 @@ class HttpRequest {
       }
     };
     _ajax.onload = (Event evt) {
+      if (_ajax.status!=200) {
+        completer.completeError(_ajax);
+      }
       if (!completer.isCompleted) completer.complete(_ajax);
       closeSinks();
     };
